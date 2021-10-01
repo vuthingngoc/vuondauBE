@@ -1,0 +1,9 @@
+diff a/UniPro.WebApi/App_Start/AutoMapperConfig.cs b/UniPro.WebApi/App_Start/AutoMapperConfig.cs	(rejected hunks)
+@@ -32,6 +32,7 @@
+ +=======
+                  mc.ConfigPostTemplateModule();
+  
+++>>>>>>> parent of 10fdc71 (Merge branch 'Dev' into Features/CRUDPostTemplate)
+              });
+              IMapper mapper = mappingConfig.CreateMapper();
+              services.AddSingleton(mapper);
