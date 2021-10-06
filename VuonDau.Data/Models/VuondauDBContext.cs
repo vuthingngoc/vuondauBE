@@ -8,9 +8,9 @@ namespace VuonDau.Data.Models
 {
     public partial class VuondauDBContext : DbContext
     {
-        //public VuondauDBContext()
-        //{
-        //}
+        public VuondauDBContext()
+        {
+        }
 
         public VuondauDBContext(DbContextOptions<VuondauDBContext> options)
             : base(options)
@@ -40,11 +40,11 @@ namespace VuonDau.Data.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Server=localhost;Database=VuondauDB;Integrated Security=True");
-//            }
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=localhost;Database=VuondauDB;Integrated Security=True");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,19 +55,13 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Customer");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Birthday)
                     .HasColumnType("date")
                     .HasColumnName("birthday");
 
-                entity.Property(e => e.CustomerType)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("customerType");
+                entity.Property(e => e.CustomerType).HasColumnName("customerType");
 
                 entity.Property(e => e.DateOfCreate)
                     .HasColumnType("datetime")
@@ -94,8 +88,7 @@ namespace VuonDau.Data.Models
                     .HasColumnName("password");
 
                 entity.Property(e => e.Phone)
-                    .HasMaxLength(15)
-                    .IsUnicode(false)
+                    .HasColumnType("text")
                     .HasColumnName("phone");
 
                 entity.Property(e => e.Status).HasColumnName("status");
@@ -110,15 +103,9 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("CustomerGroup");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.HarvestSellingId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("harvestSellingID");
+                entity.Property(e => e.HarvestSellingId).HasColumnName("harvestSellingID");
 
                 entity.Property(e => e.Location)
                     .HasMaxLength(500)
@@ -141,15 +128,9 @@ namespace VuonDau.Data.Models
 
                 entity.ToTable("CustomerInGroup");
 
-                entity.Property(e => e.CustomerId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("customerID");
+                entity.Property(e => e.CustomerId).HasColumnName("customerID");
 
-                entity.Property(e => e.CustomerGroupId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("customerGroupID");
+                entity.Property(e => e.CustomerGroupId).HasColumnName("customerGroupID");
 
                 entity.Property(e => e.JoinDate)
                     .HasColumnType("datetime")
@@ -172,10 +153,7 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("CustomerType");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(500)
@@ -190,10 +168,7 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Farm");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(500)
@@ -211,15 +186,9 @@ namespace VuonDau.Data.Models
                     .HasMaxLength(2500)
                     .HasColumnName("description");
 
-                entity.Property(e => e.FarmTypeId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("farmTypeID");
+                entity.Property(e => e.FarmTypeId).HasColumnName("farmTypeID");
 
-                entity.Property(e => e.FarmerId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("farmerID");
+                entity.Property(e => e.FarmerId).HasColumnName("farmerID");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
@@ -242,20 +211,14 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("FarmPicture");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Alt)
                     .HasMaxLength(500)
                     .IsUnicode(false)
                     .HasColumnName("alt");
 
-                entity.Property(e => e.FarmId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("farmID");
+                entity.Property(e => e.FarmId).HasColumnName("farmID");
 
                 entity.Property(e => e.Src)
                     .HasMaxLength(2500)
@@ -272,10 +235,7 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("FarmType");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(500)
@@ -290,10 +250,7 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Farmer");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.BirthDay)
                     .HasColumnType("date")
@@ -324,8 +281,7 @@ namespace VuonDau.Data.Models
                     .HasColumnName("password");
 
                 entity.Property(e => e.Phone)
-                    .HasMaxLength(15)
-                    .IsUnicode(false)
+                    .HasColumnType("text")
                     .HasColumnName("phone");
 
                 entity.Property(e => e.Status).HasColumnName("status");
@@ -335,10 +291,7 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Feedback");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.DateOfCreate)
                     .HasColumnType("datetime")
@@ -348,10 +301,7 @@ namespace VuonDau.Data.Models
                     .HasMaxLength(500)
                     .HasColumnName("description");
 
-                entity.Property(e => e.OrderId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("orderID");
+                entity.Property(e => e.OrderId).HasColumnName("orderID");
 
                 entity.Property(e => e.Status).HasColumnName("status");
 
@@ -365,28 +315,19 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Harvest");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(2500)
                     .HasColumnName("description");
 
-                entity.Property(e => e.FarmId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("farmID");
+                entity.Property(e => e.FarmId).HasColumnName("farmID");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(250)
                     .HasColumnName("name");
 
-                entity.Property(e => e.ProductId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("productID");
+                entity.Property(e => e.ProductId).HasColumnName("productID");
 
                 entity.HasOne(d => d.Farm)
                     .WithMany(p => p.Harvests)
@@ -403,19 +344,13 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("HarvestSelling");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.DateOfCreate)
                     .HasColumnType("datetime")
                     .HasColumnName("dateOfCreate");
 
-                entity.Property(e => e.HarvestId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("harvestID");
+                entity.Property(e => e.HarvestId).HasColumnName("harvestID");
 
                 entity.Property(e => e.MinWeight).HasColumnName("minWeight");
 
@@ -431,15 +366,9 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("HarvestSellingPrice");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.HarvestSellingId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("harvestSellingID");
+                entity.Property(e => e.HarvestSellingId).HasColumnName("harvestSellingID");
 
                 entity.Property(e => e.Price).HasColumnName("price");
 
@@ -453,19 +382,13 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Order");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(500)
                     .HasColumnName("address");
 
-                entity.Property(e => e.CustomerId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("customerID");
+                entity.Property(e => e.CustomerId).HasColumnName("customerID");
 
                 entity.Property(e => e.DateOfCreate)
                     .HasColumnType("datetime")
@@ -485,22 +408,13 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("OrderDetail");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.OrderId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("orderID");
+                entity.Property(e => e.OrderId).HasColumnName("orderID");
 
                 entity.Property(e => e.Price).HasColumnName("price");
 
-                entity.Property(e => e.ProductId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("productID");
+                entity.Property(e => e.ProductId).HasColumnName("productID");
 
                 entity.Property(e => e.Status).HasColumnName("status");
 
@@ -521,10 +435,7 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Payment");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Method)
                     .HasMaxLength(500)
@@ -535,10 +446,7 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Product");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.DataOfCreate)
                     .HasColumnType("datetime")
@@ -552,10 +460,7 @@ namespace VuonDau.Data.Models
                     .HasMaxLength(255)
                     .HasColumnName("name");
 
-                entity.Property(e => e.ProductTypeId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("productTypeID");
+                entity.Property(e => e.ProductTypeId).HasColumnName("productTypeID");
 
                 entity.Property(e => e.Status).HasColumnName("status");
 
@@ -569,20 +474,14 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("ProductPicture");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Alt)
                     .HasMaxLength(500)
                     .IsUnicode(false)
                     .HasColumnName("alt");
 
-                entity.Property(e => e.ProductId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("productID");
+                entity.Property(e => e.ProductId).HasColumnName("productID");
 
                 entity.Property(e => e.Src)
                     .HasMaxLength(2500)
@@ -599,10 +498,7 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("ProductType");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(500)
@@ -617,24 +513,15 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Transaction");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(500)
                     .HasColumnName("description");
 
-                entity.Property(e => e.OrderId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("orderID");
+                entity.Property(e => e.OrderId).HasColumnName("orderID");
 
-                entity.Property(e => e.PaymentId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("paymentID");
+                entity.Property(e => e.PaymentId).HasColumnName("paymentID");
 
                 entity.Property(e => e.Price).HasColumnName("price");
 
@@ -655,17 +542,11 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Wallet");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Balance).HasColumnName("balance");
 
-                entity.Property(e => e.CustomerId)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("customerID");
+                entity.Property(e => e.CustomerId).HasColumnName("customerID");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Wallets)

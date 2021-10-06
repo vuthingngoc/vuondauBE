@@ -12,10 +12,10 @@ namespace VuonDau.Data.Models
             HarvestSellings = new HashSet<HarvestSelling>();
         }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string FarmId { get; set; }
-        public string ProductId { get; set; }
+        public int? FarmId { get; set; }
+        public int? ProductId { get; set; }
         public string Description { get; set; }
 
         public virtual Farm Farm { get; set; }

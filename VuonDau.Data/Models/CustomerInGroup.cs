@@ -7,8 +7,8 @@ namespace VuonDau.Data.Models
 {
     public partial class CustomerInGroup
     {
-        public string CustomerId { get; set; }
-        public string CustomerGroupId { get; set; }
+        public int CustomerId { get; set; }
+        public int CustomerGroupId { get; set; }
         public DateTime? JoinDate { get; set; }
 
         public virtual Customer Customer { get; set; }

@@ -26,7 +26,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: ProductPictures/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -69,7 +69,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: ProductPictures/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -90,7 +90,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,ProductId,Src,Alt")] ProductPicture productPicture)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductId,Src,Alt")] ProductPicture productPicture)
         {
             if (id != productPicture.Id)
             {
@@ -122,7 +122,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: ProductPictures/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -143,7 +143,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: ProductPictures/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var productPicture = await _context.ProductPictures.FindAsync(id);
             _context.ProductPictures.Remove(productPicture);
@@ -151,7 +151,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductPictureExists(string id)
+        private bool ProductPictureExists(int id)
         {
             return _context.ProductPictures.Any(e => e.Id == id);
         }

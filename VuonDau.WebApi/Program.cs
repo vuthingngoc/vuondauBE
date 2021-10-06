@@ -32,13 +32,14 @@ namespace VuonDau.WebApi
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+           Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
                     .UseUrls("http://0.0.0.0:5000")
                     .ConfigureLogging(logging =>
                     {
+
                         logging.ClearProviders();
                         logging.SetMinimumLevel(LogLevel.Information);
                         logging.AddConsole(c =>
@@ -46,7 +47,8 @@ namespace VuonDau.WebApi
                             c.TimestampFormat = "yyyy-MM-dd HH:mm:ss.fff||";
                         });
                     })
-                .UseNLog();
+                .UseNLog()
+                ;
                 });
     }
 }

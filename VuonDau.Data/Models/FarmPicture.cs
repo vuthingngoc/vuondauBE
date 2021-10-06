@@ -7,8 +7,8 @@ namespace VuonDau.Data.Models
 {
     public partial class FarmPicture
     {
-        public string Id { get; set; }
-        public string FarmId { get; set; }
+        public int Id { get; set; }
+        public int? FarmId { get; set; }
         public string Src { get; set; }
         public string Alt { get; set; }
 

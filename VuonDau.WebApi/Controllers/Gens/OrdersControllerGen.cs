@@ -2,9 +2,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VuonDau.Data.Models;
-using VuonDau.Business.Services;
+using VuonDau.Business.Gens.Services;
 using System.Linq;
-namespace Reso_Audit.Controllers
+namespace VuonDau.WebApi.Controllers.Gens
 {
     [ApiController]
     [Route("api/orders")]
@@ -24,7 +24,7 @@ namespace Reso_Audit.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetById(string id)
+        public IActionResult GetById(int id)
         {
             return Ok(_orderService.Get(id));
         }
@@ -38,13 +38,13 @@ namespace Reso_Audit.Controllers
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Update(string id,Order entity)
+        public IActionResult Update(int id,Order entity)
         {
             _orderService.Update(entity);
             return Ok();
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id,Order entity)
+        public IActionResult Delete(int id,Order entity)
         {
             _orderService.Delete(entity);
             return Ok();

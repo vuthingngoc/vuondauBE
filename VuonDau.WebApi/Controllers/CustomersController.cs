@@ -26,7 +26,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -69,7 +69,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Customers/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -90,7 +90,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,CustomerType,Email,FirstName,LastName,Password,Phone,Birthday,Gender,DateOfCreate,Status")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CustomerType,Email,FirstName,LastName,Password,Phone,Birthday,Gender,DateOfCreate,Status")] Customer customer)
         {
             if (id != customer.Id)
             {
@@ -122,7 +122,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Customers/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -143,7 +143,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var customer = await _context.Customers.FindAsync(id);
             _context.Customers.Remove(customer);
@@ -151,7 +151,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerExists(string id)
+        private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.Id == id);
         }

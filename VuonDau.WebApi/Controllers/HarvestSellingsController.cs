@@ -26,7 +26,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: HarvestSellings/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -69,7 +69,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: HarvestSellings/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -90,7 +90,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,HarvestId,DateOfCreate,MinWeight,TotalWeight")] HarvestSelling harvestSelling)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,HarvestId,DateOfCreate,MinWeight,TotalWeight")] HarvestSelling harvestSelling)
         {
             if (id != harvestSelling.Id)
             {
@@ -122,7 +122,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: HarvestSellings/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -143,7 +143,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: HarvestSellings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var harvestSelling = await _context.HarvestSellings.FindAsync(id);
             _context.HarvestSellings.Remove(harvestSelling);
@@ -151,7 +151,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HarvestSellingExists(string id)
+        private bool HarvestSellingExists(int id)
         {
             return _context.HarvestSellings.Any(e => e.Id == id);
         }

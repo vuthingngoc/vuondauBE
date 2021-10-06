@@ -26,7 +26,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Products/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -69,7 +69,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -90,7 +90,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,ProductTypeId,Name,Description,DataOfCreate,Status")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductTypeId,Name,Description,DataOfCreate,Status")] Product product)
         {
             if (id != product.Id)
             {
@@ -122,7 +122,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -143,7 +143,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _context.Products.FindAsync(id);
             _context.Products.Remove(product);
@@ -151,7 +151,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(string id)
+        private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.Id == id);
         }

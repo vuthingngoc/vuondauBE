@@ -26,7 +26,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: CustomerInGroups/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -72,7 +72,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: CustomerInGroups/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -94,7 +94,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("CustomerId,CustomerGroupId,JoinDate")] CustomerInGroup customerInGroup)
+        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,CustomerGroupId,JoinDate")] CustomerInGroup customerInGroup)
         {
             if (id != customerInGroup.CustomerId)
             {
@@ -127,7 +127,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: CustomerInGroups/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -149,7 +149,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: CustomerInGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var customerInGroup = await _context.CustomerInGroups.FindAsync(id);
             _context.CustomerInGroups.Remove(customerInGroup);
@@ -157,7 +157,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerInGroupExists(string id)
+        private bool CustomerInGroupExists(int id)
         {
             return _context.CustomerInGroups.Any(e => e.CustomerId == id);
         }

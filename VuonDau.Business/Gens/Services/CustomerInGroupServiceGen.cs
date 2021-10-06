@@ -3,10 +3,10 @@
 //              AUTO-GENERATED
 //
 /////////////////////////////////////////////////////////////////
-namespace VuonDau.Business.Services
+namespace VuonDau.Business.Gens.Services
 {
     using Reso.Core.BaseConnect;
-    using VuonDau.Business.Repositories;
+    using VuonDau.Data.Repositories;
     using VuonDau.Data.Models;
     public partial interface ICustomerInGroupService:IBaseService<CustomerInGroup>
     {

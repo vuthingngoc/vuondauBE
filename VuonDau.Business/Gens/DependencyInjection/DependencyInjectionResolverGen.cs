@@ -7,12 +7,11 @@
 
 using VuonDau.Data.Models;
 using Microsoft.Extensions.DependencyInjection;
-using VuonDau.Business.Services;
-using VuonDau.Business.Repositories;
+using VuonDau.Business.Gens.Services;
+using VuonDau.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Reso.Core.BaseConnect;
-using Reso.Core.BaseConnect;
-namespace VuonDau.Business.Commons
+namespace VuonDau.Data.Gens.Commons
 {
     public static class DependencyInjectionResolverGen
     {

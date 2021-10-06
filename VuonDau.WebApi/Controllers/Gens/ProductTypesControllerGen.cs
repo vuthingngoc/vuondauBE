@@ -2,9 +2,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VuonDau.Data.Models;
-using VuonDau.Business.Services;
+using VuonDau.Business.Gens.Services;
 using System.Linq;
-namespace Reso_Audit.Controllers
+namespace VuonDau.WebApi.Controllers.Gens
 {
     [ApiController]
     [Route("api/product-types")]
@@ -24,7 +24,7 @@ namespace Reso_Audit.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetById(string id)
+        public IActionResult GetById(int id)
         {
             return Ok(_productTypeService.Get(id));
         }
@@ -38,13 +38,13 @@ namespace Reso_Audit.Controllers
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Update(string id,ProductType entity)
+        public IActionResult Update(int id,ProductType entity)
         {
             _productTypeService.Update(entity);
             return Ok();
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id,ProductType entity)
+        public IActionResult Delete(int id,ProductType entity)
         {
             _productTypeService.Delete(entity);
             return Ok();

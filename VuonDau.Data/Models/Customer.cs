@@ -14,17 +14,17 @@ namespace VuonDau.Data.Models
             Wallets = new HashSet<Wallet>();
         }
 
-        public string Id { get; set; }
-        public string CustomerType { get; set; }
+        public int Id { get; set; }
+        public int? CustomerType { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
         public DateTime? Birthday { get; set; }
-        public bool? Gender { get; set; }
+        public int? Gender { get; set; }
         public DateTime? DateOfCreate { get; set; }
-        public bool? Status { get; set; }
+        public int? Status { get; set; }
 
         public virtual CustomerType CustomerTypeNavigation { get; set; }
         public virtual ICollection<CustomerInGroup> CustomerInGroups { get; set; }

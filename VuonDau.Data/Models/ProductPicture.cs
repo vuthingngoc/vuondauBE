@@ -7,8 +7,8 @@ namespace VuonDau.Data.Models
 {
     public partial class ProductPicture
     {
-        public string Id { get; set; }
-        public string ProductId { get; set; }
+        public int Id { get; set; }
+        public int? ProductId { get; set; }
         public string Src { get; set; }
         public string Alt { get; set; }
 

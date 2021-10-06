@@ -25,7 +25,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: ProductTypes/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -65,7 +65,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: ProductTypes/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -85,7 +85,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Description")] ProductType productType)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] ProductType productType)
         {
             if (id != productType.Id)
             {
@@ -116,7 +116,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: ProductTypes/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -136,7 +136,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: ProductTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var productType = await _context.ProductTypes.FindAsync(id);
             _context.ProductTypes.Remove(productType);
@@ -144,7 +144,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductTypeExists(string id)
+        private bool ProductTypeExists(int id)
         {
             return _context.ProductTypes.Any(e => e.Id == id);
         }

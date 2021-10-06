@@ -25,9 +25,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VuonDau.Data.Models;
-using VuonDau.Business.Services;
+using VuonDau.Business.Gens.Services;
 using System.Linq;
-namespace Reso_Audit.Controllers
+namespace VuonDau.WebApi.Controllers.Gens
 {
     [ApiController]
     [Route("api/<#= GetRouteName(table.Name)  #>")]

@@ -2,151 +2,117 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests;
+using VuonDau.Business.Gens.Services;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class FarmersController : Controller
+    [ApiController]
+    public partial class FarmersController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public FarmersController(VuondauDBContext context)
+        private readonly IFarmerService _farmerService;
+        private readonly IConfigurationProvider _mapper;
+        public FarmersController(IFarmerService farmerService, IMapper mapper)
         {
-            _context = context;
+            _farmerService = farmerService;
+            _mapper = mapper.ConfigurationProvider;
+        }
+        /// <summary>
+        /// Get List Farmers
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/farmers")]
+        [SwaggerOperation(Tags = new[] { "Farmers" })]
+        public async Task<IActionResult> GetFarmers()
+        {
+            await _farmerService.GetAllFarmers();
+            var farmers = await _farmerService.GetAllFarmers();
+            return Ok(farmers);
         }
 
-        // GET: Farmers
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Get Farmer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/farmers/{id:int}")]
+        [SwaggerOperation(Tags = new[] { "Farmers" })]
+        public async Task<IActionResult> GetFarmer([FromRoute] int id)
         {
-            return View(await _context.Farmers.ToListAsync());
-        }
-
-        // GET: Farmers/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmer = await _context.Farmers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var farmer = await _farmerService.GetFarmerById(id);
             if (farmer == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(farmer);
+            return Ok(farmer);
         }
 
-        // GET: Farmers/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Farmers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Tạo mới 1 farmer
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Email,FirstName,LastName,Password,Phone,BirthDay,Gender,DateOfCreate,Status")] Farmer farmer)
+        [Route("~/api/farmers")]
+        [SwaggerOperation(Tags = new[] { "Farmers" })]
+        public async Task<IActionResult> CreateFarmer([FromBody] CreateFarmerRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(farmer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(farmer);
-        }
-
-        // GET: Farmers/Edit/5
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmer = await _context.Farmers.FindAsync(id);
+            var farmer = await _farmerService.CreateFarmer(request);
             if (farmer == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            return View(farmer);
+
+            return Created(nameof(CreateFarmer), farmer);
         }
 
-        // POST: Farmers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Email,FirstName,LastName,Password,Phone,BirthDay,Gender,DateOfCreate,Status")] Farmer farmer)
+        /// <summary>
+        /// Cập nhập 1 farmer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/farmers/{id:int}")]
+        [SwaggerOperation(Tags = new[] { "Farmers" })]
+        public async Task<IActionResult> UpdateFarmer([FromRoute] int id, UpdateFarmerRequest request)
         {
-            if (id != farmer.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(farmer);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FarmerExists(farmer.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(farmer);
-        }
-
-        // GET: Farmers/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmer = await _context.Farmers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var farmer = await _farmerService.UpdateFarmer(id, request);
             if (farmer == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(farmer);
+            return Ok(farmer);
         }
 
-        // POST: Farmers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        /// <summary>
+        /// Xóa 1 farmer qua id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("~/api/farmers/{id:int}")]
+        [SwaggerOperation(Tags = new[] { "Farmers" })]
+        public async Task<IActionResult> DeleteFarmer([FromRoute] int id)
         {
-            var farmer = await _context.Farmers.FindAsync(id);
-            _context.Farmers.Remove(farmer);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _farmerService.DeleteFarmer(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool FarmerExists(string id)
-        {
-            return _context.Farmers.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

@@ -12,10 +12,10 @@ namespace VuonDau.Data.Models
             CustomerInGroups = new HashSet<CustomerInGroup>();
         }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
-        public string HarvestSellingId { get; set; }
+        public int? HarvestSellingId { get; set; }
 
         public virtual HarvestSelling HarvestSelling { get; set; }
         public virtual ICollection<CustomerInGroup> CustomerInGroups { get; set; }

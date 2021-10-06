@@ -14,12 +14,12 @@ namespace VuonDau.Data.Models
             ProductPictures = new HashSet<ProductPicture>();
         }
 
-        public string Id { get; set; }
-        public string ProductTypeId { get; set; }
+        public int Id { get; set; }
+        public int? ProductTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime? DataOfCreate { get; set; }
-        public bool? Status { get; set; }
+        public int? Status { get; set; }
 
         public virtual ProductType ProductType { get; set; }
         public virtual ICollection<Harvest> Harvests { get; set; }

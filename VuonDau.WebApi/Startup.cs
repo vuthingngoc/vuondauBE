@@ -37,13 +37,15 @@ namespace VuonDau.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //var connection = Configuration.GetConnectionString("VuonDauDatabase");
-            //services.AddDbContextPool<VuondauDBContext>(options => options.UseSqlServer(connection));
-            //services.AddControllers();
-            //services.AddSwaggerGen(c =>
+
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "VuonDau.WebApi", Version = "v1" });
+            });
             services.AddCors(options =>
             {
-                //c.SwaggerDoc("v1", new OpenApiInfo { Title = "VuonDau.WebApi", Version = "v1" });
+
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
@@ -51,17 +53,11 @@ namespace VuonDau.WebApi
                     .WithOrigins(GetDomain())
                     .AllowAnyHeader()
                     .AllowAnyMethod();
-                 });
+                });
             });
-            //services.AddDbContext<VuondauDBContext>(opt =>
-            //{
-            //    opt.UseSqlServer(Configuration.GetConnectionString("VuondauDBContext"))
-            //    .EnableSensitiveDataLogging()
-            //    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-            //});
             services.ConfigureFilter<ErrorHandlingFilter>();
             services.JsonFormatConfig();
-            services.ConfigureSwagger();
+            //services.ConfigureSwagger();
             services.AddDbContext<VuondauDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VuonDauDatabase"))
                 .EnableSensitiveDataLogging()
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
@@ -72,22 +68,33 @@ namespace VuonDau.WebApi
             services.ConfigureServiceWorkers();
             services.ConfigDataProtection();
         }
-
         private string[] GetDomain()
         {
             var domains = Configuration.GetSection("Domain").Get<Dictionary<string, string>>()
             .SelectMany(s => s.Value.Split(",")).ToArray();
             return domains;
         }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, IApiVersionDescriptionProvider provider*/)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //    app.UseSwagger();
-            //    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VuonDau.WebApi v1"));
-            //}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VuonDau.WebApi v1"));
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
             app.UseCors(MyAllowSpecificOrigins);
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -121,7 +128,7 @@ namespace VuonDau.WebApi
             {
                 endpoints.MapControllers();
             });
-            app.ConfigureSwagger(provider);
+            //app.ConfigureSwagger(provider);
         }
     }
 }

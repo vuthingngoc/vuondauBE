@@ -502,7 +502,7 @@
           }
         }
       },
-      "Microsoft.Data.Sqlite.Core/5.0.9": {
+      "Microsoft.Data.Sqlite.Core/5.0.10": {
         "type": "package",
         "dependencies": {
           "SQLitePCLRaw.core": "2.0.4"
@@ -560,12 +560,12 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Design/5.0.9": {
+      "Microsoft.EntityFrameworkCore.Design/5.0.10": {
         "type": "package",
         "dependencies": {
           "Humanizer.Core": "2.8.26",
           "Microsoft.CSharp": "4.7.0",
-          "Microsoft.EntityFrameworkCore.Relational": "5.0.9"
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.10"
         },
         "compile": {
           "lib/netstandard2.1/_._": {}
@@ -590,10 +590,10 @@
           "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Relational.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Sqlite/5.0.9": {
+      "Microsoft.EntityFrameworkCore.Sqlite/5.0.10": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Sqlite.Core": "5.0.9",
+          "Microsoft.EntityFrameworkCore.Sqlite.Core": "5.0.10",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.0.4"
         },
         "compile": {
@@ -603,12 +603,12 @@
           "lib/netstandard2.1/_._": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Sqlite.Core/5.0.9": {
+      "Microsoft.EntityFrameworkCore.Sqlite.Core/5.0.10": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "5.0.9",
+          "Microsoft.Data.Sqlite.Core": "5.0.10",
           "Microsoft.DotNet.PlatformAbstractions": "3.1.6",
-          "Microsoft.EntityFrameworkCore.Relational": "5.0.9",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.10",
           "Microsoft.Extensions.DependencyModel": "5.0.0"
         },
         "compile": {
@@ -631,10 +631,10 @@
           "lib/netstandard2.1/Microsoft.EntityFrameworkCore.SqlServer.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/5.0.9": {
+      "Microsoft.EntityFrameworkCore.Tools/5.0.10": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "5.0.9"
+          "Microsoft.EntityFrameworkCore.Design": "5.0.10"
         },
         "compile": {
           "lib/netstandard2.1/_._": {}
@@ -2586,8 +2586,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "5.0.10",
-          "Reso.Core": "1.0.19",
+          "AutoMapper": "10.1.1",
           "VuonDau.Data": "1.0.0"
         },
         "compile": {
@@ -2605,14 +2604,18 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.10",
-          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.10"
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.10",
+          "Reso.Core": "1.0.19"
         },
         "compile": {
           "bin/placeholder/VuonDau.Data.dll": {}
         },
         "runtime": {
           "bin/placeholder/VuonDau.Data.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -3302,17 +3305,17 @@
         "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.pdb"
       ]
     },
-    "Microsoft.Data.Sqlite.Core/5.0.9": {
-      "sha512": "lfjHH+NAWLQK2G9PEYx393K2i+yphh2/6GtrAK+VUBOlA1Y3irqJ7Vsf5RIYHy7y6bn5M7e7qonK9mQrjjZ07g==",
+    "Microsoft.Data.Sqlite.Core/5.0.10": {
+      "sha512": "Uv/pSj1qu+yhAmGtel1rGAjBplcH8BfNaDTgeeCat4Y3nW4b17zdUffvKGBYKcrVfzInf5teHclKKv2fIsm01A==",
       "type": "package",
-      "path": "microsoft.data.sqlite.core/5.0.9",
+      "path": "microsoft.data.sqlite.core/5.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/netstandard2.0/Microsoft.Data.Sqlite.dll",
         "lib/netstandard2.0/Microsoft.Data.Sqlite.xml",
-        "microsoft.data.sqlite.core.5.0.9.nupkg.sha512",
+        "microsoft.data.sqlite.core.5.0.10.nupkg.sha512",
         "microsoft.data.sqlite.core.nuspec"
       ]
     },
@@ -3378,10 +3381,10 @@
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Design/5.0.9": {
-      "sha512": "eNf6vkQAdVkYMEADUrXTPtlgxw7EwkbU8jyaOEdz3J/3JFz2yzdVIwJg66RNMuoqDrktAG1bcR64YEys6DXVFw==",
+    "Microsoft.EntityFrameworkCore.Design/5.0.10": {
+      "sha512": "zazeCOcEuK7vsQPEtzNC7D1zaUBWxfjyhajypISNm2n9o1SBXEgVReVrn+Edj4SBy8ofoaXRfY01YYxbDwCMQQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.design/5.0.9",
+      "path": "microsoft.entityframeworkcore.design/5.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3389,7 +3392,7 @@
         "build/netcoreapp3.0/Microsoft.EntityFrameworkCore.Design.props",
         "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Design.dll",
         "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Design.xml",
-        "microsoft.entityframeworkcore.design.5.0.9.nupkg.sha512",
+        "microsoft.entityframeworkcore.design.5.0.10.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
       ]
     },
@@ -3407,30 +3410,30 @@
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Sqlite/5.0.9": {
-      "sha512": "YJrgzMQfyyeLgDOowquTxYfs46i7Hwsfhm96AgcXPyKspSY53Yf0RSjg15vXzQMl+T1FocYAyeuvoaob2N3GGQ==",
+    "Microsoft.EntityFrameworkCore.Sqlite/5.0.10": {
+      "sha512": "311OWZJJ/37USFHCkeUifUPsB0CqC2fUCl/+rFuGA1W+lZASGk3MjgRUMFszu+dQFtLFrHf9RgNAzTgjcMG+Vg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlite/5.0.9",
+      "path": "microsoft.entityframeworkcore.sqlite/5.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/netstandard2.1/_._",
-        "microsoft.entityframeworkcore.sqlite.5.0.9.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlite.5.0.10.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlite.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Sqlite.Core/5.0.9": {
-      "sha512": "nVnCValvKFE2xCA6zMLeTKkjgtfQebEXeyUN7dlB+mmwh9knlku13ftD2uOCWtJ4Ddh1n9wUjt9JkpNSO52OAw==",
+    "Microsoft.EntityFrameworkCore.Sqlite.Core/5.0.10": {
+      "sha512": "LerzBEn8jxXoCeZx/mJ+7pzsYIeRINDYmsYSv05fl9jOw5nd8fEDk88U0CY+H40KTOTOxc0tCmFV6gOGNR0ckA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlite.core/5.0.9",
+      "path": "microsoft.entityframeworkcore.sqlite.core/5.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Sqlite.dll",
         "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Sqlite.xml",
-        "microsoft.entityframeworkcore.sqlite.core.5.0.9.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlite.core.5.0.10.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlite.core.nuspec"
       ]
     },
@@ -3448,17 +3451,17 @@
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Tools/5.0.9": {
-      "sha512": "BdNfn6IzyD6r6XpjnOn7HuWKryVzT6TnDIH8MZLD3d/wLG24V0BYB1Dyr6wnAqgGXXCZxJf77YES5nobge56aA==",
+    "Microsoft.EntityFrameworkCore.Tools/5.0.10": {
+      "sha512": "tZyRQ01KmPIGXO/jGGG9OrxKvFUckgq65FvGmYjwDazgBXIvfX2kdxXp2nN5gIQOiSMPMpRu8RDqI+2InyBuMg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.tools/5.0.9",
+      "path": "microsoft.entityframeworkcore.tools/5.0.10",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/netstandard2.1/_._",
-        "microsoft.entityframeworkcore.tools.5.0.9.nupkg.sha512",
+        "microsoft.entityframeworkcore.tools.5.0.10.nupkg.sha512",
         "microsoft.entityframeworkcore.tools.nuspec",
         "tools/EntityFrameworkCore.PS2.psd1",
         "tools/EntityFrameworkCore.PS2.psm1",
@@ -8561,13 +8564,13 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "AutoMapper >= 10.1.1",
-      "Microsoft.EntityFrameworkCore >= 5.0.10",
+      "Microsoft.EntityFrameworkCore.Design >= 5.0.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.10",
-      "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.9",
-      "Microsoft.EntityFrameworkCore.Tools >= 5.0.9",
+      "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.10",
+      "Microsoft.EntityFrameworkCore.Tools >= 5.0.10",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
+      "NLog >= 4.7.11",
       "NLog.Web.AspNetCore >= 4.14.0",
-      "Reso.Core >= 1.0.19",
       "Swashbuckle.AspNetCore >= 5.6.3",
       "VuonDau.Business >= 1.0.0",
       "VuonDau.Data >= 1.0.0"
@@ -8579,11 +8582,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vuong\\Desktop\\VuonDauBE\\VuonDauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
       "projectName": "VuonDau.WebApi",
-      "projectPath": "C:\\Users\\vuong\\Desktop\\VuonDauBE\\VuonDauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+      "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
       "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vuong\\Desktop\\VuonDauBE\\VuonDauBE\\VuonDau.WebApi\\obj\\",
+      "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8600,11 +8603,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\vuong\\Desktop\\VuonDauBE\\VuonDauBE\\VuonDau.Business\\VuonDau.Business.csproj": {
-              "projectPath": "C:\\Users\\vuong\\Desktop\\VuonDauBE\\VuonDauBE\\VuonDau.Business\\VuonDau.Business.csproj"
+            "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Business\\VuonDau.Business.csproj": {
+              "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Business\\VuonDau.Business.csproj"
             },
-            "C:\\Users\\vuong\\Desktop\\VuonDauBE\\VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj": {
-              "projectPath": "C:\\Users\\vuong\\Desktop\\VuonDauBE\\VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj"
+            "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj": {
+              "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj"
             }
           }
         }
@@ -8623,7 +8626,9 @@
             "target": "Package",
             "version": "[10.1.1, )"
           },
-          "Microsoft.EntityFrameworkCore": {
+          "Microsoft.EntityFrameworkCore.Design": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
             "target": "Package",
             "version": "[5.0.10, )"
           },
@@ -8633,25 +8638,25 @@
           },
           "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",
-            "version": "[5.0.9, )"
+            "version": "[5.0.10, )"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-            "version": "[5.0.9, )"
+            "version": "[5.0.10, )"
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[5.0.2, )"
           },
+          "NLog": {
+            "target": "Package",
+            "version": "[4.7.11, )"
+          },
           "NLog.Web.AspNetCore": {
             "target": "Package",
             "version": "[4.14.0, )"
-          },
-          "Reso.Core": {
-            "target": "Package",
-            "version": "[1.0.19, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Globalization;
-using VuonDau.Business.Commons;
+using VuonDau.Data.Gens.Commons;
 
 namespace UniPro.WebApi.App_Start
 {

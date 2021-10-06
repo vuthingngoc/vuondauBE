@@ -25,7 +25,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: CustomerTypes/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -65,7 +65,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: CustomerTypes/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -85,7 +85,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Description")] CustomerType customerType)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] CustomerType customerType)
         {
             if (id != customerType.Id)
             {
@@ -116,7 +116,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: CustomerTypes/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -136,7 +136,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: CustomerTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var customerType = await _context.CustomerTypes.FindAsync(id);
             _context.CustomerTypes.Remove(customerType);
@@ -144,7 +144,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerTypeExists(string id)
+        private bool CustomerTypeExists(int id)
         {
             return _context.CustomerTypes.Any(e => e.Id == id);
         }

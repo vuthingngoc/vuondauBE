@@ -13,8 +13,8 @@ namespace VuonDau.Data.Models
             HarvestSellingPrices = new HashSet<HarvestSellingPrice>();
         }
 
-        public string Id { get; set; }
-        public string HarvestId { get; set; }
+        public int Id { get; set; }
+        public int? HarvestId { get; set; }
         public DateTime? DateOfCreate { get; set; }
         public double? MinWeight { get; set; }
         public double? TotalWeight { get; set; }

@@ -12,7 +12,7 @@ namespace VuonDau.Data.Models
             Transactions = new HashSet<Transaction>();
         }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Method { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
