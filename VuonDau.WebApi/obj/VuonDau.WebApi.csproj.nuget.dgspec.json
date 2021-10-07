@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj": {}
+    "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Business\\VuonDau.Business.csproj": {
+    "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\VuonDau.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Business\\VuonDau.Business.csproj",
+        "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\VuonDau.Business.csproj",
         "projectName": "VuonDau.Business",
-        "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Business\\VuonDau.Business.csproj",
+        "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\VuonDau.Business.csproj",
         "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Business\\obj\\",
+        "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj": {
-                "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj"
+              "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj": {
+                "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj"
               }
             }
           }
@@ -71,14 +71,14 @@
         }
       }
     },
-    "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj": {
+    "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj",
+        "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj",
         "projectName": "VuonDau.Data",
-        "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj",
+        "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj",
         "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\obj\\",
+        "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -148,14 +148,14 @@
         }
       }
     },
-    "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj": {
+    "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+        "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
         "projectName": "VuonDau.WebApi",
-        "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+        "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
         "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.WebApi\\obj\\",
+        "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -172,11 +172,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Business\\VuonDau.Business.csproj": {
-                "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Business\\VuonDau.Business.csproj"
+              "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\VuonDau.Business.csproj": {
+                "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\VuonDau.Business.csproj"
               },
-              "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj": {
-                "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj"
+              "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj": {
+                "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj"
               }
             }
           }

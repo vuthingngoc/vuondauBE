@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UniPro.WebApi.App_Start
+namespace VuonDau.WebApi.App_Start
 {
     public static class MigrationExtension
     {
@@ -20,7 +20,7 @@ namespace UniPro.WebApi.App_Start
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"{DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-dd HH:mm:ss.fff")}||fail: UniPro.WebApi.App_Start.MigrationExtension[0]\n{ex.ToString()}");
+                Console.WriteLine($"{DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-dd HH:mm:ss.fff")}||fail: VuonDau.WebApi.App_Start.MigrationExtension[0]\n{ex.ToString()}");
             }
         }
     }

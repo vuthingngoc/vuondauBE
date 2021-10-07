@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace UniPro.WebApi.App_Start
+namespace VuonDau.WebApi.App_Start
 {
     public static class ServiceWorkersConfig
     {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JAbgftDvSUu4ZC3dU8yZwxVGlj7NtENqpSBVbuxxNXzkx8EAvcEYtP9uE7MtYj2jSZwmYAnNnNTlFim+erUNjA==",
+  "dgSpecHash": "nm5uYJWXRHJDc2qeNGUIom2YNVT0g3Xq35h4pZZuV2+7RgEkurZEJReaqfxR40Hk7frQ9JVXnUbJC8b7t+tFMQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+  "projectFilePath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vuong\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\vuong\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

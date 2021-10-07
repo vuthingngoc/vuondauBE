@@ -2,7 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VuonDau.Data.Models;
-using VuonDau.Business.Gens.Services;
+using VuonDau.Business.Services;
 using System.Linq;
 namespace VuonDau.WebApi.Controllers.Gens
 {

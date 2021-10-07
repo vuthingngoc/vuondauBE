@@ -8,7 +8,7 @@ using System.Linq;
 using VuonDau.Business.AutoMapperModule;
 //using VuonDau.Bussiness.AutoMapperModule;
 
-namespace UniPro.WebApi.App_Start
+namespace VuonDau.WebApi.App_Start
 {
     public static class AutoMapperConfig
     {

@@ -8,22 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
-using VuonDau.Business.Requests;
-using VuonDau.Business.Gens.Services;
+using VuonDau.Business.Requests.Farmer;
+using VuonDau.Business.Services;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    [ApiController]
     public partial class FarmersController : ControllerBase
     {
-        private readonly IFarmerService _farmerService;
-        private readonly IConfigurationProvider _mapper;
-        public FarmersController(IFarmerService farmerService, IMapper mapper)
-        {
-            _farmerService = farmerService;
-            _mapper = mapper.ConfigurationProvider;
-        }
         /// <summary>
         /// Get List Farmers
         /// </summary>

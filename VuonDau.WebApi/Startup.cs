@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using UniPro.WebApi.App_Start;
+using VuonDau.WebApi.App_Start;
 using VuonDau.Data.Models;
 using VuonDau.WebApi.Handlers;
 
@@ -39,10 +39,10 @@ namespace VuonDau.WebApi
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "VuonDau.WebApi", Version = "v1" });
-            });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "VuonDau.WebApi", Version = "v1" });
+            //});
             services.AddCors(options =>
             {
 
@@ -57,7 +57,7 @@ namespace VuonDau.WebApi
             });
             services.ConfigureFilter<ErrorHandlingFilter>();
             services.JsonFormatConfig();
-            //services.ConfigureSwagger();
+            services.ConfigureSwagger();
             services.AddDbContext<VuondauDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VuonDauDatabase"))
                 .EnableSensitiveDataLogging()
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
@@ -76,9 +76,9 @@ namespace VuonDau.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, IApiVersionDescriptionProvider provider*/)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment()||env.IsProduction())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
@@ -128,7 +128,7 @@ namespace VuonDau.WebApi
             {
                 endpoints.MapControllers();
             });
-            //app.ConfigureSwagger(provider);
+            app.ConfigureSwagger(provider);
         }
     }
 }
