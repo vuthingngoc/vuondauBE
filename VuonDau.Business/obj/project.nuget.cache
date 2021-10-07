@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G2i4XjFtE6mkDIX3quJv8JP1hiJDk7agLI81PK3CIm/6foVj1JWvriHDmvU/3p3yXCg5xBJiJhNjr7Ush9zxQw==",
+  "dgSpecHash": "snd19Lz8exG9SI/mVP3D+nX+CAWXj0LmRtNuEnBgY5gAqvm2d/S8Ve3+dl6Mi3szYeeK31pRMeRnkdzl8G4h/g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Business\\VuonDau.Business.csproj",
+  "projectFilePath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\VuonDau.Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vuong\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\vuong\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.10\\microsoft.aspnetcore.authentication.jwtbearer.3.1.10.nupkg.sha512",

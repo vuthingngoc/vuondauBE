@@ -3,7 +3,7 @@
 //              AUTO-GENERATED
 //
 /////////////////////////////////////////////////////////////////
-namespace VuonDau.Business.Gens.Services
+namespace VuonDau.Business.Services
 {
     using Reso.Core.BaseConnect;
     using VuonDau.Data.Repositories;

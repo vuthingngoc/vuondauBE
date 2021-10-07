@@ -7,7 +7,7 @@
 
 using VuonDau.Data.Models;
 using Microsoft.Extensions.DependencyInjection;
-using VuonDau.Business.Gens.Services;
+using VuonDau.Business.Services;
 using VuonDau.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Reso.Core.BaseConnect;

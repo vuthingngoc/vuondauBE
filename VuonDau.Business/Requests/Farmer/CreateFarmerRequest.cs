@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace VuonDau.Business.Requests
+namespace VuonDau.Business.Requests.Farmer
 {
     public class CreateFarmerRequest
     {

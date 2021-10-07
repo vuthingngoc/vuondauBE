@@ -6340,11 +6340,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj",
+      "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj",
       "projectName": "VuonDau.Data",
-      "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\VuonDau.Data.csproj",
+      "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj",
       "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\VuonDau.Data\\obj\\",
+      "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using VuonDau.Business.Requests;
+using VuonDau.Business.Requests.Farmer;
 using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
@@ -14,7 +14,6 @@ namespace VuonDau.Business.AutoMapperModule
         {
             mc.CreateMap<Farmer, FarmerViewModel>().ReverseMap();
             mc.CreateMap<CreateFarmerRequest, Farmer>();
-            mc.CreateMap<Farmer, CreateFarmerRequest>();
             mc.CreateMap<UpdateFarmerRequest, Farmer>();
         }
     }
