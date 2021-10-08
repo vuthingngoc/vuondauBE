@@ -58,6 +58,14 @@ namespace VuonDau.WebApi
             services.ConfigureFilter<ErrorHandlingFilter>();
             services.JsonFormatConfig();
             services.ConfigureSwagger();
+            //services.AddAuthentication("Bearer")
+            //        .AddIdentityServerAuthentication(options =>
+            //        {
+            //            options.Authority = Configuration["DomainIdentityServer"];
+            //            options.RequireHttpsMetadata = false;
+            //            options.ApiName = Configuration["ApiName"];
+
+            //        });
             services.AddDbContext<VuondauDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VuonDauDatabase"))
                 .EnableSensitiveDataLogging()
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
@@ -78,7 +86,7 @@ namespace VuonDau.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
-            if (env.IsDevelopment()||env.IsProduction())
+            if (env.IsDevelopment() || env.IsProduction())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
@@ -100,9 +108,10 @@ namespace VuonDau.WebApi
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
-            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(options.Value);
+
             #region Multi lang
+            //var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            //app.UseRequestLocalization(options.Value);
             app.Use((context, next) =>
             {
                 var userLangs = context.Request.Headers["accept-language"].ToString();
