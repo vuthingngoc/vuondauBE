@@ -46,10 +46,6 @@ namespace VuonDau.Business.Services
             {
             var mapper = _mapper.CreateMapper();
             var farmer = mapper.Map<Farmer>(request);
-            var a = request.BirthDay;
-            var b = request.FirstName;
-            var c = request.LastName;
-            var d = request.Phone;
             farmer.Status = (int)FarmerStatus.Active;
             farmer.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(farmer);
@@ -72,7 +68,7 @@ namespace VuonDau.Business.Services
             farmer.Phone = farmerInRequest.Phone;
             farmer.BirthDay = farmerInRequest.BirthDay;
             farmer.Gender = farmerInRequest.Gender;
-            farmer.Status = (int)FarmerStatus.Active;
+            farmer.Status = farmerInRequest.Status;
             await UpdateAsyn(farmer);
             return mapper.Map<FarmerViewModel>(farmer);
         }
@@ -91,5 +87,10 @@ namespace VuonDau.Business.Services
 
             return 1;
         }
+        //public override bool Equals(object obj)
+        //{
+        //    return obj is FarmerService service &&
+        //           EqualityComparer<IConfigurationProvider>.Default.Equals(this._mapper, service._mapper);
+        //}
     }
 }

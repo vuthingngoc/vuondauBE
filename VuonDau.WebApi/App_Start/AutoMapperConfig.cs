@@ -18,6 +18,7 @@ namespace VuonDau.WebApi.App_Start
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.ConfigFarmerModule();
+                mc.ConfigProductModule();
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

@@ -1,0 +1,139 @@
+2021-10-10 16:13:15.4394||ERROR|VuonDau.WebApi.Program|Stopped program because of exception System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '<' is an invalid start of a property name. Expected a '"'. LineNumber: 12 | BytePositionInLine: 0.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at VuonDau.WebApi.Program.Main(String[] args) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\Program.cs:line 21
+2021-10-10 16:17:45.9951||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+CreateProductRequest -> Product
+VuonDau.Business.Requests.Farmer.CreateProductRequest -> VuonDau.Data.Models.Product
+
+Type Map configuration:
+CreateProductRequest -> Product
+VuonDau.Business.Requests.Farmer.CreateProductRequest -> VuonDau.Data.Models.Product
+
+Destination Member:
+ProductTypeId
+
+ ---> System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt32(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at lambda_method122(Closure , Object , Product , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method122(Closure , Object , Product , ResolutionContext )
+   at VuonDau.Business.Services.ProductService.CreateProduct(CreateProductRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\Services\ProductService.cs:line 46
+   at VuonDau.WebApi.Controllers.ProductsController.CreateProduct(CreateProductRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\Controllers\ProductsController.cs:line 49
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-10-10 16:59:45.4485||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+CreateProductRequest -> Product
+VuonDau.Business.Requests.Farmer.CreateProductRequest -> VuonDau.Data.Models.Product
+
+Type Map configuration:
+CreateProductRequest -> Product
+VuonDau.Business.Requests.Farmer.CreateProductRequest -> VuonDau.Data.Models.Product
+
+Destination Member:
+ProductTypeId
+
+ ---> System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt32(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at lambda_method80(Closure , Object , Product , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method80(Closure , Object , Product , ResolutionContext )
+   at VuonDau.Business.Services.ProductService.CreateProduct(CreateProductRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\Services\ProductService.cs:line 46
+   at VuonDau.WebApi.Controllers.ProductsController.CreateProduct(CreateProductRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\Controllers\ProductsController.cs:line 49
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-10-10 17:07:55.0143||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+CreateProductRequest -> Product
+VuonDau.Business.Requests.Farmer.CreateProductRequest -> VuonDau.Data.Models.Product
+
+Type Map configuration:
+CreateProductRequest -> Product
+VuonDau.Business.Requests.Farmer.CreateProductRequest -> VuonDau.Data.Models.Product
+
+Destination Member:
+ProductTypeId
+
+ ---> System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt32(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at lambda_method195(Closure , Object , Product , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method195(Closure , Object , Product , ResolutionContext )
+   at VuonDau.Business.Services.ProductService.CreateProduct(CreateProductRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\Services\ProductService.cs:line 46
+   at VuonDau.WebApi.Controllers.ProductsController.CreateProduct(CreateProductRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\Controllers\ProductsController.cs:line 49
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-10-10 17:23:57.4587||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+CreateProductRequest -> Product
+VuonDau.Business.Requests.Farmer.CreateProductRequest -> VuonDau.Data.Models.Product
+
+Type Map configuration:
+CreateProductRequest -> Product
+VuonDau.Business.Requests.Farmer.CreateProductRequest -> VuonDau.Data.Models.Product
+
+Destination Member:
+ProductTypeId
+
+ ---> System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt32(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at lambda_method80(Closure , Object , Product , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method80(Closure , Object , Product , ResolutionContext )
+   at VuonDau.Business.Services.ProductService.CreateProduct(CreateProductRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\Services\ProductService.cs:line 46
+   at VuonDau.WebApi.Controllers.ProductsController.CreateProduct(CreateProductRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\Controllers\ProductsController.cs:line 49
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 

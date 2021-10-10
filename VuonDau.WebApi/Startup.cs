@@ -58,6 +58,7 @@ namespace VuonDau.WebApi
             services.ConfigureFilter<ErrorHandlingFilter>();
             services.JsonFormatConfig();
             services.ConfigureSwagger();
+
             //services.AddAuthentication("Bearer")
             //        .AddIdentityServerAuthentication(options =>
             //        {
@@ -66,6 +67,7 @@ namespace VuonDau.WebApi
             //            options.ApiName = Configuration["ApiName"];
 
             //        });
+
             services.AddDbContext<VuondauDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VuonDauDatabase"))
                 .EnableSensitiveDataLogging()
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
@@ -93,16 +95,6 @@ namespace VuonDau.WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VuonDau.WebApi v1"));
             }
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
             app.UseCors(MyAllowSpecificOrigins);
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -110,8 +102,8 @@ namespace VuonDau.WebApi
             });
 
             #region Multi lang
-            //var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            //app.UseRequestLocalization(options.Value);
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
             app.Use((context, next) =>
             {
                 var userLangs = context.Request.Headers["accept-language"].ToString();
