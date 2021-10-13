@@ -6,8 +6,8 @@ namespace VuonDau.Business.ViewModel
 {
     public class ProductViewModel
     {
-        public int Id { get; set; }
-        public string ProductTypeId { get; set; }
+        public Guid Id { get; set; }
+        public Guid ProductTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime? DataOfCreate { get; set; }

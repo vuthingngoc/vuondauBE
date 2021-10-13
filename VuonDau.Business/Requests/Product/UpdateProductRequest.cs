@@ -6,7 +6,7 @@ namespace VuonDau.Business.Requests.Farmer
 {
     public class UpdateProductRequest
     {
-        public string ProductTypeId { get; set; }
+        public Guid ProductTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int? Status { get; set; }

@@ -26,7 +26,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: OrderDetails/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -72,7 +72,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: OrderDetails/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -94,7 +94,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductId,OrderId,Weight,Price,Status")] OrderDetail orderDetail)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,ProductId,OrderId,Weight,Price,Status")] OrderDetail orderDetail)
         {
             if (id != orderDetail.Id)
             {
@@ -127,7 +127,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: OrderDetails/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -149,7 +149,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: OrderDetails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var orderDetail = await _context.OrderDetails.FindAsync(id);
             _context.OrderDetails.Remove(orderDetail);
@@ -157,7 +157,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrderDetailExists(int id)
+        private bool OrderDetailExists(Guid id)
         {
             return _context.OrderDetails.Any(e => e.Id == id);
         }

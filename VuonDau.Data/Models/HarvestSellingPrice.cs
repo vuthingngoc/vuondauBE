@@ -7,9 +7,9 @@ namespace VuonDau.Data.Models
 {
     public partial class HarvestSellingPrice
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public double? Price { get; set; }
-        public int? HarvestSellingId { get; set; }
+        public Guid? HarvestSellingId { get; set; }
 
         public virtual HarvestSelling HarvestSelling { get; set; }
     }

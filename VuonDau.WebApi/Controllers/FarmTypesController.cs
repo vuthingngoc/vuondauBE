@@ -25,7 +25,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: FarmTypes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -65,7 +65,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: FarmTypes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -85,7 +85,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] FarmType farmType)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description")] FarmType farmType)
         {
             if (id != farmType.Id)
             {
@@ -116,7 +116,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: FarmTypes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -136,7 +136,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: FarmTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var farmType = await _context.FarmTypes.FindAsync(id);
             _context.FarmTypes.Remove(farmType);
@@ -144,7 +144,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FarmTypeExists(int id)
+        private bool FarmTypeExists(Guid id)
         {
             return _context.FarmTypes.Any(e => e.Id == id);
         }

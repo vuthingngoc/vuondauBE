@@ -27,9 +27,9 @@ namespace VuonDau.WebApi.Controllers
 
         // GET: Products/Details/5
         [HttpGet]
-        [Route("~/api/products/{id:int}")]
+        [Route("~/api/products/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Products" })]
-        public async Task<IActionResult> GetProduct([FromRoute] int id)
+        public async Task<IActionResult> GetProduct([FromRoute] Guid id)
         {
             var farmer = await _productService.GetProductById(id);
             if (farmer == null)
@@ -62,9 +62,9 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("~/api/products/{id:int}")]
+        [Route("~/api/products/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Products" })]
-        public async Task<IActionResult> UpdateFarmer([FromRoute] int id, UpdateProductRequest request)
+        public async Task<IActionResult> UpdateFarmer([FromRoute] Guid id, UpdateProductRequest request)
         {
             var product = await _productService.UpdateProduct(id, request);
             if (product == null)
@@ -81,9 +81,9 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("~/api/products/{id:int}")]
+        [Route("~/api/products/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Products" })]
-        public async Task<IActionResult> DeleteProduct([FromRoute] int id)
+        public async Task<IActionResult> DeleteProduct([FromRoute] Guid id)
         {
             var resultInt = await _productService.DeleteProduct(id);
             if (resultInt != 1)

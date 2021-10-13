@@ -13,9 +13,9 @@ namespace VuonDau.Data.Models
             Harvests = new HashSet<Harvest>();
         }
 
-        public int Id { get; set; }
-        public int? FarmTypeId { get; set; }
-        public int? FarmerId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? FarmTypeId { get; set; }
+        public Guid? FarmerId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }

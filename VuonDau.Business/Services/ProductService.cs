@@ -15,10 +15,10 @@ namespace VuonDau.Business.Services
     public partial interface IProductService
     {
         Task<List<ProductViewModel>> GetAllProducts();
-        Task<ProductViewModel> GetProductById(int id);
+        Task<ProductViewModel> GetProductById(Guid id);
         Task<ProductViewModel> CreateProduct(CreateProductRequest request);
-        Task<ProductViewModel> UpdateProduct(int id, UpdateProductRequest request);
-        Task<int> DeleteProduct(int id);
+        Task<ProductViewModel> UpdateProduct(Guid id, UpdateProductRequest request);
+        Task<int> DeleteProduct(Guid id);
     }
 
 
@@ -36,7 +36,7 @@ namespace VuonDau.Business.Services
         {
             return await Get(p => p.Status == (int)ProductStatus.Active).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
         }
-        public async Task<ProductViewModel> GetProductById(int id)
+        public async Task<ProductViewModel> GetProductById(Guid id)
         {
             return await Get(p => p.Id == id && p.Status == (int)ProductStatus.Active).ProjectTo<ProductViewModel>(_mapper).FirstOrDefaultAsync();
         }
@@ -50,7 +50,7 @@ namespace VuonDau.Business.Services
             var productViewModel = mapper.Map<ProductViewModel>(product);
             return productViewModel;
         }
-        public async Task<ProductViewModel> UpdateProduct(int id, UpdateProductRequest request)
+        public async Task<ProductViewModel> UpdateProduct(Guid id, UpdateProductRequest request)
         {
             var mapper = _mapper.CreateMapper();
             var productInRequest = mapper.Map<Product>(request);
@@ -66,7 +66,7 @@ namespace VuonDau.Business.Services
             await UpdateAsyn(product);
             return mapper.Map<ProductViewModel>(product);
         }
-        public async Task<int> DeleteProduct(int id)
+        public async Task<int> DeleteProduct(Guid id)
         {
             var product = await Get(p => p.Id == id).FirstOrDefaultAsync();
 

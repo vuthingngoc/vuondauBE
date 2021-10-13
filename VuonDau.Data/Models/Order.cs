@@ -14,8 +14,8 @@ namespace VuonDau.Data.Models
             Transactions = new HashSet<Transaction>();
         }
 
-        public int Id { get; set; }
-        public int? CustomerId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? CustomerId { get; set; }
         public DateTime? DateOfCreate { get; set; }
         public string Address { get; set; }
         public double? TotalPrice { get; set; }

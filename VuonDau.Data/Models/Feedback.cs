@@ -7,8 +7,8 @@ namespace VuonDau.Data.Models
 {
     public partial class Feedback
     {
-        public int Id { get; set; }
-        public int? OrderId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? OrderId { get; set; }
         public DateTime? DateOfCreate { get; set; }
         public string Description { get; set; }
         public int? Status { get; set; }

@@ -15,10 +15,10 @@ namespace VuonDau.Business.Services
     public partial interface IFarmerService
     {
         Task<List<FarmerViewModel>> GetAllFarmers();
-        Task<FarmerViewModel> GetFarmerById(int id);
+        Task<FarmerViewModel> GetFarmerById(Guid id);
         Task<FarmerViewModel> CreateFarmer(CreateFarmerRequest request);
-        Task<FarmerViewModel> UpdateFarmer(int id, UpdateFarmerRequest request);
-        Task<int> DeleteFarmer(int id);
+        Task<FarmerViewModel> UpdateFarmer(Guid id, UpdateFarmerRequest request);
+        Task<int> DeleteFarmer(Guid id);
     }
 
 
@@ -37,7 +37,7 @@ namespace VuonDau.Business.Services
             return await Get(p => p.Status == (int)FarmerStatus.Active).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
         }
 
-        public async Task<FarmerViewModel> GetFarmerById(int id)
+        public async Task<FarmerViewModel> GetFarmerById(Guid id)
         {
             return await Get(p => p.Id == id && p.Status == (int)FarmerStatus.Active).ProjectTo<FarmerViewModel>(_mapper).FirstOrDefaultAsync();
         }
@@ -53,7 +53,7 @@ namespace VuonDau.Business.Services
             return farmerViewModel;
         }
 
-        public async Task<FarmerViewModel> UpdateFarmer(int id, UpdateFarmerRequest request)
+        public async Task<FarmerViewModel> UpdateFarmer(Guid id, UpdateFarmerRequest request)
         {
             var mapper = _mapper.CreateMapper();
             var farmerInRequest = mapper.Map<Farmer>(request);
@@ -73,7 +73,7 @@ namespace VuonDau.Business.Services
             return mapper.Map<FarmerViewModel>(farmer);
         }
 
-        public async Task<int> DeleteFarmer(int id)
+        public async Task<int> DeleteFarmer(Guid id)
         {
             var farmer = await Get(p => p.Id == id).FirstOrDefaultAsync();
 

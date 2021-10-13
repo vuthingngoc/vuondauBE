@@ -26,7 +26,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Transactions/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -72,7 +72,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Transactions/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -94,7 +94,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderId,Price,PaymentId,Status,Description")] Transaction transaction)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,OrderId,Price,PaymentId,Status,Description")] Transaction transaction)
         {
             if (id != transaction.Id)
             {
@@ -127,7 +127,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Transactions/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -149,7 +149,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: Transactions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var transaction = await _context.Transactions.FindAsync(id);
             _context.Transactions.Remove(transaction);
@@ -157,7 +157,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TransactionExists(int id)
+        private bool TransactionExists(Guid id)
         {
             return _context.Transactions.Any(e => e.Id == id);
         }

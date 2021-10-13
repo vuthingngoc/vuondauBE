@@ -26,7 +26,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: HarvestSellingPrices/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -69,7 +69,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: HarvestSellingPrices/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -90,7 +90,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Price,HarvestSellingId")] HarvestSellingPrice harvestSellingPrice)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Price,HarvestSellingId")] HarvestSellingPrice harvestSellingPrice)
         {
             if (id != harvestSellingPrice.Id)
             {
@@ -106,14 +106,14 @@ namespace VuonDau.WebApi.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HarvestSellingPriceExists(harvestSellingPrice.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //if (!HarvestSellingPriceExists(harvestSellingPrice.Id))
+                    //{
+                    //    return NotFound();
+                    //}
+                    //else
+                    //{
+                    //    throw;
+                    //}
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -122,7 +122,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: HarvestSellingPrices/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -143,7 +143,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: HarvestSellingPrices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var harvestSellingPrice = await _context.HarvestSellingPrices.FindAsync(id);
             _context.HarvestSellingPrices.Remove(harvestSellingPrice);
@@ -151,7 +151,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HarvestSellingPriceExists(int id)
+        private bool HarvestSellingPriceExists(Guid id)
         {
             return _context.HarvestSellingPrices.Any(e => e.Id == id);
         }

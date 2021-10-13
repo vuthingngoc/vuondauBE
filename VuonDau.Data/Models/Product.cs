@@ -11,11 +11,12 @@ namespace VuonDau.Data.Models
         {
             Harvests = new HashSet<Harvest>();
             OrderDetails = new HashSet<OrderDetail>();
+            ProductInCarts = new HashSet<ProductInCart>();
             ProductPictures = new HashSet<ProductPicture>();
         }
 
-        public int Id { get; set; }
-        public int? ProductTypeId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? ProductTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime? DataOfCreate { get; set; }
@@ -24,6 +25,7 @@ namespace VuonDau.Data.Models
         public virtual ProductType ProductType { get; set; }
         public virtual ICollection<Harvest> Harvests { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<ProductInCart> ProductInCarts { get; set; }
         public virtual ICollection<ProductPicture> ProductPictures { get; set; }
     }
 }

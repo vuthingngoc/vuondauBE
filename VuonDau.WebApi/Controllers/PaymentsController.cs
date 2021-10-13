@@ -25,7 +25,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Payments/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -65,7 +65,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Payments/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -85,7 +85,7 @@ namespace VuonDau.WebApi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Method")] Payment payment)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Method")] Payment payment)
         {
             if (id != payment.Id)
             {
@@ -116,7 +116,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         // GET: Payments/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -136,7 +136,7 @@ namespace VuonDau.WebApi.Controllers
         // POST: Payments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var payment = await _context.Payments.FindAsync(id);
             _context.Payments.Remove(payment);
@@ -144,7 +144,7 @@ namespace VuonDau.WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PaymentExists(int id)
+        private bool PaymentExists(Guid id)
         {
             return _context.Payments.Any(e => e.Id == id);
         }
