@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
-using VuonDau.Business.Requests.Farmer;
+using VuonDau.Business.Requests.Product;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -16,7 +16,7 @@ namespace VuonDau.WebApi.Controllers
     {
         // GET: Products
         [HttpGet]
-        [Route("~/api/products")]
+        [Route("~/api/v1/products")]
         [SwaggerOperation(Tags = new[] { "Products" })]
         public async Task<IActionResult> GetProducts()
         {
@@ -27,7 +27,7 @@ namespace VuonDau.WebApi.Controllers
 
         // GET: Products/Details/5
         [HttpGet]
-        [Route("~/api/products/{id:Guid}")]
+        [Route("~/api/v1/products/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Products" })]
         public async Task<IActionResult> GetProduct([FromRoute] Guid id)
         {
@@ -42,7 +42,7 @@ namespace VuonDau.WebApi.Controllers
 
         // GET: Products/Create
         [HttpPost]
-        [Route("~/api/products")]
+        [Route("~/api/v1/products")]
         [SwaggerOperation(Tags = new[] { "Products" })]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request)
         {
@@ -62,7 +62,7 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("~/api/products/{id:Guid}")]
+        [Route("~/api/v1/products/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Products" })]
         public async Task<IActionResult> UpdateFarmer([FromRoute] Guid id, UpdateProductRequest request)
         {
@@ -81,7 +81,7 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("~/api/products/{id:Guid}")]
+        [Route("~/api/v1/products/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Products" })]
         public async Task<IActionResult> DeleteProduct([FromRoute] Guid id)
         {

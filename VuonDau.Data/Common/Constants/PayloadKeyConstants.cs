@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VuonDau.Data.Common.Constants;
+namespace VuonDau.Data.Common.Constants
 {
     public class PayloadKeyConstants
     {

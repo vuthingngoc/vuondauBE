@@ -2,158 +2,107 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.Wallet;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class WalletsController : Controller
+    public partial class WalletsController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public WalletsController(VuondauDBContext context)
+        /// <summary>
+        /// Get List Wallet
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/wallets")]
+        [SwaggerOperation(Tags = new[] { "Wallets" })]
+        public async Task<IActionResult> GetWallets()
         {
-            _context = context;
+            await _walletService.GetAllWallets();
+            var wallets = await _walletService.GetAllWallets();
+            return Ok(wallets);
         }
 
-        // GET: Wallets
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Get Wallet by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/wallets/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Wallets" })]
+        public async Task<IActionResult> GetWallet([FromRoute] Guid id)
         {
-            var vuondauDBContext = _context.Wallets.Include(w => w.Customer);
-            return View(await vuondauDBContext.ToListAsync());
-        }
-
-        // GET: Wallets/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var wallet = await _context.Wallets
-                .Include(w => w.Customer)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var wallet = await _walletService.GetWalletById(id);
             if (wallet == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(wallet);
+            return Ok(wallet);
         }
 
-        // GET: Wallets/Create
-        public IActionResult Create()
-        {
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id");
-            return View();
-        }
-
-        // POST: Wallets/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Tạo mới 1 Wallet
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CustomerId,Balance")] Wallet wallet)
+        [Route("~/api/v1/wallets")]
+        [SwaggerOperation(Tags = new[] { "Wallets" })]
+        public async Task<IActionResult> CreateWallet([FromBody] CreateWalletRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(wallet);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", wallet.CustomerId);
-            return View(wallet);
-        }
-
-        // GET: Wallets/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var wallet = await _context.Wallets.FindAsync(id);
+            var wallet = await _walletService.CreateWallet(request);
             if (wallet == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", wallet.CustomerId);
-            return View(wallet);
+
+            return Created(nameof(CreateWallet), wallet);
         }
 
-        // POST: Wallets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,CustomerId,Balance")] Wallet wallet)
+        /// <summary>
+        /// Cập nhập 1 Wallet
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/v1/wallets/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Wallets" })]
+        public async Task<IActionResult> UpdateWallet([FromRoute] Guid id, UpdateWalletRequest request)
         {
-            if (id != wallet.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(wallet);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!WalletExists(wallet.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", wallet.CustomerId);
-            return View(wallet);
-        }
-
-        // GET: Wallets/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var wallet = await _context.Wallets
-                .Include(w => w.Customer)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var wallet = await _walletService.UpdateWallet(id, request);
             if (wallet == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(wallet);
+            return Ok(wallet);
         }
 
-        // POST: Wallets/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        /// <summary>
+        /// Xóa 1 Wallet qua id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("~/api/v1/wallets/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Wallets" })]
+        public async Task<IActionResult> DeleteWallet([FromRoute] Guid id)
         {
-            var wallet = await _context.Wallets.FindAsync(id);
-            _context.Wallets.Remove(wallet);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _walletService.DeleteWallet(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool WalletExists(Guid id)
-        {
-            return _context.Wallets.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

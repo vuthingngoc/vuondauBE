@@ -2,158 +2,107 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.CustomerGroup;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class CustomerGroupsController : Controller
+    public partial class CustomerGroupsController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public CustomerGroupsController(VuondauDBContext context)
+        /// <summary>
+        /// Get List Customer
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/customer-groups")]
+        [SwaggerOperation(Tags = new[] { "CustomerGroups" })]
+        public async Task<IActionResult> GetCustomerGroups()
         {
-            _context = context;
+            await _customerGroupService.GetAllCustomerGroups();
+            var customerGroups = await _customerGroupService.GetAllCustomerGroups();
+            return Ok(customerGroups);
         }
 
-        // GET: CustomerGroups
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Get Customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/customer-groups/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "CustomerGroups" })]
+        public async Task<IActionResult> GetCustomerGroup([FromRoute] Guid id)
         {
-            var vuondauDBContext = _context.CustomerGroups.Include(c => c.HarvestSelling);
-            return View(await vuondauDBContext.ToListAsync());
-        }
-
-        // GET: CustomerGroups/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerGroup = await _context.CustomerGroups
-                .Include(c => c.HarvestSelling)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var customerGroup = await _customerGroupService.GetCustomerGroupById(id);
             if (customerGroup == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(customerGroup);
+            return Ok(customerGroup);
         }
 
-        // GET: CustomerGroups/Create
-        public IActionResult Create()
-        {
-            ViewData["HarvestSellingId"] = new SelectList(_context.HarvestSellings, "Id", "Id");
-            return View();
-        }
-
-        // POST: CustomerGroups/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Tạo mới 1 Customer
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Location,HarvestSellingId")] CustomerGroup customerGroup)
+        [Route("~/api/v1/customer-groups")]
+        [SwaggerOperation(Tags = new[] { "CustomerGroups" })]
+        public async Task<IActionResult> CreateCustomerGroup([FromBody] CreateCustomerGroupRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customerGroup);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["HarvestSellingId"] = new SelectList(_context.HarvestSellings, "Id", "Id", customerGroup.HarvestSellingId);
-            return View(customerGroup);
-        }
-
-        // GET: CustomerGroups/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerGroup = await _context.CustomerGroups.FindAsync(id);
+            var customerGroup = await _customerGroupService.CreateCustomerGroup(request);
             if (customerGroup == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["HarvestSellingId"] = new SelectList(_context.HarvestSellings, "Id", "Id", customerGroup.HarvestSellingId);
-            return View(customerGroup);
+
+            return Created(nameof(_customerGroupService), customerGroup);
         }
 
-        // POST: CustomerGroups/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Location,HarvestSellingId")] CustomerGroup customerGroup)
+        /// <summary>
+        /// Cập nhập 1 Customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/v1/customer-groups/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "CustomerGroups" })]
+        public async Task<IActionResult> UpdateCustomerGroup([FromRoute] Guid id, UpdateCustomerGroupRequest request)
         {
-            if (id != customerGroup.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(customerGroup);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerGroupExists(customerGroup.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["HarvestSellingId"] = new SelectList(_context.HarvestSellings, "Id", "Id", customerGroup.HarvestSellingId);
-            return View(customerGroup);
-        }
-
-        // GET: CustomerGroups/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerGroup = await _context.CustomerGroups
-                .Include(c => c.HarvestSelling)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var customerGroup = await _customerGroupService.UpdateCustomerGroup(id, request);
             if (customerGroup == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(customerGroup);
+            return Ok(customerGroup);
         }
 
-        // POST: CustomerGroups/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        /// <summary>
+        /// Xóa 1 Customer qua id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("~/api/v1/customer-groups/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "CustomerGroups" })]
+        public async Task<IActionResult> DeleteCustomerGroup([FromRoute] Guid id)
         {
-            var customerGroup = await _context.CustomerGroups.FindAsync(id);
-            _context.CustomerGroups.Remove(customerGroup);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _customerGroupService.DeleteCustomerGroup(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool CustomerGroupExists(Guid id)
-        {
-            return _context.CustomerGroups.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

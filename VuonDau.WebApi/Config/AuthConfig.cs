@@ -27,7 +27,7 @@ namespace VuonDau.Api.Config
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String("AIzaSyD18a1UxSqfHcx4xFb-O7oILp3rNz_w1t0")),
+                        IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String("QUl6YVN5RDE4YTFVeFNxZkhjeDR4RmItTzdvSUxwM3JOel93MXQw")),
                         ValidateLifetime = false
                     };
                 });

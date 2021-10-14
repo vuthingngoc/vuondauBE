@@ -2495,6 +2495,7 @@
       "VuonDau.Business/1.0.0": {
         "dependencies": {
           "AutoMapper": "10.1.1",
+          "FirebaseAdmin": "2.2.0",
           "VuonDau.Data": "1.0.0"
         },
         "runtime": {

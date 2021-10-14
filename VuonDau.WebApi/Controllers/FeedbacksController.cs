@@ -2,158 +2,107 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.Feedback;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class FeedbacksController : Controller
+    public partial class FeedbacksController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public FeedbacksController(VuondauDBContext context)
+        /// <summary>
+        /// Get List Customer
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/feedbacks")]
+        [SwaggerOperation(Tags = new[] { "Feedbacks" })]
+        public async Task<IActionResult> GetFeedbacks()
         {
-            _context = context;
+            await _feedbackService.GetAllFeedbacks();
+            var feedbacks = await _feedbackService.GetAllFeedbacks();
+            return Ok(feedbacks);
         }
 
-        // GET: Feedbacks
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Get Customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/feedbacks/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Feedbacks" })]
+        public async Task<IActionResult> GetFeedback([FromRoute] Guid id)
         {
-            var vuondauDBContext = _context.Feedbacks.Include(f => f.Order);
-            return View(await vuondauDBContext.ToListAsync());
-        }
-
-        // GET: Feedbacks/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var feedback = await _context.Feedbacks
-                .Include(f => f.Order)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var feedback = await _feedbackService.GetFeedbackById(id);
             if (feedback == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(feedback);
+            return Ok(feedback);
         }
 
-        // GET: Feedbacks/Create
-        public IActionResult Create()
-        {
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id");
-            return View();
-        }
-
-        // POST: Feedbacks/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Tạo mới 1 Customer
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderId,DateOfCreate,Description,Status")] Feedback feedback)
+        [Route("~/api/v1/feedbacks")]
+        [SwaggerOperation(Tags = new[] { "Feedbacks" })]
+        public async Task<IActionResult> CreateFeedback([FromBody] CreateFeedbackRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(feedback);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", feedback.OrderId);
-            return View(feedback);
-        }
-
-        // GET: Feedbacks/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var feedback = await _context.Feedbacks.FindAsync(id);
+            var feedback = await _feedbackService.CreateFeedback(request);
             if (feedback == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", feedback.OrderId);
-            return View(feedback);
+
+            return Created(nameof(CreateFeedback), feedback);
         }
 
-        // POST: Feedbacks/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,OrderId,DateOfCreate,Description,Status")] Feedback feedback)
+        /// <summary>
+        /// Cập nhập 1 Customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/v1/feedbacks/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Feedbacks" })]
+        public async Task<IActionResult> UpdateFeedback([FromRoute] Guid id, UpdateFeedbackRequest request)
         {
-            if (id != feedback.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(feedback);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FeedbackExists(feedback.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", feedback.OrderId);
-            return View(feedback);
-        }
-
-        // GET: Feedbacks/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var feedback = await _context.Feedbacks
-                .Include(f => f.Order)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var feedback = await _feedbackService.UpdateFeedback(id, request);
             if (feedback == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(feedback);
+            return Ok(feedback);
         }
 
-        // POST: Feedbacks/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        /// <summary>
+        /// Xóa 1 Customer qua id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("~/api/v1/feedbacks/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Feedbacks" })]
+        public async Task<IActionResult> DeleteFeedback([FromRoute] Guid id)
         {
-            var feedback = await _context.Feedbacks.FindAsync(id);
-            _context.Feedbacks.Remove(feedback);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _feedbackService.DeleteFeedback(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool FeedbackExists(Guid id)
-        {
-            return _context.Feedbacks.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

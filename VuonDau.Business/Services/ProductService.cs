@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using VuonDau.Business.ViewModel;
 using System;
-using VuonDau.Business.Requests.Farmer;
+using VuonDau.Business.Requests.Product;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 namespace VuonDau.Business.Services

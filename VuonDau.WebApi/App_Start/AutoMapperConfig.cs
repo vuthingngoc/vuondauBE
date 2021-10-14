@@ -19,6 +19,26 @@ namespace VuonDau.WebApi.App_Start
             {
                 mc.ConfigFarmerModule();
                 mc.ConfigProductModule();
+                mc.ConfigProductTypeModule();
+                mc.ConfigProductPictureModule();
+                mc.ConfigFarmModule();
+                mc.ConfigFarmPictureModule();
+                mc.ConfigFarmTypeModule();
+                mc.ConfigHarvestModule();
+                mc.ConfigHarvestSellingModule();
+                mc.ConfigHarvestSellingPriceModule();
+                mc.ConfigCustomerModule();
+                mc.ConfigCustomerTypeModule();
+                mc.ConfigCustomerGroupModule();
+                mc.ConfigCustomerInGroupModule();
+                mc.ConfigFeedbackModule();
+                mc.ConfigOrderModule();
+                mc.ConfigOrderDetailModule();
+                mc.ConfigPaymentModule();
+                mc.ConfigWalletModule();
+                mc.ConfigTransactionModule();
+                mc.ConfigAdminModule();
+                mc.ConfigProductInCartModule();
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

@@ -7,7 +7,7 @@ using System.Linq;
 namespace VuonDau.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/products")]
+    [Route("api/v1/products")]
     public partial class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;

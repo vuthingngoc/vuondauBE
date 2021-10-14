@@ -23,7 +23,7 @@ namespace VuonDau.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("~/api/farmers")]
+        [Route("~/api/v1/farmers")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
         public async Task<IActionResult> GetFarmers()
         {
@@ -38,7 +38,7 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("~/api/farmers/{id:Guid}")]
+        [Route("~/api/v1/farmers/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
         public async Task<IActionResult> GetFarmer([FromRoute] Guid id)
         {
@@ -57,7 +57,7 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("~/api/farmers")]
+        [Route("~/api/v1/farmers")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
         public async Task<IActionResult> CreateFarmer([FromBody] CreateFarmerRequest request)
         {
@@ -77,7 +77,7 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("~/api/farmers/{id:Guid}")]
+        [Route("~/api/v1/farmers/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
         public async Task<IActionResult> UpdateFarmer([FromRoute] Guid id, UpdateFarmerRequest request)
         {

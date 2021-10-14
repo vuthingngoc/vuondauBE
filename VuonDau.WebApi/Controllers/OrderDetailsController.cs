@@ -1,165 +1,103 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using VuonDau.Data.Models;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.OrderDetail;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class OrderDetailsController : Controller
+    public partial class OrderDetailsController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public OrderDetailsController(VuondauDBContext context)
+        /// <summary>
+        /// Get List Customer
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/order-details")]
+        [SwaggerOperation(Tags = new[] { "OrderDetails" })]
+        public async Task<IActionResult> GetOrderDetails()
         {
-            _context = context;
+            await _orderDetailService.GetAllOrderDetails();
+            var orderDetails = await _orderDetailService.GetAllOrderDetails();
+            return Ok(orderDetails);
         }
 
-        // GET: OrderDetails
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Get Customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/order-details/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "OrderDetails" })]
+        public async Task<IActionResult> GetOrderDetail([FromRoute] Guid id)
         {
-            var vuondauDBContext = _context.OrderDetails.Include(o => o.Order).Include(o => o.Product);
-            return View(await vuondauDBContext.ToListAsync());
-        }
-
-        // GET: OrderDetails/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var orderDetail = await _context.OrderDetails
-                .Include(o => o.Order)
-                .Include(o => o.Product)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var orderDetail = await _orderDetailService.GetOrderDetailById(id);
             if (orderDetail == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(orderDetail);
+            return Ok(orderDetail);
         }
 
-        // GET: OrderDetails/Create
-        public IActionResult Create()
-        {
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id");
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id");
-            return View();
-        }
-
-        // POST: OrderDetails/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Tạo mới 1 Customer
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductId,OrderId,Weight,Price,Status")] OrderDetail orderDetail)
+        [Route("~/api/v1/order-details")]
+        [SwaggerOperation(Tags = new[] { "OrderDetails" })]
+        public async Task<IActionResult> CreateOrderDetail([FromBody] CreateOrderDetailRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(orderDetail);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", orderDetail.OrderId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id", orderDetail.ProductId);
-            return View(orderDetail);
-        }
-
-        // GET: OrderDetails/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var orderDetail = await _context.OrderDetails.FindAsync(id);
+            var orderDetail = await _orderDetailService.CreateOrderDetail(request);
             if (orderDetail == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", orderDetail.OrderId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id", orderDetail.ProductId);
-            return View(orderDetail);
+
+            return Created(nameof(CreateOrderDetail), orderDetail);
         }
 
-        // POST: OrderDetails/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,ProductId,OrderId,Weight,Price,Status")] OrderDetail orderDetail)
+        /// <summary>
+        /// Cập nhập 1 Customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/v1/order-details/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "OrderDetails" })]
+        public async Task<IActionResult> UpdateOrderDetail([FromRoute] Guid id, UpdateOrderDetailRequest request)
         {
-            if (id != orderDetail.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(orderDetail);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderDetailExists(orderDetail.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", orderDetail.OrderId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id", orderDetail.ProductId);
-            return View(orderDetail);
-        }
-
-        // GET: OrderDetails/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var orderDetail = await _context.OrderDetails
-                .Include(o => o.Order)
-                .Include(o => o.Product)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var orderDetail = await _orderDetailService.UpdateOrderDetail(id, request);
             if (orderDetail == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(orderDetail);
+            return Ok(orderDetail);
         }
 
-        // POST: OrderDetails/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        /// <summary>
+        /// Xóa 1 Customer qua id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("~/api/v1/order-details/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "OrderDetails" })]
+        public async Task<IActionResult> DeleteOrderDetail([FromRoute] Guid id)
         {
-            var orderDetail = await _context.OrderDetails.FindAsync(id);
-            _context.OrderDetails.Remove(orderDetail);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _orderDetailService.DeleteOrderDetail(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool OrderDetailExists(Guid id)
-        {
-            return _context.OrderDetails.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

@@ -2,158 +2,84 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.FarmPicture;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class FarmPicturesController : Controller
+    public partial class FarmPicturesController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public FarmPicturesController(VuondauDBContext context)
+        /// Get List FarmPictures
+        [HttpGet]
+        [Route("~/api/v1/farm-pictures")]
+        [SwaggerOperation(Tags = new[] { "FarmPictures" })]
+        public async Task<IActionResult> GetFarmPictures()
         {
-            _context = context;
+            await _farmPictureService.GetAllFarmPictures();
+            var farmPictures = await _farmPictureService.GetAllFarmPictures();
+            return Ok(farmPictures);
         }
 
-        // GET: FarmPictures
-        public async Task<IActionResult> Index()
+        /// Get FarmPicture by id
+        [HttpGet]
+        [Route("~/api/v1/farm-pictures/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "FarmPictures" })]
+        public async Task<IActionResult> GetFarmPicture([FromRoute] Guid id)
         {
-            var vuondauDBContext = _context.FarmPictures.Include(f => f.Farm);
-            return View(await vuondauDBContext.ToListAsync());
-        }
-
-        // GET: FarmPictures/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
+            var farmPictures = await _farmPictureService.GetFarmPictureById(id);
+            if (farmPictures == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
-
-            var farmPicture = await _context.FarmPictures
-                .Include(f => f.Farm)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (farmPicture == null)
-            {
-                return NotFound();
-            }
-
-            return View(farmPicture);
+            return Ok(farmPictures);
         }
-
-        // GET: FarmPictures/Create
-        public IActionResult Create()
-        {
-            ViewData["FarmId"] = new SelectList(_context.Farms, "Id", "Id");
-            return View();
-        }
-
-        // POST: FarmPictures/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// Tạo mới 1 farmPicture
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FarmId,Src,Alt")] FarmPicture farmPicture)
+        [Route("~/api/v1/farm-pictures")]
+        [SwaggerOperation(Tags = new[] { "FarmPictures" })]
+        public async Task<IActionResult> CreateFarmPicture([FromBody] CreateFarmPictureRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(farmPicture);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FarmId"] = new SelectList(_context.Farms, "Id", "Id", farmPicture.FarmId);
-            return View(farmPicture);
-        }
-
-        // GET: FarmPictures/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmPicture = await _context.FarmPictures.FindAsync(id);
+            var farmPicture = await _farmPictureService.CreateFarmPicture(request);
             if (farmPicture == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["FarmId"] = new SelectList(_context.Farms, "Id", "Id", farmPicture.FarmId);
-            return View(farmPicture);
+
+            return Created(nameof(CreateFarmPicture), farmPicture);
         }
-
-        // POST: FarmPictures/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,FarmId,Src,Alt")] FarmPicture farmPicture)
+        /// Cập nhập 1 farmPicture
+        [HttpPut]
+        [Route("~/api/v1/farm-pictures/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "FarmPictures" })]
+        public async Task<IActionResult> UpdateFarmPicture([FromRoute] Guid id, UpdateFarmPictureRequest request)
         {
-            if (id != farmPicture.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(farmPicture);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FarmPictureExists(farmPicture.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FarmId"] = new SelectList(_context.Farms, "Id", "Id", farmPicture.FarmId);
-            return View(farmPicture);
-        }
-
-        // GET: FarmPictures/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmPicture = await _context.FarmPictures
-                .Include(f => f.Farm)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var farmPicture = await _farmPictureService.UpdateFarmPicture(id, request);
             if (farmPicture == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(farmPicture);
+            return Ok(farmPicture);
         }
 
-        // POST: FarmPictures/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        /// Xóa 1 farmPictureer qua id
+        [HttpDelete]
+        [Route("~/api/v1/farm-pictures/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "FarmPictures" })]
+        public async Task<IActionResult> DeleteFarmPicture([FromRoute] Guid id)
         {
-            var farmPicture = await _context.FarmPictures.FindAsync(id);
-            _context.FarmPictures.Remove(farmPicture);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _farmPictureService.DeleteFarmPicture(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool FarmPictureExists(Guid id)
-        {
-            return _context.FarmPictures.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

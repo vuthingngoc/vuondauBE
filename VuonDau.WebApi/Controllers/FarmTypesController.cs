@@ -2,151 +2,107 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.FarmType;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class FarmTypesController : Controller
+    public partial class FarmTypesController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public FarmTypesController(VuondauDBContext context)
+        /// <summary>
+        /// Get List Farm
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/farm-types")]
+        [SwaggerOperation(Tags = new[] { "FarmTypes" })]
+        public async Task<IActionResult> GetFarmTypes()
         {
-            _context = context;
+            await _farmTypeService.GetAllFarmTypes();
+            var farmTypes = await _farmTypeService.GetAllFarmTypes();
+            return Ok(farmTypes);
         }
 
-        // GET: FarmTypes
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Get Farm by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/farm-types/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "FarmTypes" })]
+        public async Task<IActionResult> GetFarmType([FromRoute] Guid id)
         {
-            return View(await _context.FarmTypes.ToListAsync());
-        }
-
-        // GET: FarmTypes/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmType = await _context.FarmTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var farmType = await _farmTypeService.GetFarmTypeById(id);
             if (farmType == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(farmType);
+            return Ok(farmType);
         }
 
-        // GET: FarmTypes/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: FarmTypes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Tạo mới 1 Farm
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] FarmType farmType)
+        [Route("~/api/v1/farm-types")]
+        [SwaggerOperation(Tags = new[] { "FarmTypes" })]
+        public async Task<IActionResult> CreateFarmType([FromBody] CreateFarmTypeRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(farmType);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(farmType);
-        }
-
-        // GET: FarmTypes/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmType = await _context.FarmTypes.FindAsync(id);
+            var farmType = await _farmTypeService.CreateFarmType(request);
             if (farmType == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            return View(farmType);
+
+            return Created(nameof(CreateFarmType), farmType);
         }
 
-        // POST: FarmTypes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description")] FarmType farmType)
+        /// <summary>
+        /// Cập nhập 1 Farm
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/v1/farm-types/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "FarmTypes" })]
+        public async Task<IActionResult> UpdateFarmType([FromRoute] Guid id, UpdateFarmTypeRequest request)
         {
-            if (id != farmType.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(farmType);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FarmTypeExists(farmType.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(farmType);
-        }
-
-        // GET: FarmTypes/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmType = await _context.FarmTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var farmType = await _farmTypeService.UpdateFarmType(id, request);
             if (farmType == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(farmType);
+            return Ok(farmType);
         }
 
-        // POST: FarmTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        /// <summary>
+        /// Xóa 1 Farm qua id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("~/api/v1/farm-types/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "FarmTypes" })]
+        public async Task<IActionResult> DeleteFarmType([FromRoute] Guid id)
         {
-            var farmType = await _context.FarmTypes.FindAsync(id);
-            _context.FarmTypes.Remove(farmType);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _farmTypeService.DeleteFarmType(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool FarmTypeExists(Guid id)
-        {
-            return _context.FarmTypes.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }
