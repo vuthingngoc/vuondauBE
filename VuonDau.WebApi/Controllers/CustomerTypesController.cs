@@ -2,151 +2,107 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.CustomerType;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class CustomerTypesController : Controller
+    public partial class CustomerTypesController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public CustomerTypesController(VuondauDBContext context)
+        /// <summary>
+        /// Get List Customer
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/customer-types")]
+        [SwaggerOperation(Tags = new[] { "CustomerTypes" })]
+        public async Task<IActionResult> GetCustomerTypes()
         {
-            _context = context;
+            await _customerTypeService.GetAllCustomerTypes();
+            var customerTypes = await _customerTypeService.GetAllCustomerTypes();
+            return Ok(customerTypes);
         }
 
-        // GET: CustomerTypes
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Get Customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/customer-types/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "CustomerTypes" })]
+        public async Task<IActionResult> GetCustomerType([FromRoute] Guid id)
         {
-            return View(await _context.CustomerTypes.ToListAsync());
-        }
-
-        // GET: CustomerTypes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerType = await _context.CustomerTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var customerType = await _customerTypeService.GetCustomerTypeById(id);
             if (customerType == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(customerType);
+            return Ok(customerType);
         }
 
-        // GET: CustomerTypes/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CustomerTypes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Tạo mới 1 Customer
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] CustomerType customerType)
+        [Route("~/api/v1/customer-types")]
+        [SwaggerOperation(Tags = new[] { "CustomerTypes" })]
+        public async Task<IActionResult> CreateCustomerType([FromBody] CreateCustomerTypeRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customerType);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(customerType);
-        }
-
-        // GET: CustomerTypes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerType = await _context.CustomerTypes.FindAsync(id);
+            var customerType = await _customerTypeService.CreateCustomerType(request);
             if (customerType == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            return View(customerType);
+
+            return Created(nameof(CreateCustomerType), customerType);
         }
 
-        // POST: CustomerTypes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] CustomerType customerType)
+        /// <summary>
+        /// Cập nhập 1 Customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/v1/customer-types/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "CustomerTypes" })]
+        public async Task<IActionResult> UpdateCustomerType([FromRoute] Guid id, UpdateCustomerTypeRequest request)
         {
-            if (id != customerType.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(customerType);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerTypeExists(customerType.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(customerType);
-        }
-
-        // GET: CustomerTypes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerType = await _context.CustomerTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var customerType = await _customerTypeService.UpdateCustomerType(id, request);
             if (customerType == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(customerType);
+            return Ok(customerType);
         }
 
-        // POST: CustomerTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        /// <summary>
+        /// Xóa 1 Customer qua id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("~/api/v1/customer-types/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "CustomerTypes" })]
+        public async Task<IActionResult> DeleteCustomerType([FromRoute] Guid id)
         {
-            var customerType = await _context.CustomerTypes.FindAsync(id);
-            _context.CustomerTypes.Remove(customerType);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _customerTypeService.DeleteCustomerType(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool CustomerTypeExists(int id)
-        {
-            return _context.CustomerTypes.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

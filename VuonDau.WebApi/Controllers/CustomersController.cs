@@ -2,158 +2,107 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.Customer;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class CustomersController : Controller
+    public partial class CustomersController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public CustomersController(VuondauDBContext context)
+        /// <summary>
+        /// Get List Customer
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/customers")]
+        [SwaggerOperation(Tags = new[] { "Customers" })]
+        public async Task<IActionResult> GetCustomers()
         {
-            _context = context;
+            await _customerService.GetAllCustomers();
+            var customers = await _customerService.GetAllCustomers();
+            return Ok(customers);
         }
 
-        // GET: Customers
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Get Customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/customers/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Customers" })]
+        public async Task<IActionResult> GetCustomer([FromRoute] Guid id)
         {
-            var vuondauDBContext = _context.Customers.Include(c => c.CustomerTypeNavigation);
-            return View(await vuondauDBContext.ToListAsync());
-        }
-
-        // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customer = await _context.Customers
-                .Include(c => c.CustomerTypeNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var customer = await _customerService.GetCustomerById(id);
             if (customer == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(customer);
+            return Ok(customer);
         }
 
-        // GET: Customers/Create
-        public IActionResult Create()
-        {
-            ViewData["CustomerType"] = new SelectList(_context.CustomerTypes, "Id", "Id");
-            return View();
-        }
-
-        // POST: Customers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Tạo mới 1 Customer
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CustomerType,Email,FirstName,LastName,Password,Phone,Birthday,Gender,DateOfCreate,Status")] Customer customer)
+        [Route("~/api/v1/customers")]
+        [SwaggerOperation(Tags = new[] { "Customers" })]
+        public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CustomerType"] = new SelectList(_context.CustomerTypes, "Id", "Id", customer.CustomerType);
-            return View(customer);
-        }
-
-        // GET: Customers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _customerService.CreateCustomer(request);
             if (customer == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["CustomerType"] = new SelectList(_context.CustomerTypes, "Id", "Id", customer.CustomerType);
-            return View(customer);
+
+            return Created(nameof(CreateCustomer), customer);
         }
 
-        // POST: Customers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CustomerType,Email,FirstName,LastName,Password,Phone,Birthday,Gender,DateOfCreate,Status")] Customer customer)
+        /// <summary>
+        /// Cập nhập 1 Customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/v1/customers/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Customers" })]
+        public async Task<IActionResult> UpdateCustomer([FromRoute] Guid id, UpdateCustomerRequest request)
         {
-            if (id != customer.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerExists(customer.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CustomerType"] = new SelectList(_context.CustomerTypes, "Id", "Id", customer.CustomerType);
-            return View(customer);
-        }
-
-        // GET: Customers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customer = await _context.Customers
-                .Include(c => c.CustomerTypeNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var customer = await _customerService.UpdateCustomer(id, request);
             if (customer == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(customer);
+            return Ok(customer);
         }
 
-        // POST: Customers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        /// <summary>
+        /// Xóa 1 Customer qua id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("~/api/v1/customers/{id:int}")]
+        [SwaggerOperation(Tags = new[] { "Customers" })]
+        public async Task<IActionResult> DeleteCustomer([FromRoute] Guid id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _customerService.DeleteCustomer(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool CustomerExists(int id)
-        {
-            return _context.Customers.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

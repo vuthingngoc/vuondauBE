@@ -2,158 +2,97 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.HarvestSelling;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class HarvestSellingsController : Controller
+    public partial class HarvestSellingsController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public HarvestSellingsController(VuondauDBContext context)
-        {
-            _context = context;
-        }
-
         // GET: HarvestSellings
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        [Route("~/api/v1/harvest-sellings")]
+        [SwaggerOperation(Tags = new[] { "HarvestSellings" })]
+        public async Task<IActionResult> GetHarvestSellings()
         {
-            var vuondauDBContext = _context.HarvestSellings.Include(h => h.Harvest);
-            return View(await vuondauDBContext.ToListAsync());
+            await _harvestSellingService.GetAllHarvestSellings();
+            var harvestSellings = await _harvestSellingService.GetAllHarvestSellings();
+            return Ok(harvestSellings);
         }
 
         // GET: HarvestSellings/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        [Route("~/api/v1/harvest-sellings/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "HarvestSellings" })]
+        public async Task<IActionResult> GetHarvestSellings([FromRoute] Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var harvestSelling = await _context.HarvestSellings
-                .Include(h => h.Harvest)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var harvestSelling = await _harvestSellingService.GetHarvestSellingById(id);
             if (harvestSelling == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(harvestSelling);
+            return Ok(harvestSelling);
         }
 
-        // GET: HarvestSellings/Create
-        public IActionResult Create()
-        {
-            ViewData["HarvestId"] = new SelectList(_context.Harvests, "Id", "Id");
-            return View();
-        }
+
 
         // POST: HarvestSellings/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HarvestId,DateOfCreate,MinWeight,TotalWeight")] HarvestSelling harvestSelling)
+        [Route("~/api/v1/harvest-sellings")]
+        [SwaggerOperation(Tags = new[] { "HarvestSellings" })]
+        public async Task<IActionResult> CreateHarvestSelling([FromBody] CreateHarvestSellingRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(harvestSelling);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["HarvestId"] = new SelectList(_context.Harvests, "Id", "Id", harvestSelling.HarvestId);
-            return View(harvestSelling);
-        }
-
-        // GET: HarvestSellings/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var harvestSelling = await _context.HarvestSellings.FindAsync(id);
+            var harvestSelling = await _harvestSellingService.CreateHarvestSelling(request);
             if (harvestSelling == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["HarvestId"] = new SelectList(_context.Harvests, "Id", "Id", harvestSelling.HarvestId);
-            return View(harvestSelling);
+
+            return Created(nameof(_harvestSellingService), harvestSelling);
         }
+
+
 
         // POST: HarvestSellings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,HarvestId,DateOfCreate,MinWeight,TotalWeight")] HarvestSelling harvestSelling)
+        [HttpPut]
+        [Route("~/api/v1/harvest-sellings/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "HarvestSellings" })]
+        public async Task<IActionResult> UpdateHarvestSelling([FromRoute] Guid id, UpdateHarvestSellingRequest request)
         {
-            if (id != harvestSelling.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(harvestSelling);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!HarvestSellingExists(harvestSelling.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["HarvestId"] = new SelectList(_context.Harvests, "Id", "Id", harvestSelling.HarvestId);
-            return View(harvestSelling);
-        }
-
-        // GET: HarvestSellings/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var harvestSelling = await _context.HarvestSellings
-                .Include(h => h.Harvest)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var harvestSelling = await _harvestSellingService.UpdateHarvestSelling(id, request);
             if (harvestSelling == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(harvestSelling);
+            return Ok(harvestSelling);
         }
+
+
 
         // POST: HarvestSellings/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpDelete]
+        [Route("~/api/v1/harvest-sellings/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "HarvestSellings" })]
+        public async Task<IActionResult> DeleteHarvestSelling([FromRoute] Guid id)
         {
-            var harvestSelling = await _context.HarvestSellings.FindAsync(id);
-            _context.HarvestSellings.Remove(harvestSelling);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _harvestSellingService.DeleteHarvestSelling(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool HarvestSellingExists(int id)
-        {
-            return _context.HarvestSellings.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

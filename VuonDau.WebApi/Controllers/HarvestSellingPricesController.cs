@@ -2,158 +2,97 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.HarvestSellingPrice;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class HarvestSellingPricesController : Controller
+    public partial class HarvestSellingPricesController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public HarvestSellingPricesController(VuondauDBContext context)
-        {
-            _context = context;
-        }
-
         // GET: HarvestSellingPrices
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        [Route("~/api/v1/harvest-selling-prices")]
+        [SwaggerOperation(Tags = new[] { "HarvestSellingPrices" })]
+        public async Task<IActionResult> GetHarvestSellingPrices()
         {
-            var vuondauDBContext = _context.HarvestSellingPrices.Include(h => h.HarvestSelling);
-            return View(await vuondauDBContext.ToListAsync());
+            await _harvestSellingPriceService.GetAllHarvestSellingPrices();
+            var harvestSellingPrices = await _harvestSellingPriceService.GetAllHarvestSellingPrices();
+            return Ok(harvestSellingPrices);
         }
 
         // GET: HarvestSellingPrices/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        [Route("~/api/v1/harvest-selling-prices/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "HarvestSellingPrices" })]
+        public async Task<IActionResult> GetHarvestSellingPrices([FromRoute] Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var harvestSellingPrice = await _context.HarvestSellingPrices
-                .Include(h => h.HarvestSelling)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var harvestSellingPrice = await _harvestSellingPriceService.GetHarvestSellingPriceById(id);
             if (harvestSellingPrice == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(harvestSellingPrice);
+            return Ok(harvestSellingPrice);
         }
 
-        // GET: HarvestSellingPrices/Create
-        public IActionResult Create()
-        {
-            ViewData["HarvestSellingId"] = new SelectList(_context.HarvestSellings, "Id", "Id");
-            return View();
-        }
+
 
         // POST: HarvestSellingPrices/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Price,HarvestSellingId")] HarvestSellingPrice harvestSellingPrice)
+        [Route("~/api/v1/harvest-selling-prices")]
+        [SwaggerOperation(Tags = new[] { "HarvestSellingPrices" })]
+        public async Task<IActionResult> CreateHarvestSellingPrice([FromBody] CreateHarvestSellingPriceRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(harvestSellingPrice);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["HarvestSellingId"] = new SelectList(_context.HarvestSellings, "Id", "Id", harvestSellingPrice.HarvestSellingId);
-            return View(harvestSellingPrice);
-        }
-
-        // GET: HarvestSellingPrices/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var harvestSellingPrice = await _context.HarvestSellingPrices.FindAsync(id);
+            var harvestSellingPrice = await _harvestSellingPriceService.CreateHarvestSellingPrice(request);
             if (harvestSellingPrice == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["HarvestSellingId"] = new SelectList(_context.HarvestSellings, "Id", "Id", harvestSellingPrice.HarvestSellingId);
-            return View(harvestSellingPrice);
+
+            return Created(nameof(_harvestSellingPriceService), harvestSellingPrice);
         }
+
+
 
         // POST: HarvestSellingPrices/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Price,HarvestSellingId")] HarvestSellingPrice harvestSellingPrice)
+        [HttpPut]
+        [Route("~/api/v1/harvest-selling-prices/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "HarvestSellingPrices" })]
+        public async Task<IActionResult> UpdateHarvestSellingPrice([FromRoute] Guid id, UpdateHarvestSellingPriceRequest request)
         {
-            if (id != harvestSellingPrice.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(harvestSellingPrice);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!HarvestSellingPriceExists(harvestSellingPrice.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["HarvestSellingId"] = new SelectList(_context.HarvestSellings, "Id", "Id", harvestSellingPrice.HarvestSellingId);
-            return View(harvestSellingPrice);
-        }
-
-        // GET: HarvestSellingPrices/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var harvestSellingPrice = await _context.HarvestSellingPrices
-                .Include(h => h.HarvestSelling)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var harvestSellingPrice = await _harvestSellingPriceService.UpdateHarvestSellingPrice(id, request);
             if (harvestSellingPrice == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(harvestSellingPrice);
+            return Ok(harvestSellingPrice);
         }
+
+
 
         // POST: HarvestSellingPrices/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpDelete]
+        [Route("~/api/v1/harvest-selling-prices/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "HarvestSellingPrices" })]
+        public async Task<IActionResult> DeleteHarvestSellingPrice([FromRoute] Guid id)
         {
-            var harvestSellingPrice = await _context.HarvestSellingPrices.FindAsync(id);
-            _context.HarvestSellingPrices.Remove(harvestSellingPrice);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _harvestSellingPriceService.DeleteHarvestSellingPrice(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool HarvestSellingPriceExists(int id)
-        {
-            return _context.HarvestSellingPrices.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

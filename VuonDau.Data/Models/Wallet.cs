@@ -7,8 +7,8 @@ namespace VuonDau.Data.Models
 {
     public partial class Wallet
     {
-        public int Id { get; set; }
-        public int? CustomerId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? CustomerId { get; set; }
         public double? Balance { get; set; }
 
         public virtual Customer Customer { get; set; }

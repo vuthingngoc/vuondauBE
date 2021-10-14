@@ -1,0 +1,15 @@
+2021-10-10 20:48:06.5028||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-10 20:48:11.8553|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-10 20:48:13.3102||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-10 20:48:13.3102||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-10 20:48:13.3102||INFO|Microsoft.Hosting.Lifetime|Content root path: D:\fpt\Ky7\SWD\Project\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-10 22:59:09.4886||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-10 22:59:13.7091|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-10 22:59:15.3711||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-10 22:59:15.3711||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-10 22:59:15.4002||INFO|Microsoft.Hosting.Lifetime|Content root path: D:\fpt\Ky7\SWD\Project\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-10 23:01:00.4408||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-10 23:01:04.1749|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-10 23:01:05.7598||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-10 23:01:05.7895||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-10 23:01:05.8065||INFO|Microsoft.Hosting.Lifetime|Content root path: D:\fpt\Ky7\SWD\Project\vuondauBE\VuonDau.WebApi |url: |action: 

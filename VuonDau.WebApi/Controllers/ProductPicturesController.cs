@@ -2,158 +2,84 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.ProductPicture;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class ProductPicturesController : Controller
+    public partial class ProductPicturesController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public ProductPicturesController(VuondauDBContext context)
+        /// Get List ProductPictures
+        [HttpGet]
+        [Route("~/api/v1/product-pictures")]
+        [SwaggerOperation(Tags = new[] { "ProductPictures" })]
+        public async Task<IActionResult> GetProductPictures()
         {
-            _context = context;
+            await _productPictureService.GetAllProductPictures();
+            var productPictures = await _productPictureService.GetAllProductPictures();
+            return Ok(productPictures);
         }
 
-        // GET: ProductPictures
-        public async Task<IActionResult> Index()
+        /// Get ProductPicture by id
+        [HttpGet]
+        [Route("~/api/v1/product-pictures/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "ProductPictures" })]
+        public async Task<IActionResult> GetProductPicture([FromRoute] Guid id)
         {
-            var vuondauDBContext = _context.ProductPictures.Include(p => p.Product);
-            return View(await vuondauDBContext.ToListAsync());
-        }
-
-        // GET: ProductPictures/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            var productPictures = await _productPictureService.GetProductPictureById(id);
+            if (productPictures == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
-
-            var productPicture = await _context.ProductPictures
-                .Include(p => p.Product)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (productPicture == null)
-            {
-                return NotFound();
-            }
-
-            return View(productPicture);
+            return Ok(productPictures);
         }
-
-        // GET: ProductPictures/Create
-        public IActionResult Create()
-        {
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id");
-            return View();
-        }
-
-        // POST: ProductPictures/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// Tạo mới 1 productPicture
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductId,Src,Alt")] ProductPicture productPicture)
+        [Route("~/api/v1/product-pictures")]
+        [SwaggerOperation(Tags = new[] { "ProductPictures" })]
+        public async Task<IActionResult> CreateProductPicture([FromBody] CreateProductPictureRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(productPicture);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id", productPicture.ProductId);
-            return View(productPicture);
-        }
-
-        // GET: ProductPictures/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productPicture = await _context.ProductPictures.FindAsync(id);
+            var productPicture = await _productPictureService.CreateProductPicture(request);
             if (productPicture == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id", productPicture.ProductId);
-            return View(productPicture);
+
+            return Created(nameof(CreateProductPicture), productPicture);
         }
-
-        // POST: ProductPictures/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductId,Src,Alt")] ProductPicture productPicture)
+        /// Cập nhập 1 productPicture
+        [HttpPut]
+        [Route("~/api/v1/product-pictures/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "ProductPictures" })]
+        public async Task<IActionResult> UpdateProductPicture([FromRoute] Guid id, UpdateProductPictureRequest request)
         {
-            if (id != productPicture.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(productPicture);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductPictureExists(productPicture.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Id", productPicture.ProductId);
-            return View(productPicture);
-        }
-
-        // GET: ProductPictures/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productPicture = await _context.ProductPictures
-                .Include(p => p.Product)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var productPicture = await _productPictureService.UpdateProductPicture(id, request);
             if (productPicture == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(productPicture);
+            return Ok(productPicture);
         }
 
-        // POST: ProductPictures/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        /// Xóa 1 productPictureer qua id
+        [HttpDelete]
+        [Route("~/api/v1/product-pictures/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "ProductPictures" })]
+        public async Task<IActionResult> DeleteProductPicture([FromRoute] Guid id)
         {
-            var productPicture = await _context.ProductPictures.FindAsync(id);
-            _context.ProductPictures.Remove(productPicture);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _productPictureService.DeleteProductPicture(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool ProductPictureExists(int id)
-        {
-            return _context.ProductPictures.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

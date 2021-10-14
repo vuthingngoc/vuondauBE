@@ -2,164 +2,109 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VuonDau.Data.Models;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.CustomerInGroup;
+
+
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class CustomerInGroupsController : Controller
+    public partial class CustomerInGroupsController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public CustomerInGroupsController(VuondauDBContext context)
+        /// <summary>
+        /// Get List Customer
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/customer-in-groups")]
+        [SwaggerOperation(Tags = new[] { "CustomerInGroups" })]
+        public async Task<IActionResult> GetCustomerInGroups()
         {
-            _context = context;
+            await _customerInGroupService.GetAllCustomerInGroups();
+            var customerInGroups = await _customerInGroupService.GetAllCustomerInGroups();
+            return Ok(customerInGroups);
         }
 
-        // GET: CustomerInGroups
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Get Customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/customer-in-groups/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "CustomerInGroups" })]
+        public async Task<IActionResult> GetCustomerInGroup([FromRoute] Guid id)
         {
-            var vuondauDBContext = _context.CustomerInGroups.Include(c => c.Customer).Include(c => c.CustomerGroup);
-            return View(await vuondauDBContext.ToListAsync());
-        }
-
-        // GET: CustomerInGroups/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerInGroup = await _context.CustomerInGroups
-                .Include(c => c.Customer)
-                .Include(c => c.CustomerGroup)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+            var customerInGroup = await _customerInGroupService.GetCustomerInGroupById(id);
             if (customerInGroup == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(customerInGroup);
+            return Ok(customerInGroup);
         }
 
-        // GET: CustomerInGroups/Create
-        public IActionResult Create()
-        {
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id");
-            ViewData["CustomerGroupId"] = new SelectList(_context.CustomerGroups, "Id", "Id");
-            return View();
-        }
-
-        // POST: CustomerInGroups/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Tạo mới 1 Customer
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,CustomerGroupId,JoinDate")] CustomerInGroup customerInGroup)
+        [Route("~/api/v1/customer-in-groups")]
+        [SwaggerOperation(Tags = new[] { "CustomerInGroups" })]
+        public async Task<IActionResult> CreateCustomerInGroup([FromBody] CreateCustomerInGroupRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customerInGroup);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", customerInGroup.CustomerId);
-            ViewData["CustomerGroupId"] = new SelectList(_context.CustomerGroups, "Id", "Id", customerInGroup.CustomerGroupId);
-            return View(customerInGroup);
-        }
-
-        // GET: CustomerInGroups/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerInGroup = await _context.CustomerInGroups.FindAsync(id);
+            var customerInGroup = await _customerInGroupService.CreateCustomerInGroup(request);
             if (customerInGroup == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", customerInGroup.CustomerId);
-            ViewData["CustomerGroupId"] = new SelectList(_context.CustomerGroups, "Id", "Id", customerInGroup.CustomerGroupId);
-            return View(customerInGroup);
+
+            return Created(nameof(_customerInGroupService), customerInGroup);
         }
 
-        // POST: CustomerInGroups/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,CustomerGroupId,JoinDate")] CustomerInGroup customerInGroup)
+        /// <summary>
+        /// Cập nhập 1 Customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/v1/customer-in-groups/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "CustomerInGroups" })]
+        public async Task<IActionResult> UpdateCustomerInGroup([FromRoute] Guid id, UpdateCustomerInGroupRequest request)
         {
-            if (id != customerInGroup.CustomerId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(customerInGroup);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerInGroupExists(customerInGroup.CustomerId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", customerInGroup.CustomerId);
-            ViewData["CustomerGroupId"] = new SelectList(_context.CustomerGroups, "Id", "Id", customerInGroup.CustomerGroupId);
-            return View(customerInGroup);
-        }
-
-        // GET: CustomerInGroups/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerInGroup = await _context.CustomerInGroups
-                .Include(c => c.Customer)
-                .Include(c => c.CustomerGroup)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+            var customerInGroup = await _customerInGroupService.UpdateCustomerInGroup(id, request);
             if (customerInGroup == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(customerInGroup);
+            return Ok(customerInGroup);
         }
 
-        // POST: CustomerInGroups/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        /// <summary>
+        /// Xóa 1 Customer qua id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("~/api/v1/customer-in-groups/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "CustomerInGroups" })]
+        public async Task<IActionResult> DeleteCustomerInGroup([FromRoute] Guid id)
         {
-            var customerInGroup = await _context.CustomerInGroups.FindAsync(id);
-            _context.CustomerInGroups.Remove(customerInGroup);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _customerInGroupService.DeleteCustomerInGroup(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool CustomerInGroupExists(int id)
-        {
-            return _context.CustomerInGroups.Any(e => e.CustomerId == id);
+            return NoContent();
         }
     }
 }

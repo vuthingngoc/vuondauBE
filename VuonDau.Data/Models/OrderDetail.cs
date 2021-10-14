@@ -7,9 +7,9 @@ namespace VuonDau.Data.Models
 {
     public partial class OrderDetail
     {
-        public int Id { get; set; }
-        public int? ProductId { get; set; }
-        public int? OrderId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? ProductId { get; set; }
+        public Guid? OrderId { get; set; }
         public double? Weight { get; set; }
         public double? Price { get; set; }
         public int? Status { get; set; }

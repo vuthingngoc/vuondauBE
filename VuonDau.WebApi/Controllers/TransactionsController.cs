@@ -1,165 +1,103 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using VuonDau.Data.Models;
+using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests.Transaction;
 
 namespace VuonDau.WebApi.Controllers
 {
-    public class TransactionsController : Controller
+    public partial class TransactionsController : ControllerBase
     {
-        private readonly VuondauDBContext _context;
-
-        public TransactionsController(VuondauDBContext context)
+        /// <summary>
+        /// Get List Customer
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/transactions")]
+        [SwaggerOperation(Tags = new[] { "Transactions" })]
+        public async Task<IActionResult> GetTransactions()
         {
-            _context = context;
+            await _transactionService.GetAllTransactions();
+            var transactions = await _transactionService.GetAllTransactions();
+            return Ok(transactions);
         }
 
-        // GET: Transactions
-        public async Task<IActionResult> Index()
+        /// <summary>
+        /// Get Customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/transactions/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Transactions" })]
+        public async Task<IActionResult> GetTransaction([FromRoute] Guid id)
         {
-            var vuondauDBContext = _context.Transactions.Include(t => t.Order).Include(t => t.Payment);
-            return View(await vuondauDBContext.ToListAsync());
-        }
-
-        // GET: Transactions/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var transaction = await _context.Transactions
-                .Include(t => t.Order)
-                .Include(t => t.Payment)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var transaction = await _transactionService.GetTransactionById(id);
             if (transaction == null)
             {
-                return NotFound();
+                return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return View(transaction);
+            return Ok(transaction);
         }
 
-        // GET: Transactions/Create
-        public IActionResult Create()
-        {
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id");
-            ViewData["PaymentId"] = new SelectList(_context.Payments, "Id", "Id");
-            return View();
-        }
-
-        // POST: Transactions/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Tạo mới 1 Customer
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderId,Price,PaymentId,Status,Description")] Transaction transaction)
+        [Route("~/api/v1/transactions")]
+        [SwaggerOperation(Tags = new[] { "Transactions" })]
+        public async Task<IActionResult> CreateTransaction([FromBody] CreateTransactionRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(transaction);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", transaction.OrderId);
-            ViewData["PaymentId"] = new SelectList(_context.Payments, "Id", "Id", transaction.PaymentId);
-            return View(transaction);
-        }
-
-        // GET: Transactions/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var transaction = await _context.Transactions.FindAsync(id);
+            var transaction = await _transactionService.CreateTransaction(request);
             if (transaction == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
             }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", transaction.OrderId);
-            ViewData["PaymentId"] = new SelectList(_context.Payments, "Id", "Id", transaction.PaymentId);
-            return View(transaction);
+
+            return Created(nameof(CreateTransaction), transaction);
         }
 
-        // POST: Transactions/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderId,Price,PaymentId,Status,Description")] Transaction transaction)
+        /// <summary>
+        /// Cập nhập 1 Customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/v1/transactions/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Transactions" })]
+        public async Task<IActionResult> UpdateTransaction([FromRoute] Guid id, UpdateTransactionRequest request)
         {
-            if (id != transaction.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(transaction);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TransactionExists(transaction.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", transaction.OrderId);
-            ViewData["PaymentId"] = new SelectList(_context.Payments, "Id", "Id", transaction.PaymentId);
-            return View(transaction);
-        }
-
-        // GET: Transactions/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var transaction = await _context.Transactions
-                .Include(t => t.Order)
-                .Include(t => t.Payment)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var transaction = await _transactionService.UpdateTransaction(id, request);
             if (transaction == null)
             {
-                return NotFound();
+                return NotFound("Message");
             }
 
-            return View(transaction);
+            return Ok(transaction);
         }
 
-        // POST: Transactions/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        /// <summary>
+        /// Xóa 1 Customer qua id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("~/api/v1/transactions/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Transactions" })]
+        public async Task<IActionResult> DeleteTransaction([FromRoute] Guid id)
         {
-            var transaction = await _context.Transactions.FindAsync(id);
-            _context.Transactions.Remove(transaction);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var resultInt = await _transactionService.DeleteTransaction(id);
+            if (resultInt != 1)
+            {
+                return BadRequest("BAD_REQUEST");
+            }
 
-        private bool TransactionExists(int id)
-        {
-            return _context.Transactions.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }

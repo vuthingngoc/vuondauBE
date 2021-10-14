@@ -20,6 +20,10 @@ using System.Threading.Tasks;
 using VuonDau.WebApi.App_Start;
 using VuonDau.Data.Models;
 using VuonDau.WebApi.Handlers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
+using VuonDau.Api.Config;
 
 namespace VuonDau.WebApi
 {
@@ -37,12 +41,16 @@ namespace VuonDau.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
-            //services.AddSwaggerGen(c =>
+            //using var json = Assembly.GetExecutingAssembly()
+            //    .GetManifestResourceStream("VuonDau.WebApi.Firebase.firebase_config.json");
+            //var something = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            //FirebaseApp.Create(new AppOptions
             //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "VuonDau.WebApi", Version = "v1" });
+            //    Credential = GoogleCredential.FromStream(json)
             //});
+            //AuthConfig.ConfigAuthentication(services, Configuration);
+            //services.AddControllers();
+
             services.AddCors(options =>
             {
 
@@ -57,17 +65,8 @@ namespace VuonDau.WebApi
             });
             services.ConfigureFilter<ErrorHandlingFilter>();
             services.JsonFormatConfig();
-            services.ConfigureSwagger();
-
-            //services.AddAuthentication("Bearer")
-            //        .AddIdentityServerAuthentication(options =>
-            //        {
-            //            options.Authority = Configuration["DomainIdentityServer"];
-            //            options.RequireHttpsMetadata = false;
-            //            options.ApiName = Configuration["ApiName"];
-
-            //        });
-
+            services.ConfigureSwagger(
+                );
             services.AddDbContext<VuondauDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VuonDauDatabase"))
                 .EnableSensitiveDataLogging()
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
@@ -94,7 +93,6 @@ namespace VuonDau.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VuonDau.WebApi v1"));
             }
-
             app.UseCors(MyAllowSpecificOrigins);
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -122,8 +120,8 @@ namespace VuonDau.WebApi
             app.ConfigMigration<VuondauDBContext>();
             app.ConfigureErrorHandler(env);
             app.UseRouting();
-
-            app.ConfigureAuthor();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

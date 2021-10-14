@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,6 +15,7 @@ using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
+    
     public partial class FarmersController : ControllerBase
     {
         /// <summary>
@@ -21,7 +23,7 @@ namespace VuonDau.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("~/api/farmers")]
+        [Route("~/api/v1/farmers")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
         public async Task<IActionResult> GetFarmers()
         {
@@ -36,9 +38,9 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("~/api/farmers/{id:int}")]
+        [Route("~/api/v1/farmers/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
-        public async Task<IActionResult> GetFarmer([FromRoute] int id)
+        public async Task<IActionResult> GetFarmer([FromRoute] Guid id)
         {
             var farmer = await _farmerService.GetFarmerById(id);
             if (farmer == null)
@@ -55,7 +57,7 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("~/api/farmers")]
+        [Route("~/api/v1/farmers")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
         public async Task<IActionResult> CreateFarmer([FromBody] CreateFarmerRequest request)
         {
@@ -75,9 +77,9 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("~/api/farmers/{id:int}")]
+        [Route("~/api/v1/farmers/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
-        public async Task<IActionResult> UpdateFarmer([FromRoute] int id, UpdateFarmerRequest request)
+        public async Task<IActionResult> UpdateFarmer([FromRoute] Guid id, UpdateFarmerRequest request)
         {
             var farmer = await _farmerService.UpdateFarmer(id, request);
             if (farmer == null)
@@ -94,9 +96,9 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("~/api/farmers/{id:int}")]
+        [Route("~/api/farmers/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
-        public async Task<IActionResult> DeleteFarmer([FromRoute] int id)
+        public async Task<IActionResult> DeleteFarmer([FromRoute] Guid id)
         {
             var resultInt = await _farmerService.DeleteFarmer(id);
             if (resultInt != 1)
@@ -107,4 +109,5 @@ namespace VuonDau.WebApi.Controllers
             return NoContent();
         }
     }
+
 }

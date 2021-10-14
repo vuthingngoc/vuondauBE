@@ -11,11 +11,12 @@ namespace VuonDau.Data.Models
         {
             CustomerInGroups = new HashSet<CustomerInGroup>();
             Orders = new HashSet<Order>();
+            ProductInCarts = new HashSet<ProductInCart>();
             Wallets = new HashSet<Wallet>();
         }
 
-        public int Id { get; set; }
-        public int? CustomerType { get; set; }
+        public Guid Id { get; set; }
+        public Guid? CustomerType { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -29,6 +30,7 @@ namespace VuonDau.Data.Models
         public virtual CustomerType CustomerTypeNavigation { get; set; }
         public virtual ICollection<CustomerInGroup> CustomerInGroups { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<ProductInCart> ProductInCarts { get; set; }
         public virtual ICollection<Wallet> Wallets { get; set; }
     }
 }

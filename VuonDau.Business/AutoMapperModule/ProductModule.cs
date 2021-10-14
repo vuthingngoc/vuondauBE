@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using VuonDau.Business.Requests.Farmer;
+using VuonDau.Business.Requests.Product;
 using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
