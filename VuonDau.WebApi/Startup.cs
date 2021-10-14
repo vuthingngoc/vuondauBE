@@ -24,6 +24,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using VuonDau.Api.Config;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 namespace VuonDau.WebApi
 {
@@ -49,8 +51,7 @@ namespace VuonDau.WebApi
             //    Credential = GoogleCredential.FromStream(json)
             //});
             //AuthConfig.ConfigAuthentication(services, Configuration);
-            //services.AddControllers();
-
+            services.AddControllers();
             services.AddCors(options =>
             {
 

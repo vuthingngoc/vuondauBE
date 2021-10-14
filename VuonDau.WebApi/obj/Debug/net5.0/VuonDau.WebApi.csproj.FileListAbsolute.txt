@@ -180,7 +180,11 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\V
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\ref\VuonDau.WebApi.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.pdb
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.genruntimeconfig.cache
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\IdentityModel.dll
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\IdentityModel.AspNetCore.OAuth2Introspection.dll
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\IdentityServer4.AccessTokenValidation.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\Firebase.Json\VuonDau.WebApi.Firebase.firebase_config.json
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\FirebaseAdmin.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\Google.Api.Gax.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\Google.Api.Gax.Rest.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\Google.Apis.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\Google.Apis.Auth.PlatformServices.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\Google.Apis.Auth.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\Google.Apis.Core.dll
