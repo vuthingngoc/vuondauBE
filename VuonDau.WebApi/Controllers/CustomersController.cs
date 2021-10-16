@@ -17,7 +17,7 @@ namespace VuonDau.WebApi.Controllers
     public partial class CustomersController : ControllerBase
     {
         [HttpPost]
-        [Route("~/api/v1/customer")]
+        [Route("~/api/v1/login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
             string token = await _customerService.Login(request, _configuration);
@@ -25,6 +25,24 @@ namespace VuonDau.WebApi.Controllers
             return await Task.Run(() => Ok(token));
         }
 
+        /// <summary>
+        /// Get Customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("~/api/v1/customers/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Customers" })]
+        public async Task<IActionResult> GetCustomer([FromRoute] Guid id)
+        {
+            var customer = await _customerService.GetCustomerById(id);
+            if (customer == null)
+            {
+                return NotFound("NOT_FOUND_MESSAGE");
+            }
+
+            return Ok(customer);
+        }
 
         /// <summary>
         /// Get List Customer

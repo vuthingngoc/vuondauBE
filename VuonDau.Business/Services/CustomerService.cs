@@ -20,7 +20,7 @@ namespace VuonDau.Business.Services
     public partial interface ICustomerService
     {
         Task<List<CustomerViewModel>> GetAllCustomers();
-        //Task<CustomerViewModel> GetCustomerById(Guid id);
+        Task<CustomerViewModel> GetCustomerById(Guid id);
         Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request);
         Task<CustomerViewModel> UpdateCustomer(Guid id, UpdateProductInCartRequest request);
         Task<int> DeleteCustomer(Guid id);
@@ -48,6 +48,10 @@ namespace VuonDau.Business.Services
             return await Get(c => c.Email.Equals(mail)).ProjectTo<CustomerViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
+        public async Task<CustomerViewModel> GetCustomerById(Guid id)
+        {
+            return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<CustomerViewModel>(_mapper).FirstOrDefaultAsync();
+        }
         public async Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request)
             {
             var mapper = _mapper.CreateMapper();
