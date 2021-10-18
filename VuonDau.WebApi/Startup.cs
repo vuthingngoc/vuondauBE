@@ -24,6 +24,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using VuonDau.Api.Config;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 namespace VuonDau.WebApi
 {
@@ -41,16 +43,7 @@ namespace VuonDau.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //using var json = Assembly.GetExecutingAssembly()
-            //    .GetManifestResourceStream("VuonDau.WebApi.Firebase.firebase_config.json");
-            //var something = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-            //FirebaseApp.Create(new AppOptions
-            //{
-            //    Credential = GoogleCredential.FromStream(json)
-            //});
-            //AuthConfig.ConfigAuthentication(services, Configuration);
-            //services.AddControllers();
-
+            services.AddControllers();
             services.AddCors(options =>
             {
 
@@ -76,6 +69,15 @@ namespace VuonDau.WebApi
             services.ConfigureDI();
             services.ConfigureServiceWorkers();
             services.ConfigDataProtection();
+            using var json = Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream("VuonDau.WebApi.Firebase.firebase_config.json");
+            var something = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            FirebaseApp.Create(new AppOptions
+            {
+                Credential = GoogleCredential.FromStream(json)
+            });
+            services.AddRouting();
+            AuthConfig.ConfigAuthentication(services, Configuration);
         }
         private string[] GetDomain()
         {

@@ -37,6 +37,8 @@ namespace VuonDau.WebApi.App_Start
                 mc.ConfigPaymentModule();
                 mc.ConfigWalletModule();
                 mc.ConfigTransactionModule();
+                mc.ConfigAdminModule();
+                mc.ConfigProductInCartModule();
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

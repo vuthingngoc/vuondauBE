@@ -10,3 +10,16 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Release\netcorea
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.pdb
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.genruntimeconfig.cache
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\bin\Release\netcoreapp3.1\VuonDau.Data.deps.json
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\bin\Release\netcoreapp3.1\VuonDau.Data.runtimeconfig.json
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\bin\Release\netcoreapp3.1\VuonDau.Data.runtimeconfig.dev.json
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\bin\Release\netcoreapp3.1\VuonDau.Data.dll
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\bin\Release\netcoreapp3.1\VuonDau.Data.pdb
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.csproj.AssemblyReference.cache
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.AssemblyInfoInputs.cache
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.AssemblyInfo.cs
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.csproj.CoreCompileInputs.cache
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.dll
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.pdb
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.genruntimeconfig.cache

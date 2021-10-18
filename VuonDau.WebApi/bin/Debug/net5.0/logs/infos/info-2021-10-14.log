@@ -1,69 +1,74 @@
-2021-10-14 00:23:56.7144||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 00:23:59.2197|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 00:24:15.0766||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 00:24:15.0766||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 00:24:15.0944||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
-2021-10-14 00:27:33.0580||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 00:27:34.9366|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 00:28:06.4972||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 00:28:08.4009|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 00:28:09.0619||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 00:28:09.0619||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 00:28:09.0703||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
-2021-10-14 00:29:04.9621||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 00:29:06.8063|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 00:29:07.4953||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 00:29:07.4953||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 00:29:07.4953||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
-2021-10-14 00:38:02.0030||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 00:38:03.9539|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 00:38:04.6527||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 00:38:04.6527||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 00:38:04.6700||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
-2021-10-14 00:38:34.0081||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 00:38:35.8395|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 00:38:36.4399||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 00:38:36.4481||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 00:38:36.4481||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
-2021-10-14 00:39:03.5603||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 00:39:05.4907|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 00:39:06.1212||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 00:39:06.1212||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 00:39:06.1212||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
-2021-10-14 00:39:26.9277||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 00:39:28.9988|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 00:39:29.6333||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 00:39:29.6333||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 00:39:29.6333||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
-2021-10-14 11:50:13.5847||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 11:50:19.7069|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 11:50:34.6522||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 11:50:38.0647|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 11:50:53.8319||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 11:50:53.8337||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 11:50:53.8489||INFO|Microsoft.Hosting.Lifetime|Content root path: D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi |url: |action: 
-2021-10-14 11:51:53.6318||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 11:51:56.6871|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 11:52:12.2163||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 11:52:12.2163||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 11:52:12.2367||INFO|Microsoft.Hosting.Lifetime|Content root path: D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi |url: |action: 
-2021-10-14 13:00:39.3011||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 13:00:42.3992|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 13:00:43.4058||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 13:00:43.4058||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 13:00:43.4217||INFO|Microsoft.Hosting.Lifetime|Content root path: D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi |url: |action: 
-2021-10-14 13:07:29.1630||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 13:07:32.0913|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 13:07:32.8640||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 13:07:32.8648||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 13:07:32.8818||INFO|Microsoft.Hosting.Lifetime|Content root path: D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi |url: |action: 
-2021-10-14 13:31:19.5456||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 13:31:22.2731|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 13:31:23.1106||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 13:31:23.1106||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 13:31:23.1273||INFO|Microsoft.Hosting.Lifetime|Content root path: D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi |url: |action: 
-2021-10-14 14:12:34.0596||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
-2021-10-14 14:12:36.9454|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
-2021-10-14 14:12:37.7556||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
-2021-10-14 14:12:37.7556||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
-2021-10-14 14:12:37.7739||INFO|Microsoft.Hosting.Lifetime|Content root path: D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi |url: |action: 
+2021-10-14 16:31:23.4016||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 16:31:27.1473|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 16:31:28.5156||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 16:31:28.5156||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 16:31:28.5156||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 17:04:37.0838||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 17:04:40.6324|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 17:04:41.7160||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 17:04:41.7326||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 17:04:41.7326||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 17:12:08.7919||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 17:12:12.3490|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 17:12:13.6643||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 17:12:13.6643||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 17:12:13.6643||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 17:20:15.4381||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 17:22:59.3817||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 17:24:02.4692||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 17:25:27.3377||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 17:27:44.6032||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 17:39:34.7740||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 17:40:59.5183||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 18:59:32.0608||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 19:00:43.3814||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 19:02:02.6588||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 19:02:06.5270|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 19:02:07.9597||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 19:02:07.9626||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 19:02:08.0330||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 19:06:06.4668||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 19:06:09.3717|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 19:06:10.1804||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 19:06:10.1804||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 19:06:10.1804||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 19:52:01.8609||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 19:52:04.7668|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 19:52:05.4925||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 19:52:05.4925||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 19:52:05.4925||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 19:53:03.2482||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 19:53:05.7389|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 19:53:06.3577||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 19:53:06.3681||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 19:53:06.3681||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 19:54:03.2531||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 19:54:05.6323|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 19:54:06.2870||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 19:54:06.2912||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 19:54:06.3042||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 19:54:36.4054||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 19:54:38.8763|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 19:54:39.4919||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 19:54:39.4919||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 19:54:39.4919||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 21:51:22.6100||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 21:51:27.1535|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 21:51:28.0258||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 21:51:28.0258||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 21:51:28.0258||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 21:52:46.8081||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 21:52:49.0431|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 21:52:49.7134||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 21:52:49.7134||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 21:52:49.7300||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 21:54:33.8894||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 21:54:37.1217|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 21:54:37.9370||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 21:54:37.9370||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 21:54:37.9449||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-14 21:55:30.3626||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-14 21:55:32.6421|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-14 21:55:33.2538||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-14 21:55:33.2538||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-14 21:55:33.2607||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 

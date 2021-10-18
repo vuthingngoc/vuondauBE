@@ -34,12 +34,12 @@ namespace VuonDau.Business.Services
 
         public async Task<List<FarmerViewModel>> GetAllFarmers()
         {
-            return await Get(p => p.Status == (int)FarmerStatus.Active).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<FarmerViewModel> GetFarmerById(Guid id)
         {
-            return await Get(p => p.Id == id && p.Status == (int)FarmerStatus.Active).ProjectTo<FarmerViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id).ProjectTo<FarmerViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
         public async Task<FarmerViewModel> CreateFarmer(CreateFarmerRequest request)
