@@ -19,10 +19,10 @@ namespace VuonDau.Business.Services
 {
     public partial interface ICustomerService
     {
-        Task<List<CustomerViewModel>> GetAllCustomers();
-        Task<CustomerViewModel> GetCustomerById(Guid id);
-        Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request);
-        Task<CustomerViewModel> UpdateCustomer(Guid id, UpdateProductInCartRequest request);
+        Task<List<CustomerFullViewModel>> GetAllCustomers();
+        Task<CustomerFullViewModel> GetCustomerById(Guid id);
+        Task<CustomerFullViewModel> CreateCustomer(CreateCustomerRequest request);
+        Task<CustomerFullViewModel> UpdateCustomer(Guid id, UpdateCustomerRequest request);
         Task<int> DeleteCustomer(Guid id);
         Task<string> Login(UserLoginRequest loginRequest, IConfiguration configuration);
     }
@@ -38,32 +38,32 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CustomerViewModel>> GetAllCustomers()
+        public async Task<List<CustomerFullViewModel>> GetAllCustomers()
         {
-            return await Get(p => p.Status == (int)Status.Active).ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<CustomerFullViewModel>(_mapper).ToListAsync();
         }
 
-        public async Task<CustomerViewModel> GetByMail(string mail)
+        public async Task<CustomerFullViewModel> GetByMail(string mail)
         {
-            return await Get(c => c.Email.Equals(mail)).ProjectTo<CustomerViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(c => c.Email.Equals(mail)).ProjectTo<CustomerFullViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
-        public async Task<CustomerViewModel> GetCustomerById(Guid id)
+        public async Task<CustomerFullViewModel> GetCustomerById(Guid id)
         {
-            return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<CustomerViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id ).ProjectTo<CustomerFullViewModel>(_mapper).FirstOrDefaultAsync();
         }
-        public async Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request)
+        public async Task<CustomerFullViewModel> CreateCustomer(CreateCustomerRequest request)
             {
             var mapper = _mapper.CreateMapper();
             var customer = mapper.Map<Customer>(request);
             customer.Status = (int)Status.Active;
             customer.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(customer);
-            var customerViewModel = mapper.Map<CustomerViewModel>(customer);
+            var customerViewModel = mapper.Map<CustomerFullViewModel>(customer);
             return customerViewModel;
         }
 
-        public async Task<CustomerViewModel> UpdateCustomer(Guid id, UpdateProductInCartRequest request)
+        public async Task<CustomerFullViewModel> UpdateCustomer(Guid id, UpdateCustomerRequest request)
         {
             var mapper = _mapper.CreateMapper();
             var customerInRequest = mapper.Map<Customer>(request);
@@ -79,9 +79,9 @@ namespace VuonDau.Business.Services
             customer.Phone = customerInRequest.Phone;
             customer.Birthday = customerInRequest.Birthday;
             customer.Gender = customerInRequest.Gender;
-            customer.Status = 1;
+            customer.Status = customerInRequest.Status;
             await UpdateAsyn(customer);
-            return mapper.Map<CustomerViewModel>(customer);
+            return mapper.Map<CustomerFullViewModel>(customer);
         }
 
         public async Task<int> DeleteCustomer(Guid id)

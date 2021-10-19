@@ -9,7 +9,9 @@ namespace VuonDau.Business.ViewModel
         public Guid Id { get; set; }
         public Guid? HarvestId { get; set; }
         public DateTime? DateOfCreate { get; set; }
+        public DateTime? EndDate { get; set; }
         public double? MinWeight { get; set; }
         public double? TotalWeight { get; set; }
+        public int? Status { get; set; }
     }
 }

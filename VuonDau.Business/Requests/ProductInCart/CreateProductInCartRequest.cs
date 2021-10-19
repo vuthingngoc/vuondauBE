@@ -7,7 +7,8 @@ namespace VuonDau.Business.Requests.ProductInCart
     public class CreateProductInCartRequest
     {
         public Guid? CustomerId { get; set; }
-        public Guid? ProductId { get; set; }
+        public Guid? HarvestSellingId { get; set; }
+        public int? Quantity { get; set; }
 
     }
 }

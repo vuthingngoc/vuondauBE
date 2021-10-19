@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,6 +12,7 @@ namespace VuonDau.WebApi.Controllers
     {
         /// Get List Farms
         [HttpGet]
+        //[Authorize]
         [Route("~/api/v1/farms")]
         [SwaggerOperation(Tags = new[] { "Farms" })]
         public async Task<IActionResult> GetFarms()

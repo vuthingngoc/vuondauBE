@@ -11,6 +11,7 @@ namespace VuonDau.Business.Requests.Farmer
         public string Password { get; set; }
         public string Phone { get; set; }
         public DateTime? BirthDay { get; set; }
+        public DateTime? DateUpdate { get; set; }
         public int? Gender { get; set; }
         public int? Status { get; set; }
     }

@@ -49,6 +49,7 @@ namespace VuonDau.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize/*(Roles = "Admin")*/]
         [Route("~/api/v1/customers")]
         [SwaggerOperation(Tags = new[] { "Customers" })]
         public async Task<IActionResult> GetCustomers()
@@ -105,7 +106,7 @@ namespace VuonDau.WebApi.Controllers
         [HttpPut]
         [Route("~/api/v1/customers/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Customers" })]
-        public async Task<IActionResult> UpdateCustomer([FromRoute] Guid id, UpdateProductInCartRequest request)
+        public async Task<IActionResult> UpdateCustomer([FromRoute] Guid id, UpdateCustomerRequest request)
         {
             var customer = await _customerService.UpdateCustomer(id, request);
             if (customer == null)
@@ -122,7 +123,7 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("~/api/v1/customers/{id:int}")]
+        [Route("~/api/v1/customers/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Customers" })]
         public async Task<IActionResult> DeleteCustomer([FromRoute] Guid id)
         {

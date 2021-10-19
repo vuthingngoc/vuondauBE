@@ -23,9 +23,10 @@ using VuonDau.WebApi.Handlers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
-using VuonDau.Api.Config;
+//using VuonDau.Api.Config;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using VuonDau.Api.Config;
 
 namespace VuonDau.WebApi
 {
@@ -58,8 +59,7 @@ namespace VuonDau.WebApi
             });
             services.ConfigureFilter<ErrorHandlingFilter>();
             services.JsonFormatConfig();
-            services.ConfigureSwagger(
-                );
+            services.ConfigureSwagger();
             services.AddDbContext<VuondauDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VuonDauDatabase"))
                 .EnableSensitiveDataLogging()
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));

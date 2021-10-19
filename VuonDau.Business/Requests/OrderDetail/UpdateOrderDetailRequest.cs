@@ -6,9 +6,10 @@ namespace VuonDau.Business.Requests.OrderDetail
 {
     public class UpdateOrderDetailRequest
     {
-        public Guid? ProductId { get; set; }
+        public Guid? HarvestsellingId { get; set; }
         public Guid? OrderId { get; set; }
         public double? Weight { get; set; }
         public double? Price { get; set; }
+        public int? Status { get; set; }
     }
 }

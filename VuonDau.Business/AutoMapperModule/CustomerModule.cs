@@ -13,9 +13,10 @@ namespace VuonDau.Business.AutoMapperModule
     {
         public static void ConfigCustomerModule(this IMapperConfigurationExpression mc)
         {
-            mc.CreateMap<Customer, CustomerViewModel>().ReverseMap();
+            mc.CreateMap<Customer, CustomerFullViewModel>().ReverseMap();
+        //    mc.CreateMap<Customer, CustomerViewModel>().ReverseMap();
             mc.CreateMap<CreateCustomerRequest, Customer>();
-            mc.CreateMap<UpdateProductInCartRequest, Customer>();
+            mc.CreateMap<UpdateCustomerRequest, Customer>();
             mc.CreateMap<UserLoginRequest, Customer>();
         }
     }

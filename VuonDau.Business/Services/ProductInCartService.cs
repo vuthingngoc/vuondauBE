@@ -63,7 +63,8 @@ namespace VuonDau.Business.Services
                 return null;
             }
             productInCart.CustomerId = productInCartRequest.CustomerId;
-            productInCart.ProductId = productInCartRequest.ProductId;
+            productInCart.HarvestSellingId = productInCartRequest.HarvestSellingId;
+            productInCart.Quantity = productInCartRequest.Quantity;
             productInCart.Status = productInCartRequest.Status;
             await UpdateAsyn(productInCart);
             return mapper.Map<ProductInCartViewModel>(productInCart);

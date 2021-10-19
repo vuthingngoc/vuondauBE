@@ -17,6 +17,9 @@ namespace VuonDau.Data.Models
         public Guid? FarmId { get; set; }
         public Guid? ProductId { get; set; }
         public string Description { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public int? Status { get; set; }
 
         public virtual Farm Farm { get; set; }
         public virtual Product Product { get; set; }

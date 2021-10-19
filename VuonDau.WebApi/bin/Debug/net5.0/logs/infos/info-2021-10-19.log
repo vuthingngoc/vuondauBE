@@ -1,0 +1,15 @@
+2021-10-19 19:18:30.9772||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-19 19:18:35.6136|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-19 19:18:37.3766||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-19 19:18:37.3766||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-19 19:18:37.4070||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-19 19:20:46.2086||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-19 19:20:50.3971|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-19 19:20:51.7045||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-19 19:20:51.7045||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-19 19:20:51.7445||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-19 19:22:18.2781||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-19 19:22:20.3764|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-19 19:22:21.4868||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-19 19:22:21.5006||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-19 19:22:21.5006||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 

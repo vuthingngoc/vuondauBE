@@ -17,5 +17,10 @@ namespace VuonDau.Business.ViewModel
         public int? Gender { get; set; }
         public DateTime? DateOfCreate { get; set; }
         public int? Status { get; set; }
+
+        public static implicit operator CustomerViewModel(CustomerFullViewModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
