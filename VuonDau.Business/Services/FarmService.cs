@@ -16,6 +16,7 @@ namespace VuonDau.Business.Services
     {
         Task<List<FarmViewModel>> GetAllFarms();
         Task<FarmViewModel> GetFarmById(Guid id);
+        Task<List<FarmViewModel>> GetFarmByType(Guid id);
         Task<FarmViewModel> CreateFarm(CreateFarmRequest request);
         Task<FarmViewModel> UpdateFarm(Guid id, UpdateFarmRequest request);
         Task<int> DeleteFarm(Guid id);
@@ -34,14 +35,17 @@ namespace VuonDau.Business.Services
 
         public async Task<List<FarmViewModel>> GetAllFarms()
         {
-            return await Get(p => p.Status == (int)Status.Active).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<FarmViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<FarmViewModel> GetFarmById(Guid id)
         {
-            return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<FarmViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id ).ProjectTo<FarmViewModel>(_mapper).FirstOrDefaultAsync();
         }
-
+        public async Task<List<FarmViewModel>> GetFarmByType(Guid FarmTypeId)
+        {
+            return await Get(p => p.FarmTypeId == FarmTypeId).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+        }
         public async Task<FarmViewModel> CreateFarm(CreateFarmRequest request)
             {
             var mapper = _mapper.CreateMapper();
@@ -65,10 +69,11 @@ namespace VuonDau.Business.Services
             farm.FarmTypeId = farmInRequest.FarmTypeId;
             farm.FarmerId = farmInRequest.FarmerId;
             farm.Name = farmInRequest.Name;
+            farm.AreaId = farmInRequest.AreaId;
             farm.Address = farmInRequest.Address;
             farm.Description = farmInRequest.Description;
             farm.DateUpdate = DateTime.UtcNow;
-            farm.Status = 1;
+            farm.Status = farmInRequest.Status;
             await UpdateAsyn(farm);
             return mapper.Map<FarmViewModel>(farm);
         }

@@ -47,6 +47,10 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[10.1.1, )"
+            },
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             }
           },
           "imports": [
@@ -195,13 +199,9 @@
               "target": "Package",
               "version": "[10.1.1, )"
             },
-            "IdentityServer4.AccessTokenValidation": {
+            "FirebaseAdmin": {
               "target": "Package",
-              "version": "[3.0.1, )"
-            },
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[5.0.10, )"
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",

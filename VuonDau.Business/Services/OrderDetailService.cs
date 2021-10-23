@@ -61,7 +61,7 @@ namespace VuonDau.Business.Services
             {
                 return null;
             }
-            orderDetail.ProductId = orderDetailInRequest.ProductId;
+            orderDetail.HarvestsellingId = orderDetailInRequest.HarvestsellingId;
             orderDetail.OrderId = orderDetailInRequest.OrderId;
             orderDetail.Weight = orderDetailInRequest.Weight;
             orderDetail.Price = orderDetailInRequest.Price;

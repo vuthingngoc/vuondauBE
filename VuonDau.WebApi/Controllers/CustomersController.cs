@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
+using VuonDau.Business.Requests;
 using VuonDau.Business.Requests.Customer;
 using VuonDau.Data.Models;
 
@@ -14,18 +16,13 @@ namespace VuonDau.WebApi.Controllers
 {
     public partial class CustomersController : ControllerBase
     {
-        /// <summary>
-        /// Get List Customer
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("~/api/v1/customers")]
-        [SwaggerOperation(Tags = new[] { "Customers" })]
-        public async Task<IActionResult> GetCustomers()
+        [HttpPost]
+        [Route("~/api/v1/login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
-            await _customerService.GetAllCustomers();
-            var customers = await _customerService.GetAllCustomers();
-            return Ok(customers);
+            string token = await _customerService.Login(request, _configuration);
+
+            return await Task.Run(() => Ok(token));
         }
 
         /// <summary>
@@ -41,11 +38,53 @@ namespace VuonDau.WebApi.Controllers
             var customer = await _customerService.GetCustomerById(id);
             if (customer == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _customerService.GetCustomerByType(id);
+                var customers = await _customerService.GetCustomerByType(id);
+                if (customers != null)
+                {
+                    return Ok(customers);
+                }
+                else
+                {
+                    return NotFound("NOT_FOUND_MESSAGE");
+                }
             }
-
             return Ok(customer);
         }
+
+        /// <summary>
+        /// Get List Customer
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+       // [Authorize/*(Roles = "Admin")*/]
+        [Route("~/api/v1/customers")]
+        [SwaggerOperation(Tags = new[] { "Customers" })]
+        public async Task<IActionResult> GetCustomers()
+        {
+            await _customerService.GetAllCustomers();
+            var customers = await _customerService.GetAllCustomers();
+            return Ok(customers);
+        }
+
+        ///// <summary>
+        ///// Get Customer by id
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <returns></returns>
+        //[HttpGet]
+        //[Route("~/api/v1/customers/{id:Guid}")]
+        //[SwaggerOperation(Tags = new[] { "Customers" })]
+        //public async Task<IActionResult> GetCustomer([FromRoute] Guid id)
+        //{
+        //    var customer = await _customerService.GetCustomerById(id);
+        //    if (customer == null)
+        //    {
+        //        return NotFound("NOT_FOUND_MESSAGE");
+        //    }
+
+        //    return Ok(customer);
+        //}
 
         /// <summary>
         /// Tạo mới 1 Customer
@@ -92,7 +131,7 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("~/api/v1/customers/{id:int}")]
+        [Route("~/api/v1/customers/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Customers" })]
         public async Task<IActionResult> DeleteCustomer([FromRoute] Guid id)
         {

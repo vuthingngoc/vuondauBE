@@ -18,6 +18,8 @@ namespace VuonDau.WebApi.App_Start
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.ConfigFarmerModule();
+                mc.ConfigAreaModule();
+                mc.ConfigCampaignModule();
                 mc.ConfigProductModule();
                 mc.ConfigProductTypeModule();
                 mc.ConfigProductPictureModule();
@@ -37,6 +39,8 @@ namespace VuonDau.WebApi.App_Start
                 mc.ConfigPaymentModule();
                 mc.ConfigWalletModule();
                 mc.ConfigTransactionModule();
+                mc.ConfigAdminModule();
+                mc.ConfigProductInCartModule();
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

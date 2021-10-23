@@ -10,8 +10,6 @@ namespace VuonDau.Data.Models
         public Product()
         {
             Harvests = new HashSet<Harvest>();
-            OrderDetails = new HashSet<OrderDetail>();
-            ProductInCarts = new HashSet<ProductInCart>();
             ProductPictures = new HashSet<ProductPicture>();
         }
 
@@ -24,8 +22,6 @@ namespace VuonDau.Data.Models
 
         public virtual ProductType ProductType { get; set; }
         public virtual ICollection<Harvest> Harvests { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual ICollection<ProductInCart> ProductInCarts { get; set; }
         public virtual ICollection<ProductPicture> ProductPictures { get; set; }
     }
 }

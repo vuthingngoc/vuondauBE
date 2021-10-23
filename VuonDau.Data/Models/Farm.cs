@@ -16,6 +16,7 @@ namespace VuonDau.Data.Models
         public Guid Id { get; set; }
         public Guid? FarmTypeId { get; set; }
         public Guid? FarmerId { get; set; }
+        public Guid? AreaId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
@@ -23,6 +24,7 @@ namespace VuonDau.Data.Models
         public DateTime? DateUpdate { get; set; }
         public int? Status { get; set; }
 
+        public virtual Area Area { get; set; }
         public virtual FarmType FarmType { get; set; }
         public virtual Farmer Farmer { get; set; }
         public virtual ICollection<FarmPicture> FarmPictures { get; set; }

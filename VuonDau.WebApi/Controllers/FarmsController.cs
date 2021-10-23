@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,6 +12,7 @@ namespace VuonDau.WebApi.Controllers
     {
         /// Get List Farms
         [HttpGet]
+        //[Authorize]
         [Route("~/api/v1/farms")]
         [SwaggerOperation(Tags = new[] { "Farms" })]
         public async Task<IActionResult> GetFarms()
@@ -26,12 +28,21 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "Farms" })]
         public async Task<IActionResult> GetFarm([FromRoute] Guid id)
         {
-            var farms = await _farmService.GetFarmById(id);
-            if (farms == null)
+            var farm = await _farmService.GetFarmById(id);
+            if (farm == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _farmService.GetFarmByType(id);
+                var farms = await _farmService.GetFarmByType(id);
+                if (farms != null)
+                {
+                    return Ok(farms);
+                }
+                else
+                {
+                    return NotFound("NOT_FOUND_MESSAGE");
+                }
             }
-            return Ok(farms);
+            return Ok(farm);
         }
         /// Tạo mới 1 farm
         [HttpPost]

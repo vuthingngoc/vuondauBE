@@ -79,6 +79,18 @@ namespace VuonDau.Data.Gens.Commons
         
             services.AddScoped<IWalletService, WalletService>();
             services.AddScoped<IWalletRepository, WalletRepository>();
+
+            services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
+
+            services.AddScoped<IProductInCartService, ProductInCartService>();
+            services.AddScoped<IProductInCartRepository, ProductInCartRepository>();
+
+            services.AddScoped<IAreaService, AreaService>();
+            services.AddScoped<IAreaRepository, AreaRepository>();
+
+            services.AddScoped<ICampaignService, CampaignService>();
+            services.AddScoped<ICampaignRepository, CampaignRepository>();
         }
     }
 }

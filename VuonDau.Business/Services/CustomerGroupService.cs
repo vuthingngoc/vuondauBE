@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using VuonDau.Business.ViewModel;
 using System;
-using VuonDau.Business.Requests.CustomerGroup;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using VuonDau.Business.Requests.CustomerGroup;
+
 namespace VuonDau.Business.Services
 {
     public partial interface ICustomerGroupService

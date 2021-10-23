@@ -10,5 +10,8 @@ namespace VuonDau.Business.Requests.Harvest
         public Guid? FarmId { get; set; }
         public Guid? ProductId { get; set; }
         public string Description { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public int? Status { get; set; }
     }
 }

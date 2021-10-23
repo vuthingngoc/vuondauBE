@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using VuonDau.Data.Models;
 using VuonDau.Business.Services;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
+
 namespace VuonDau.WebApi.Controllers
 {
     [ApiController]
@@ -11,11 +13,13 @@ namespace VuonDau.WebApi.Controllers
     public partial class CustomersController : ControllerBase
     {
         private readonly ICustomerService _customerService;
-        private readonly IConfigurationProvider _mapper;
-        public CustomersController(ICustomerService customerService, IMapper mapper)
+        private readonly AutoMapper.IConfigurationProvider _mapper;
+        private readonly IConfiguration _configuration;
+        public CustomersController(ICustomerService customerService, IMapper mapper, IConfiguration configuration)
         {
             _customerService = customerService;
             _mapper = mapper.ConfigurationProvider;
+            _configuration = configuration;
         }
     }
 }
