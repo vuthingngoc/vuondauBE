@@ -3,3 +3,10 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\bin\Debug\netcoreapp
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.csprojAssemblyReference.cache
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.pdb
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\bin\Debug\netcoreapp3.1\VuonDau.Data.deps.json
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\bin\Debug\netcoreapp3.1\VuonDau.Data.runtimeconfig.json
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\bin\Debug\netcoreapp3.1\VuonDau.Data.runtimeconfig.dev.json
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.AssemblyInfoInputs.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.AssemblyInfo.cs
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.csproj.CoreCompileInputs.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.genruntimeconfig.cache
