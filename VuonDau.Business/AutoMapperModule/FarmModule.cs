@@ -12,7 +12,7 @@ namespace VuonDau.Business.AutoMapperModule
     {
         public static void ConfigFarmModule(this IMapperConfigurationExpression mc)
         {
-            mc.CreateMap<Farm, FarmFullViewModel>().ReverseMap();
+            mc.CreateMap<Farm, FarmViewModel>().ReverseMap();
             mc.CreateMap<CreateFarmRequest, Farm>();
             mc.CreateMap<UpdateFarmRequest, Farm>();
         }

@@ -18,6 +18,8 @@ namespace VuonDau.WebApi.App_Start
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.ConfigFarmerModule();
+                mc.ConfigAreaModule();
+                mc.ConfigCampaignModule();
                 mc.ConfigProductModule();
                 mc.ConfigProductTypeModule();
                 mc.ConfigProductPictureModule();

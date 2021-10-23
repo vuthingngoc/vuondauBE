@@ -9,6 +9,7 @@ using VuonDau.Business.Requests.HarvestSellingPrice;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using System;
+using VuonDau.Data.Common.Enum;
 
 namespace VuonDau.Business.Services
 {
@@ -46,6 +47,7 @@ namespace VuonDau.Business.Services
             {
             var mapper = _mapper.CreateMapper();
             var harvestSellingPrice = mapper.Map<HarvestSellingPrice>(request);
+            harvestSellingPrice.Status = (int)Status.Active;
             await CreateAsyn(harvestSellingPrice);
             var harvestSellingPriceViewModel = mapper.Map<HarvestSellingPriceViewModel>(harvestSellingPrice);
             return harvestSellingPriceViewModel;

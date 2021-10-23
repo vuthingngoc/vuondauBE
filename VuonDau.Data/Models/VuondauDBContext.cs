@@ -18,6 +18,8 @@ namespace VuonDau.Data.Models
         }
 
         public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<Area> Areas { get; set; }
+        public virtual DbSet<Campaign> Campaigns { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerGroup> CustomerGroups { get; set; }
         public virtual DbSet<CustomerInGroup> CustomerInGroups { get; set; }
@@ -57,9 +59,12 @@ namespace VuonDau.Data.Models
             {
                 entity.ToTable("Admin");
 
+                entity.HasIndex(e => e.UserName, "UQ__Admin__66DCF95C06CD04F7")
+                    .IsUnique();
+
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.Password)
                     .HasMaxLength(50)
@@ -71,6 +76,58 @@ namespace VuonDau.Data.Models
                 entity.Property(e => e.UserName)
                     .HasMaxLength(50)
                     .HasColumnName("userName");
+            });
+
+            modelBuilder.Entity<Area>(entity =>
+            {
+                entity.ToTable("Area");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(500)
+                    .HasColumnName("description");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(255)
+                    .HasColumnName("name");
+            });
+
+            modelBuilder.Entity<Campaign>(entity =>
+            {
+                entity.ToTable("Campaign");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.EndTime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("endTime");
+
+                entity.Property(e => e.HarvestSellingId).HasColumnName("harvestSellingID");
+
+                entity.Property(e => e.MinOrderAmount).HasColumnName("minOrderAmount");
+
+                entity.Property(e => e.OrderId).HasColumnName("orderID");
+
+                entity.Property(e => e.StartTime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("startTime");
+
+                entity.Property(e => e.Status).HasColumnName("status");
+
+                entity.HasOne(d => d.HarvestSelling)
+                    .WithMany(p => p.Campaigns)
+                    .HasForeignKey(d => d.HarvestSellingId)
+                    .HasConstraintName("FK__Campaign__harves__4BAC3F29");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.Campaigns)
+                    .HasForeignKey(d => d.OrderId)
+                    .HasConstraintName("FK__Campaign__orderI__4CA06362");
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -144,13 +201,13 @@ namespace VuonDau.Data.Models
                 entity.HasOne(d => d.HarvestSelling)
                     .WithMany(p => p.CustomerGroups)
                     .HasForeignKey(d => d.HarvestSellingId)
-                    .HasConstraintName("FK__CustomerG__harve__45F365D3");
+                    .HasConstraintName("FK__CustomerG__harve__52593CB8");
             });
 
             modelBuilder.Entity<CustomerInGroup>(entity =>
             {
                 entity.HasKey(e => new { e.CustomerId, e.CustomerGroupId })
-                    .HasName("PK__Customer__740ACCDE48CFD27E");
+                    .HasName("PK__Customer__740ACCDE5535A963");
 
                 entity.ToTable("CustomerInGroup");
 
@@ -166,13 +223,13 @@ namespace VuonDau.Data.Models
                     .WithMany(p => p.CustomerInGroups)
                     .HasForeignKey(d => d.CustomerGroupId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CustomerI__custo__4BAC3F29");
+                    .HasConstraintName("FK__CustomerI__custo__5812160E");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.CustomerInGroups)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CustomerI__custo__4AB81AF0");
+                    .HasConstraintName("FK__CustomerI__custo__571DF1D5");
             });
 
             modelBuilder.Entity<CustomerType>(entity =>
@@ -204,6 +261,8 @@ namespace VuonDau.Data.Models
                     .HasMaxLength(500)
                     .HasColumnName("address");
 
+                entity.Property(e => e.AreaId).HasColumnName("areaID");
+
                 entity.Property(e => e.DateOfCreate)
                     .HasColumnType("datetime")
                     .HasColumnName("dateOfCreate");
@@ -226,15 +285,20 @@ namespace VuonDau.Data.Models
 
                 entity.Property(e => e.Status).HasColumnName("status");
 
+                entity.HasOne(d => d.Area)
+                    .WithMany(p => p.Farms)
+                    .HasForeignKey(d => d.AreaId)
+                    .HasConstraintName("FK__Farm__areaID__32E0915F");
+
                 entity.HasOne(d => d.FarmType)
                     .WithMany(p => p.Farms)
                     .HasForeignKey(d => d.FarmTypeId)
-                    .HasConstraintName("FK__Farm__farmTypeID__32E0915F");
+                    .HasConstraintName("FK__Farm__farmTypeID__30F848ED");
 
                 entity.HasOne(d => d.Farmer)
                     .WithMany(p => p.Farms)
                     .HasForeignKey(d => d.FarmerId)
-                    .HasConstraintName("FK__Farm__farmerID__33D4B598");
+                    .HasConstraintName("FK__Farm__farmerID__31EC6D26");
             });
 
             modelBuilder.Entity<FarmPicture>(entity =>
@@ -260,7 +324,7 @@ namespace VuonDau.Data.Models
                 entity.HasOne(d => d.Farm)
                     .WithMany(p => p.FarmPictures)
                     .HasForeignKey(d => d.FarmId)
-                    .HasConstraintName("FK__FarmPictu__farmI__5CD6CB2B");
+                    .HasConstraintName("FK__FarmPictu__farmI__693CA210");
             });
 
             modelBuilder.Entity<FarmType>(entity =>
@@ -361,6 +425,10 @@ namespace VuonDau.Data.Models
                     .HasMaxLength(2500)
                     .HasColumnName("description");
 
+                entity.Property(e => e.EndDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("endDate");
+
                 entity.Property(e => e.FarmId).HasColumnName("farmID");
 
                 entity.Property(e => e.Name)
@@ -369,15 +437,21 @@ namespace VuonDau.Data.Models
 
                 entity.Property(e => e.ProductId).HasColumnName("productID");
 
+                entity.Property(e => e.StartDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("startDate");
+
+                entity.Property(e => e.Status).HasColumnName("status");
+
                 entity.HasOne(d => d.Farm)
                     .WithMany(p => p.Harvests)
                     .HasForeignKey(d => d.FarmId)
-                    .HasConstraintName("FK__Harvest__farmID__3A81B327");
+                    .HasConstraintName("FK__Harvest__farmID__398D8EEE");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Harvests)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__Harvest__product__398D8EEE");
+                    .HasConstraintName("FK__Harvest__product__38996AB5");
             });
 
             modelBuilder.Entity<HarvestSelling>(entity =>
@@ -392,16 +466,22 @@ namespace VuonDau.Data.Models
                     .HasColumnType("datetime")
                     .HasColumnName("dateOfCreate");
 
+                entity.Property(e => e.EndDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("endDate");
+
                 entity.Property(e => e.HarvestId).HasColumnName("harvestID");
 
                 entity.Property(e => e.MinWeight).HasColumnName("minWeight");
+
+                entity.Property(e => e.Status).HasColumnName("status");
 
                 entity.Property(e => e.TotalWeight).HasColumnName("totalWeight");
 
                 entity.HasOne(d => d.Harvest)
                     .WithMany(p => p.HarvestSellings)
                     .HasForeignKey(d => d.HarvestId)
-                    .HasConstraintName("FK__HarvestSe__harve__403A8C7D");
+                    .HasConstraintName("FK__HarvestSe__harve__3F466844");
             });
 
             modelBuilder.Entity<HarvestSellingPrice>(entity =>
@@ -416,10 +496,12 @@ namespace VuonDau.Data.Models
 
                 entity.Property(e => e.Price).HasColumnName("price");
 
+                entity.Property(e => e.Status).HasColumnName("status");
+
                 entity.HasOne(d => d.HarvestSelling)
                     .WithMany(p => p.HarvestSellingPrices)
                     .HasForeignKey(d => d.HarvestSellingId)
-                    .HasConstraintName("FK__HarvestSe__harve__5165187F");
+                    .HasConstraintName("FK__HarvestSe__harve__5DCAEF64");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -458,25 +540,25 @@ namespace VuonDau.Data.Models
                     .HasColumnName("id")
                     .HasDefaultValueSql("(newid())");
 
+                entity.Property(e => e.HarvestsellingId).HasColumnName("harvestsellingID");
+
                 entity.Property(e => e.OrderId).HasColumnName("orderID");
 
                 entity.Property(e => e.Price).HasColumnName("price");
-
-                entity.Property(e => e.ProductId).HasColumnName("productID");
 
                 entity.Property(e => e.Status).HasColumnName("status");
 
                 entity.Property(e => e.Weight).HasColumnName("weight");
 
+                entity.HasOne(d => d.Harvestselling)
+                    .WithMany(p => p.OrderDetails)
+                    .HasForeignKey(d => d.HarvestsellingId)
+                    .HasConstraintName("FK__OrderDeta__harve__44FF419A");
+
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__OrderDeta__order__239E4DCF");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__OrderDeta__produ__22AA2996");
+                    .HasConstraintName("FK__OrderDeta__order__45F365D3");
             });
 
             modelBuilder.Entity<Payment>(entity =>
@@ -532,19 +614,25 @@ namespace VuonDau.Data.Models
 
                 entity.Property(e => e.CustomerId).HasColumnName("customerID");
 
-                entity.Property(e => e.ProductId).HasColumnName("productID");
+                entity.Property(e => e.DateCreate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("dateCreate");
+
+                entity.Property(e => e.HarvestSellingId).HasColumnName("harvestSellingID");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
 
                 entity.Property(e => e.Status).HasColumnName("status");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.ProductInCarts)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__ProductIn__custo__73BA3083");
+                    .HasConstraintName("FK__ProductIn__custo__00200768");
 
-                entity.HasOne(d => d.Product)
+                entity.HasOne(d => d.HarvestSelling)
                     .WithMany(p => p.ProductInCarts)
-                    .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__ProductIn__produ__74AE54BC");
+                    .HasForeignKey(d => d.HarvestSellingId)
+                    .HasConstraintName("FK__ProductIn__harve__01142BA1");
             });
 
             modelBuilder.Entity<ProductPicture>(entity =>
@@ -570,7 +658,7 @@ namespace VuonDau.Data.Models
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.ProductPictures)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__ProductPi__produ__571DF1D5");
+                    .HasConstraintName("FK__ProductPi__produ__6383C8BA");
             });
 
             modelBuilder.Entity<ProductType>(entity =>
@@ -613,12 +701,12 @@ namespace VuonDau.Data.Models
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.Transactions)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__Transacti__order__6D0D32F4");
+                    .HasConstraintName("FK__Transacti__order__797309D9");
 
                 entity.HasOne(d => d.Payment)
                     .WithMany(p => p.Transactions)
                     .HasForeignKey(d => d.PaymentId)
-                    .HasConstraintName("FK__Transacti__payme__6E01572D");
+                    .HasConstraintName("FK__Transacti__payme__7A672E12");
             });
 
             modelBuilder.Entity<Wallet>(entity =>
@@ -636,7 +724,7 @@ namespace VuonDau.Data.Models
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Wallets)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__Wallet__customer__628FA481");
+                    .HasConstraintName("FK__Wallet__customer__6EF57B66");
             });
 
             OnModelCreatingPartial(modelBuilder);

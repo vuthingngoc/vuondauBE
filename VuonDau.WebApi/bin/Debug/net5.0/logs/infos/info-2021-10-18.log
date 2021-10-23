@@ -1,0 +1,56 @@
+2021-10-18 17:20:26.0864||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-18 17:20:30.4728|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-18 17:20:32.2414||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-18 17:20:32.2414||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-18 17:20:32.2447||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-18 17:43:36.2056||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-18 17:43:39.6208|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-18 17:43:41.0788||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-18 17:43:41.0788||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-18 17:43:41.0788||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-18 17:55:24.2355||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-18 17:59:03.9128||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-18 17:59:07.4974|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-18 17:59:09.6098||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-18 17:59:09.6098||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-18 17:59:09.6203||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-18 17:59:28.1111|12|INFO|IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler|AuthenticationScheme: Bearer was challenged. |url: https://localhost/api/v1/farms|action: GetFarms
+2021-10-18 18:01:04.8524||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-18 18:01:08.9159|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-18 18:01:10.5338||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-18 18:01:10.5338||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-18 18:01:10.5535||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-18 18:01:19.9583|12|INFO|IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler|AuthenticationScheme: Bearer was challenged. |url: https://localhost/api/v1/farms|action: GetFarms
+2021-10-18 18:02:06.9946|7|INFO|IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler|Bearer was not authenticated. Failure message: IDX10500: Signature validation failed. No security keys were provided to validate the signature. |url: https://localhost/api/v1/farms|action: GetFarms
+2021-10-18 18:02:07.0134|12|INFO|IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler|AuthenticationScheme: Bearer was challenged. |url: https://localhost/api/v1/farms|action: GetFarms
+2021-10-18 18:02:10.3252|7|INFO|IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler|Bearer was not authenticated. Failure message: IDX10500: Signature validation failed. No security keys were provided to validate the signature. |url: https://localhost/api/v1/farms|action: GetFarms
+2021-10-18 18:02:10.3252|12|INFO|IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler|AuthenticationScheme: Bearer was challenged. |url: https://localhost/api/v1/farms|action: GetFarms
+2021-10-18 18:03:13.9645||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-18 18:03:16.4915|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-18 18:03:17.6134||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-18 18:03:17.6134||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-18 18:03:17.6209||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-18 18:04:00.9017|7|INFO|IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler|Bearer was not authenticated. Failure message: IDX10500: Signature validation failed. No security keys were provided to validate the signature. |url: https://localhost/api/v1/farms|action: GetFarms
+2021-10-18 18:04:00.9191|12|INFO|IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler|AuthenticationScheme: Bearer was challenged. |url: https://localhost/api/v1/farms|action: GetFarms
+2021-10-18 18:06:08.5317||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-18 18:06:10.8394|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-18 18:06:12.2368||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-18 18:06:12.2368||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-18 18:06:12.2459||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-18 18:07:15.0811|7|INFO|IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler|Bearer was not authenticated. Failure message: IDX10500: Signature validation failed. No security keys were provided to validate the signature. |url: https://localhost/api/v1/farms|action: GetFarms
+2021-10-18 18:07:15.0996|12|INFO|IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler|AuthenticationScheme: Bearer was challenged. |url: https://localhost/api/v1/farms|action: GetFarms
+2021-10-18 18:35:32.9594||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-18 18:35:35.8950|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-18 18:35:37.1889||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-18 18:35:37.1889||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-18 18:35:37.2005||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-18 18:35:58.1330||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-18 18:36:00.6500|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-18 18:36:01.6828||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-18 18:36:01.6828||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-18 18:36:01.6973||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-10-18 18:43:07.0943||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
+2021-10-18 18:43:10.5139|10400|WARN|Microsoft.EntityFrameworkCore.Model.Validation|Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development. |url: |action: 
+2021-10-18 18:43:12.2044||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
+2021-10-18 18:43:12.2044||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
+2021-10-18 18:43:12.2151||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 

@@ -46,6 +46,7 @@ namespace VuonDau.Business.Services
             {
             var mapper = _mapper.CreateMapper();
             var harvest = mapper.Map<Harvest>(request);
+            harvest.Status = (int)Status.Active;
             await CreateAsyn(harvest);
             var harvestViewModel = mapper.Map<HarvestViewModel>(harvest);
             return harvestViewModel;

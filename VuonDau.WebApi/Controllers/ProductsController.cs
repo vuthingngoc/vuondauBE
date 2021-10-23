@@ -31,15 +31,35 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "Products" })]
         public async Task<IActionResult> GetProduct([FromRoute] Guid id)
         {
-            var farmer = await _productService.GetProductById(id);
-            if (farmer == null)
+            var product = await _productService.GetProductById(id);
+            if (product == null)
+            {
+                await _productService.GetProductByType(id);
+                var products = await _productService.GetProductByType(id);
+                if (products != null)
+                {
+                    return Ok(products);
+                } else
+                {
+                    return NotFound("NOT_FOUND_MESSAGE");
+                }
+            }
+            return Ok(product);
+        }
+        // GET: Products/Details/Name
+        [HttpGet]
+        [Route("~/api/v1/products/{name:alpha}")]
+        [SwaggerOperation(Tags = new[] { "Products" })]
+        public async Task<IActionResult> GetProduct([FromRoute] string name)
+        {
+            var product = await _productService.GetProductByName(name);
+            if (product == null)
             {
                 return NotFound("NOT_FOUND_MESSAGE");
             }
 
-            return Ok(farmer);
+            return Ok(product);
         }
-
         // GET: Products/Create
         [HttpPost]
         [Route("~/api/v1/products")]

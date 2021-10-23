@@ -38,9 +38,17 @@ namespace VuonDau.WebApi.Controllers
             var customer = await _customerService.GetCustomerById(id);
             if (customer == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _customerService.GetCustomerByType(id);
+                var customers = await _customerService.GetCustomerByType(id);
+                if (customers != null)
+                {
+                    return Ok(customers);
+                }
+                else
+                {
+                    return NotFound("NOT_FOUND_MESSAGE");
+                }
             }
-
             return Ok(customer);
         }
 
@@ -49,6 +57,7 @@ namespace VuonDau.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+       // [Authorize/*(Roles = "Admin")*/]
         [Route("~/api/v1/customers")]
         [SwaggerOperation(Tags = new[] { "Customers" })]
         public async Task<IActionResult> GetCustomers()

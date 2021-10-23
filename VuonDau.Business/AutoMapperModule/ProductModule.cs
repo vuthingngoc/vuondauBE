@@ -12,7 +12,7 @@ namespace VuonDau.Business.AutoMapperModule
     {
         public static void ConfigProductModule(this IMapperConfigurationExpression mc)
         {
-            mc.CreateMap<Product, ProductFullViewModel>().ReverseMap();
+            mc.CreateMap<Product, ProductViewModel>().ReverseMap();
             mc.CreateMap<CreateProductRequest, Product>();
             mc.CreateMap<UpdateProductRequest, Product>();
         }
