@@ -186,3 +186,7 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\V
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\ref\VuonDau.WebApi.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.pdb
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.genruntimeconfig.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.csprojAssemblyReference.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\IdentityModel.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\IdentityModel.AspNetCore.OAuth2Introspection.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\IdentityServer4.AccessTokenValidation.dll

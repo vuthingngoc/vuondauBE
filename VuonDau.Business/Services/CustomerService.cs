@@ -101,25 +101,16 @@ namespace VuonDau.Business.Services
 
         public async Task<string> Login(UserLoginRequest loginRequest, IConfiguration configuration)
         {
-            UserRecord userRecord = await FirebaseAuth.DefaultInstance.GetUserAsync(loginRequest.GoogleId); // get user by request's guid
-            CustomerViewModel result = await GetByMail(userRecord.Email);
-
-            if (result != null) // if email existed in local database
+            FirebaseToken token = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(loginRequest.AccessToken); // re-check access token with firebase
+            object email;
+            token.Claims.TryGetValue("email", out email); // get email from the above re-check step, then check the email whether it's matched the request email
+            CustomerViewModel result = await GetByMail(email.ToString());
+            if (result != null)
             {
-                FirebaseToken token = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(loginRequest.AccessToken); // re-check access token with firebase
-                object email;
-                token.Claims.TryGetValue("email", out email); // get email from the above re-check step, then check the email whether it's matched the request email
-                if (userRecord.Email.Equals(email))
-                {
-                    string verifyRequestToken = TokenService.GenerateCustomerJWTWebToken(result, configuration);
-
-                    return await Task.Run(() => verifyRequestToken); // return if everything is done
-                }
-                throw new ErrorResponse((int)ResponseStatusConstants.FORBIDDEN, "Email from request and the one from access token is not matched."); // return if this email's not existed yet in database - FE foward to sign up page
+                string verifyRequestToken = TokenService.GenerateCustomerJWTWebToken(result, configuration);
+                return await Task.Run(() => verifyRequestToken); // return if everything is done
+                throw new ErrorResponse((int)ResponseStatusConstants.FORBIDDEN, "Email is not exist"); // return if this email's not existed yet in database - FE foward to sign up page
             }
-            var claim = new Dictionary<string, object> { { "email", userRecord.Email } };
-            await FirebaseAuth.DefaultInstance.SetCustomUserClaimsAsync(loginRequest.GoogleId, claim);
-
             throw new ErrorResponse((int)ResponseStatusConstants.CREATED, "Email's not existed in database yet.");
         }
         //public override bool Equals(object obj)

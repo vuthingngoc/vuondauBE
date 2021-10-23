@@ -49,7 +49,7 @@ namespace VuonDau.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize/*(Roles = "Admin")*/]
+        [CustomAuthorized(AppRoles = "Admin")]
         [Route("~/api/v1/customers")]
         [SwaggerOperation(Tags = new[] { "Customers" })]
         public async Task<IActionResult> GetCustomers()
