@@ -56,7 +56,6 @@ namespace VuonDau.WebApi
             if (string.IsNullOrEmpty(AppRoles)) return true;
             var roles = AppRoles?.Split(",");
             if (!roles.Any()) return true;
-            var a = apps.Intersect(roles).Any();
             if (!apps.Intersect(roles).Any())
                 return false;
             return true;

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VuonDau.Data.Models;
 
 namespace VuonDau.Business.ViewModel
 {
     public class CustomerInGroupViewModel
     {
-        public Guid CustomerId { get; set; }
-        public Guid CustomerGroupId { get; set; }
+        public virtual CustomerViewModel Customer { get; set; }
+        public virtual CustomerGroupViewModel CustomerGroup { get; set; }
         public DateTime? JoinDate { get; set; }
     }
 }

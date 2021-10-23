@@ -14,10 +14,12 @@ namespace VuonDau.Business.Services
 {
     public partial interface IProductService
     {
-        Task<List<ProductFullViewModel>> GetAllProducts();
-        Task<ProductFullViewModel> GetProductById(Guid id);
-        Task<ProductFullViewModel> CreateProduct(CreateProductRequest request);
-        Task<ProductFullViewModel> UpdateProduct(Guid id, UpdateProductRequest request);
+        Task<List<ProductViewModel>> GetAllProducts();
+        Task<ProductViewModel> GetProductById(Guid id);
+        Task<ProductViewModel> GetProductByName(String name);
+        Task<List<ProductViewModel>> GetProductByType(Guid id);
+        Task<ProductViewModel> CreateProduct(CreateProductRequest request);
+        Task<ProductViewModel> UpdateProduct(Guid id, UpdateProductRequest request);
         Task<int> DeleteProduct(Guid id);
     }
 
@@ -32,25 +34,33 @@ namespace VuonDau.Business.Services
         {
             _mapper = mapper.ConfigurationProvider;
         }
-        public async Task<List<ProductFullViewModel>> GetAllProducts()
+        public async Task<List<ProductViewModel>> GetAllProducts()
         {
-            return await Get().ProjectTo<ProductFullViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<ProductViewModel>(_mapper).ToListAsync();
         }
-        public async Task<ProductFullViewModel> GetProductById(Guid id)
+        public async Task<ProductViewModel> GetProductById(Guid id)
         {
-            return await Get(p => p.Id == id).ProjectTo<ProductFullViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id).ProjectTo<ProductViewModel>(_mapper).FirstOrDefaultAsync();
         }
-        public async Task<ProductFullViewModel> CreateProduct(CreateProductRequest request)
+        public async Task<List<ProductViewModel>> GetProductByType(Guid ProductTypeId)
+        {
+            return await Get(p => p.ProductTypeId == ProductTypeId).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+        }
+        public async Task<ProductViewModel> GetProductByName(string name)
+        {
+            return await Get(p => p.Name.Equals(name)).ProjectTo<ProductViewModel>(_mapper).FirstOrDefaultAsync();
+        }
+        public async Task<ProductViewModel> CreateProduct(CreateProductRequest request)
         {
             var mapper = _mapper.CreateMapper();
             var product = mapper.Map<Product>(request);
             product.Status = (int)ProductStatus.Active;
             product.DataOfCreate = DateTime.UtcNow;
             await CreateAsyn(product);
-            var productViewModel = mapper.Map<ProductFullViewModel>(product);
+            var productViewModel = mapper.Map<ProductViewModel>(product);
             return productViewModel;
         }
-        public async Task<ProductFullViewModel> UpdateProduct(Guid id, UpdateProductRequest request)
+        public async Task<ProductViewModel> UpdateProduct(Guid id, UpdateProductRequest request)
         {
             var mapper = _mapper.CreateMapper();
             var productInRequest = mapper.Map<Product>(request);
@@ -64,7 +74,7 @@ namespace VuonDau.Business.Services
             product.Description = productInRequest.Description;
             product.Status = productInRequest.Status;
             await UpdateAsyn(product);
-            return mapper.Map<ProductFullViewModel>(product);
+            return mapper.Map<ProductViewModel>(product);
         }
         public async Task<int> DeleteProduct(Guid id)
         {

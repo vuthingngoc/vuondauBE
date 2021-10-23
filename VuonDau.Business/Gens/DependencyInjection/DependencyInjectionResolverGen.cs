@@ -85,6 +85,12 @@ namespace VuonDau.Data.Gens.Commons
 
             services.AddScoped<IProductInCartService, ProductInCartService>();
             services.AddScoped<IProductInCartRepository, ProductInCartRepository>();
+
+            services.AddScoped<IAreaService, AreaService>();
+            services.AddScoped<IAreaRepository, AreaRepository>();
+
+            services.AddScoped<ICampaignService, CampaignService>();
+            services.AddScoped<ICampaignRepository, CampaignRepository>();
         }
     }
 }
