@@ -109,7 +109,6 @@ namespace VuonDau.Business.Services
             {
                 string verifyRequestToken = TokenService.GenerateCustomerJWTWebToken(result, configuration);
                 return await Task.Run(() => verifyRequestToken); // return if everything is done
-                throw new ErrorResponse((int)ResponseStatusConstants.FORBIDDEN, "Email is not exist"); // return if this email's not existed yet in database - FE foward to sign up page
             }
             throw new ErrorResponse((int)ResponseStatusConstants.CREATED, "Email's not existed in database yet.");
         }
