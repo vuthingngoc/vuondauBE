@@ -8,6 +8,5 @@ namespace VuonDau.Business.Requests.HarvestSellingPrice
     {
         public double? Price { get; set; }
         public Guid? HarvestSellingId { get; set; }
-        public int? Status { get; set; }
     }
 }
