@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj": {}
+    "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj": {}
   },
   "projects": {
-    "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj": {
+    "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj",
+        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj",
         "projectName": "VuonDau.Business",
-        "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj",
+        "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj",
         "packagesPath": "C:\\Users\\09323\\.nuget\\packages\\",
-        "outputPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Business\\obj\\",
+        "outputPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -32,8 +32,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {
-                "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj"
+              "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {
+                "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj"
               }
             }
           }
@@ -76,14 +76,14 @@
         }
       }
     },
-    "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {
+    "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj",
+        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj",
         "projectName": "VuonDau.Data",
-        "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj",
+        "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj",
         "packagesPath": "C:\\Users\\09323\\.nuget\\packages\\",
-        "outputPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\obj\\",
+        "outputPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -154,14 +154,14 @@
         }
       }
     },
-    "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj": {
+    "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
         "projectName": "VuonDau.WebApi",
-        "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+        "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
         "packagesPath": "C:\\Users\\09323\\.nuget\\packages\\",
-        "outputPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.WebApi\\obj\\",
+        "outputPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -182,11 +182,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj": {
-                "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj"
+              "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj": {
+                "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj"
               },
-              "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {
-                "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj"
+              "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {
+                "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj"
               }
             }
           }
@@ -208,6 +208,10 @@
             "FirebaseAdmin": {
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "IdentityServer4.AccessTokenValidation": {
+              "target": "Package",
+              "version": "[3.0.1, )"
             },
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",

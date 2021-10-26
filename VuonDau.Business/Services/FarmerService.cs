@@ -68,7 +68,7 @@ namespace VuonDau.Business.Services
             farmer.Phone = farmerInRequest.Phone;
             farmer.BirthDay = farmerInRequest.BirthDay;
             farmer.Gender = farmerInRequest.Gender;
-            farmer.Status = farmerInRequest.Status;
+            farmer.Status = 1;
             await UpdateAsyn(farmer);
             return mapper.Map<FarmerViewModel>(farmer);
         }

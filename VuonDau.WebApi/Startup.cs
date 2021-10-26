@@ -78,6 +78,13 @@ namespace VuonDau.WebApi
             });
             services.AddRouting();
             AuthConfig.ConfigAuthentication(services, Configuration);
+            //services.AddAuthentication("Bearer")
+            //       .AddIdentityServerAuthentication(options =>
+            //       {
+            //           options.Authority = Configuration["IdentityServer:Domain"];
+            //           options.RequireHttpsMetadata = false;
+            //           options.ApiName = Configuration["IdentityServer:ApiName"];
+            //       });
         }
         private string[] GetDomain()
         {

@@ -39,7 +39,7 @@ namespace VuonDau.Business.Services
 
         public async Task<FarmPictureViewModel> GetFarmPictureById(Guid id)
         {
-            return await Get(p => p.Id == id).ProjectTo<FarmPictureViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.FarmId == id).ProjectTo<FarmPictureViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
         public async Task<FarmPictureViewModel> CreateFarmPicture(CreateFarmPictureRequest request)

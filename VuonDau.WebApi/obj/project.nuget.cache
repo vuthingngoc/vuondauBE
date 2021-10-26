@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1ITfA5g4BtbFFkCZJU6JfffSznpO8LM8iwLQKLD1eFQ0mkLba8lZS1EBA8WpjWyjc5ho6n4pwx5IIQFOhJeQRg==",
+  "dgSpecHash": "pgcSe7zxDvwLVY8VGDsBBugRqpGDxGnh9kcctvJ5SbE+QX84WqkgdbDcBHwTH+q/v2cYedcoZTqwEZMUKqdtVw==",
   "success": true,
-  "projectFilePath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+  "projectFilePath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\09323\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\09323\\.nuget\\packages\\firebaseadmin\\2.2.0\\firebaseadmin.2.2.0.nupkg.sha512",
@@ -12,6 +12,9 @@
     "C:\\Users\\09323\\.nuget\\packages\\google.apis.auth\\1.49.0\\google.apis.auth.1.49.0.nupkg.sha512",
     "C:\\Users\\09323\\.nuget\\packages\\google.apis.core\\1.49.0\\google.apis.core.1.49.0.nupkg.sha512",
     "C:\\Users\\09323\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\09323\\.nuget\\packages\\identitymodel\\4.0.0\\identitymodel.4.0.0.nupkg.sha512",
+    "C:\\Users\\09323\\.nuget\\packages\\identitymodel.aspnetcore.oauth2introspection\\4.0.1\\identitymodel.aspnetcore.oauth2introspection.4.0.1.nupkg.sha512",
+    "C:\\Users\\09323\\.nuget\\packages\\identityserver4.accesstokenvalidation\\3.0.1\\identityserver4.accesstokenvalidation.3.0.1.nupkg.sha512",
     "C:\\Users\\09323\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.10\\microsoft.aspnetcore.authentication.jwtbearer.3.1.10.nupkg.sha512",
     "C:\\Users\\09323\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\09323\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.10\\microsoft.aspnetcore.cryptography.internal.3.1.10.nupkg.sha512",

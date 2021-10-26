@@ -1,31 +1,31 @@
-﻿using IdentityModel;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using VuonDau.Data.Common.Constants;
 
 namespace VuonDau.WebApi
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class CustomAuthorizedAttribute : AuthorizeAttribute, IAsyncAuthorizationFilter
     {
-        private string _appRoles;
+        public string AppRoles { get; set; }
         public CustomAuthorizedAttribute()
         {
 
         }
-        public CustomAuthorizedAttribute(string appRoles)
-        {
-            _appRoles = appRoles;
-        }
+
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
+
             if (context.HttpContext.User.Identity.IsAuthenticated)
             {
                 if (!Check(context))
@@ -48,11 +48,15 @@ namespace VuonDau.WebApi
         }
         private bool Check(AuthorizationFilterContext context)
         {
-            if (string.IsNullOrEmpty(_appRoles)) return true;
-            var roles = _appRoles?.Split(",");
+            var configuration = context.HttpContext.RequestServices.GetService(typeof(IConfiguration)) as IConfiguration;
+            var apps = new List<string>();
+            apps.Add("Admin");
+            apps.Add("Customer");
+            apps.Add("Farmer");
+            if (string.IsNullOrEmpty(AppRoles)) return true;
+            var roles = AppRoles?.Split(",");
             if (!roles.Any()) return true;
-            if (!context.HttpContext.User.Claims.Where(w => w.Type == JwtClaimTypes.Role)
-                .Select(s => s.Value).Intersect(roles).Any())
+            if (!apps.Intersect(roles).Any())
                 return false;
             return true;
         }

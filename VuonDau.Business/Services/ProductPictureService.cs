@@ -39,7 +39,7 @@ namespace VuonDau.Business.Services
 
         public async Task<ProductPictureViewModel> GetProductPictureById(Guid id)
         {
-            return await Get(p => p.Id == id).ProjectTo<ProductPictureViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.ProductId == id).ProjectTo<ProductPictureViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
         public async Task<ProductPictureViewModel> CreateProductPicture(CreateProductPictureRequest request)
