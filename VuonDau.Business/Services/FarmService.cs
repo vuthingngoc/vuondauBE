@@ -50,7 +50,7 @@ namespace VuonDau.Business.Services
             {
             var mapper = _mapper.CreateMapper();
             var farm = mapper.Map<Farm>(request);
-            farm.Status = (int)FarmerStatus.Active;
+            farm.Status = (int)Status.Active;
             farm.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(farm);
             var farmViewModel = mapper.Map<FarmViewModel>(farm);

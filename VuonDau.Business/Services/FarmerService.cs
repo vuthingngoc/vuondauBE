@@ -10,11 +10,13 @@ using System;
 using VuonDau.Business.Requests.Farmer;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IFarmerService
     {
-        Task<List<FarmerViewModel>> GetAllFarmers();
+        Task<List<FarmerViewModel>> GetAllFarmers(FarmerViewModel filter);
         Task<FarmerViewModel> GetFarmerById(Guid id);
         Task<FarmerViewModel> CreateFarmer(CreateFarmerRequest request);
         Task<FarmerViewModel> UpdateFarmer(Guid id, UpdateFarmerRequest request);
@@ -33,9 +35,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FarmerViewModel>> GetAllFarmers()
+        public async Task<List<FarmerViewModel>> GetAllFarmers(FarmerViewModel filter)
         {
-            return await Get().ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<FarmerViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<FarmerViewModel> GetFarmerById(Guid id)
@@ -51,7 +53,7 @@ namespace VuonDau.Business.Services
             {
             var mapper = _mapper.CreateMapper();
             var farmer = mapper.Map<Farmer>(request);
-            farmer.Status = (int)FarmerStatus.Active;
+            farmer.Status = (int)Status.Active;
             farmer.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(farmer);
             var farmerViewModel = mapper.Map<FarmerViewModel>(farmer);
@@ -87,7 +89,7 @@ namespace VuonDau.Business.Services
                 return 0;
             }
 
-            farmer.Status = (int)FarmerStatus.Inactive;
+            farmer.Status = (int)Status.Inactive;
             await UpdateAsyn(farmer);
 
             return 1;
