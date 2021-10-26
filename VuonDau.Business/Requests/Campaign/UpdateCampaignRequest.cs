@@ -11,6 +11,5 @@ namespace VuonDau.Business.Requests.Campaign
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
         public int? MinOrderAmount { get; set; }
-        public int? Status { get; set; }
     }
 }

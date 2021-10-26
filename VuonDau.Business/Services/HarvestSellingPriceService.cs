@@ -64,6 +64,7 @@ namespace VuonDau.Business.Services
             }
             harvestSellingPrice.Price = harvestSellingPriceInRequest.Price;
             harvestSellingPrice.HarvestSellingId = harvestSellingPriceInRequest.HarvestSellingId;
+            harvestSellingPrice.Status = 1;
             await UpdateAsyn(harvestSellingPrice);
             return mapper.Map<HarvestSellingPriceViewModel>(harvestSellingPrice);
         }

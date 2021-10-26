@@ -71,7 +71,7 @@ namespace VuonDau.Business.Services
             campaign.StartTime = campaignInRequest.StartTime;
             campaign.EndTime = campaignInRequest.EndTime;
             campaign.MinOrderAmount = campaignInRequest.MinOrderAmount;
-            campaign.Status = campaignInRequest.Status;
+            campaign.Status = 1;
             await UpdateAsyn(campaign);
             return mapper.Map<CampaignViewModel>(campaign);
         }

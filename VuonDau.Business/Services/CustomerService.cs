@@ -81,7 +81,7 @@ namespace VuonDau.Business.Services
             customer.Phone = customerInRequest.Phone;
             customer.Birthday = customerInRequest.Birthday;
             customer.Gender = customerInRequest.Gender;
-            customer.Status = customerInRequest.Status;
+            customer.Status = 1;
             await UpdateAsyn(customer);
             return mapper.Map<CustomerViewModel>(customer);
         }
@@ -100,7 +100,6 @@ namespace VuonDau.Business.Services
 
             return 1;
         }
-
         //public override bool Equals(object obj)
         //{
         //    return obj is FarmerService service &&

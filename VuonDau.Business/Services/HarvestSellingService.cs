@@ -65,6 +65,7 @@ namespace VuonDau.Business.Services
             harvestSelling.HarvestId = harvestSellingInRequest.HarvestId;
             harvestSelling.MinWeight = harvestSellingInRequest.MinWeight;
             harvestSelling.TotalWeight = harvestSellingInRequest.TotalWeight;
+            harvestSelling.Status = 1;
             await UpdateAsyn(harvestSelling);
             return mapper.Map<HarvestSellingViewModel>(harvestSelling);
         }
