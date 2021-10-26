@@ -14,12 +14,10 @@ namespace VuonDau.WebApi.Controllers
     {
         private readonly ICustomerService _customerService;
         private readonly AutoMapper.IConfigurationProvider _mapper;
-        private readonly IConfiguration _configuration;
-        public CustomersController(ICustomerService customerService, IMapper mapper, IConfiguration configuration)
+        public CustomersController(ICustomerService customerService, IMapper mapper)
         {
             _customerService = customerService;
             _mapper = mapper.ConfigurationProvider;
-            _configuration = configuration;
         }
     }
 }

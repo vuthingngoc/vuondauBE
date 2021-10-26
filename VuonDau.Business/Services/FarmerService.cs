@@ -18,6 +18,7 @@ namespace VuonDau.Business.Services
         Task<FarmerViewModel> GetFarmerById(Guid id);
         Task<FarmerViewModel> CreateFarmer(CreateFarmerRequest request);
         Task<FarmerViewModel> UpdateFarmer(Guid id, UpdateFarmerRequest request);
+        Task<FarmerViewModel> GetByMail(string mail);
         Task<int> DeleteFarmer(Guid id);
     }
 
@@ -40,6 +41,10 @@ namespace VuonDau.Business.Services
         public async Task<FarmerViewModel> GetFarmerById(Guid id)
         {
             return await Get(p => p.Id == id).ProjectTo<FarmerViewModel>(_mapper).FirstOrDefaultAsync();
+        }
+        public async Task<FarmerViewModel> GetByMail(string mail)
+        {
+            return await Get(c => c.Email.Equals(mail)).ProjectTo<FarmerViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
         public async Task<FarmerViewModel> CreateFarmer(CreateFarmerRequest request)
