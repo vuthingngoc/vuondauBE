@@ -12,8 +12,6 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using VuonDau.Business.Requests;
 using Microsoft.Extensions.Configuration;
-using FirebaseAdmin.Auth;
-using VuonDau.Data.Common.Constants;
 
 namespace VuonDau.Business.Services
 {
@@ -25,7 +23,7 @@ namespace VuonDau.Business.Services
         Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request);
         Task<CustomerViewModel> UpdateCustomer(Guid id, UpdateCustomerRequest request);
         Task<int> DeleteCustomer(Guid id);
-        Task<string> Login(UserLoginRequest loginRequest, IConfiguration configuration);
+        Task<CustomerViewModel> GetByMail(string mail);
     }
 
 
@@ -103,6 +101,7 @@ namespace VuonDau.Business.Services
             return 1;
         }
 
+<<<<<<< HEAD
         public async Task<string> Login(UserLoginRequest loginRequest, IConfiguration configuration)
         {
             FirebaseToken token = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(loginRequest.AccessToken); // re-check access token with firebase
@@ -116,6 +115,8 @@ namespace VuonDau.Business.Services
             }
             throw new ErrorResponse((int)ResponseStatusConstants.CREATED, "Email's not existed in database yet.");
         }
+=======
+>>>>>>> update-database
         //public override bool Equals(object obj)
         //{
         //    return obj is FarmerService service &&

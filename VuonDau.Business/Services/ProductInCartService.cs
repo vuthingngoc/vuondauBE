@@ -35,19 +35,19 @@ namespace VuonDau.Business.Services
 
         public async Task<List<ProductInCartViewModel>> GetAllProductInCarts()
         {
-            return await Get(p => p.Status == (int)ProductInCartStatus.Active).ProjectTo<ProductInCartViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.Status == (int)Status.Active).ProjectTo<ProductInCartViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<ProductInCartViewModel> GetProductInCartById(Guid id)
         {
-            return await Get(p => p.Id == id && p.Status == (int)ProductInCartStatus.Active).ProjectTo<ProductInCartViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<ProductInCartViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
         public async Task<ProductInCartViewModel> CreateProductInCart(CreateProductInCartRequest request)
             {
             var mapper = _mapper.CreateMapper();
             var productInCart = mapper.Map<ProductInCart>(request);
-            productInCart.Status = (int)ProductInCartStatus.Active;
+            productInCart.Status = (int)Status.Active;
             await CreateAsyn(productInCart);
             var productInCartViewModel = mapper.Map<ProductInCartViewModel>(productInCart);
             return productInCartViewModel;
@@ -79,7 +79,7 @@ namespace VuonDau.Business.Services
                 return 0;
             }
 
-            productInCart.Status = (int)ProductInCartStatus.Inactive;
+            productInCart.Status = (int)Status.Inactive;
             await UpdateAsyn(productInCart);
 
             return 1;

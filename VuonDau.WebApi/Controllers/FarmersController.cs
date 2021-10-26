@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Farmer;
 using VuonDau.Business.Services;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -25,10 +26,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/farmers")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
-        public async Task<IActionResult> GetFarmers()
+        public async Task<IActionResult> GetFarmers([FromQuery] FarmerViewModel filter)
         {
-            await _farmerService.GetAllFarmers();
-            var farmers = await _farmerService.GetAllFarmers();
+            var farmers = await _farmerService.GetAllFarmers(filter);
             return Ok(farmers);
         }
 

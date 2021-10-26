@@ -54,7 +54,7 @@ namespace VuonDau.Business.Services
         {
             var mapper = _mapper.CreateMapper();
             var product = mapper.Map<Product>(request);
-            product.Status = (int)ProductStatus.Active;
+            product.Status = (int)Status.Active;
             product.DataOfCreate = DateTime.UtcNow;
             await CreateAsyn(product);
             var productViewModel = mapper.Map<ProductViewModel>(product);
@@ -85,7 +85,7 @@ namespace VuonDau.Business.Services
                 return 0;
             }
 
-            product.Status = (int)ProductStatus.Inactive;
+            product.Status = (int)Status.Inactive;
             await UpdateAsyn(product);
 
             return 1;

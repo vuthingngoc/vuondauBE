@@ -16,7 +16,7 @@ namespace VuonDau.Business.AutoMapperModule
             mc.CreateMap<Customer, CustomerViewModel>().ReverseMap();
             mc.CreateMap<CreateCustomerRequest, Customer>();
             mc.CreateMap<UpdateCustomerRequest, Customer>();
-            mc.CreateMap<UserLoginRequest, Customer>();
+            mc.CreateMap<LoginRequest, Customer>();
         }
     }
 }

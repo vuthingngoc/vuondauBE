@@ -44,7 +44,7 @@ namespace VuonDau.Business.Services
             return handler.WriteToken(secToken);
         }
 
-        public static string GenerateFarmerJWTWebToken(CustomerViewModel farmerViewModel, IConfiguration configuration) 
+        public static string GenerateFarmerJWTWebToken(FarmerViewModel farmerViewModel, IConfiguration configuration) 
         {
             setPrivateKey(configuration);
 

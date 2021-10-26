@@ -13,7 +13,6 @@ namespace VuonDau.Business.AutoMapperModule
         public static void ConfigAdminModule(this IMapperConfigurationExpression mc)
         {
             mc.CreateMap<Admin, AdminViewModel>().ReverseMap();
-            mc.CreateMap<AdminLoginRequest, Admin>();
         }
     }
 }
