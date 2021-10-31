@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "n008F7kI2p414m38jZwFFHWctk7LajxqnF7hI401DlK2uecqgkP+lH/BKABRkd92bo/wQBJGb5uRC+jQ6LoYuw==",
+  "dgSpecHash": "oBBCa1DNmxe7f1FGxGwkmrxF3x/wAKMQzA1G1DQLxMmhrE14rM6tttC0j0P1eIL5Fl+X6mT4BQyk/b22tmhgVQ==",
   "success": true,
-  "projectFilePath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj",
+  "projectFilePath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\09323\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\09323\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.10\\microsoft.aspnetcore.authentication.jwtbearer.3.1.10.nupkg.sha512",

@@ -10,11 +10,13 @@ using System;
 using VuonDau.Business.Requests.CustomerType;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface ICustomerTypeService
     {
-        Task<List<CustomerTypeViewModel>> GetAllCustomerTypes();
+        Task<List<CustomerTypeViewModel>> GetAllCustomerTypes(CustomerTypeViewModel filter);
         Task<CustomerTypeViewModel> GetCustomerTypeById(Guid id);
         Task<CustomerTypeViewModel> CreateCustomerType(CreateCustomerTypeRequest request);
         Task<CustomerTypeViewModel> UpdateCustomerType(Guid id, UpdateCustomerTypeRequest request);
@@ -32,9 +34,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CustomerTypeViewModel>> GetAllCustomerTypes()
+        public async Task<List<CustomerTypeViewModel>> GetAllCustomerTypes(CustomerTypeViewModel filter)
         {
-            return await Get().ProjectTo<CustomerTypeViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<CustomerTypeViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<CustomerTypeViewModel> GetCustomerTypeById(Guid id)

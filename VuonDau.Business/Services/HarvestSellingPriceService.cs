@@ -10,13 +10,15 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using System;
 using VuonDau.Data.Common.Enum;
+using Reso.Core.Utilities;
 
 namespace VuonDau.Business.Services
 {
     public partial interface IHarvestSellingPriceService
     {
-        Task<List<HarvestSellingPriceViewModel>> GetAllHarvestSellingPrices();
+        Task<List<HarvestSellingPriceViewModel>> GetAllHarvestSellingPrices(HarvestSellingPriceViewModel filter);
         Task<HarvestSellingPriceViewModel> GetHarvestSellingPriceById(Guid id);
+        Task<List<HarvestSellingPriceViewModel>> GetHarvestSellingPriceByHarvestSellingId(Guid id);
         Task<HarvestSellingPriceViewModel> CreateHarvestSellingPrice(CreateHarvestSellingPriceRequest request);
         Task<HarvestSellingPriceViewModel> UpdateHarvestSellingPrice(Guid id, UpdateHarvestSellingPriceRequest request);
         Task<int> DeleteHarvestSellingPrice(Guid id);
@@ -33,16 +35,19 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<HarvestSellingPriceViewModel>> GetAllHarvestSellingPrices()
+        public async Task<List<HarvestSellingPriceViewModel>> GetAllHarvestSellingPrices(HarvestSellingPriceViewModel filter)
         {
-            return await Get().ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<HarvestSellingPriceViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<HarvestSellingPriceViewModel> GetHarvestSellingPriceById(Guid id)
         {
             return await Get(p => p.Id == id).ProjectTo<HarvestSellingPriceViewModel>(_mapper).FirstOrDefaultAsync();
         }
-
+        public async Task<List<HarvestSellingPriceViewModel>> GetHarvestSellingPriceByHarvestSellingId(Guid HarvestSellingId)
+        {
+            return await Get(p => p.HarvestSellingId == HarvestSellingId).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
+        }
         public async Task<HarvestSellingPriceViewModel> CreateHarvestSellingPrice(CreateHarvestSellingPriceRequest request)
             {
             var mapper = _mapper.CreateMapper();

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.OrderDetail;
+using VuonDau.Business.ViewModel;
 
 namespace VuonDau.WebApi.Controllers
 {
@@ -16,10 +17,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/order-details")]
         [SwaggerOperation(Tags = new[] { "OrderDetails" })]
-        public async Task<IActionResult> GetOrderDetails()
+        public async Task<IActionResult> GetOrderDetails([FromQuery] OrderDetailViewModel filter)
         {
-            await _orderDetailService.GetAllOrderDetails();
-            var orderDetails = await _orderDetailService.GetAllOrderDetails();
+            var orderDetails = await _orderDetailService.GetAllOrderDetails(filter);
             return Ok(orderDetails);
         }
 
@@ -36,7 +36,25 @@ namespace VuonDau.WebApi.Controllers
             var orderDetail = await _orderDetailService.GetOrderDetailById(id);
             if (orderDetail == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _orderDetailService.GetOrderDetailByHarvestSellingId(id);
+                var orderDetails = await _orderDetailService.GetOrderDetailByHarvestSellingId(id);
+                if (orderDetails.Count > 0)
+                {
+                    return Ok(orderDetails);
+                }
+                else
+                {
+                    await _orderDetailService.GetOrderDetailByOrderId(id);
+                    orderDetails = await _orderDetailService.GetOrderDetailByOrderId(id);
+                    if (orderDetails.Count > 0)
+                    {
+                        return Ok(orderDetails);
+                    }
+                    else
+                    {
+                        return NotFound("NOT_FOUND_MESSAGE");
+                    }
+                }
             }
 
             return Ok(orderDetail);

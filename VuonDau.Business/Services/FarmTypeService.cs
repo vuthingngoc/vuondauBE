@@ -10,11 +10,13 @@ using System;
 using VuonDau.Business.Requests.FarmType;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IFarmTypeService
     {
-        Task<List<FarmTypeViewModel>> GetAllFarmTypes();
+        Task<List<FarmTypeViewModel>> GetAllFarmTypes(FarmTypeViewModel filter);
         Task<FarmTypeViewModel> GetFarmTypeById(Guid id);
         Task<FarmTypeViewModel> CreateFarmType(CreateFarmTypeRequest request);
         Task<FarmTypeViewModel> UpdateFarmType(Guid id, UpdateFarmTypeRequest request);
@@ -32,9 +34,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FarmTypeViewModel>> GetAllFarmTypes()
+        public async Task<List<FarmTypeViewModel>> GetAllFarmTypes(FarmTypeViewModel filter)
         {
-            return await Get().ProjectTo<FarmTypeViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<FarmTypeViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<FarmTypeViewModel> GetFarmTypeById(Guid id)

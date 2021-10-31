@@ -12,20 +12,19 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using VuonDau.Business.Requests;
 using Microsoft.Extensions.Configuration;
-using FirebaseAdmin.Auth;
-using VuonDau.Data.Common.Constants;
+using Reso.Core.Utilities;
 
 namespace VuonDau.Business.Services
 {
     public partial interface ICustomerService
     {
-        Task<List<CustomerViewModel>> GetAllCustomers();
+        Task<List<CustomerViewModel>> GetAllCustomers(CustomerViewModel filter);
         Task<CustomerViewModel> GetCustomerById(Guid id);
         Task<List<CustomerViewModel>> GetCustomerByType(Guid id);
         Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request);
         Task<CustomerViewModel> UpdateCustomer(Guid id, UpdateCustomerRequest request);
         Task<int> DeleteCustomer(Guid id);
-        Task<string> Login(UserLoginRequest loginRequest, IConfiguration configuration);
+        Task<CustomerViewModel> GetByMail(string mail);
     }
 
 
@@ -39,9 +38,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CustomerViewModel>> GetAllCustomers()
+        public async Task<List<CustomerViewModel>> GetAllCustomers(CustomerViewModel filter)
         {
-            return await Get().ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<CustomerViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<CustomerViewModel> GetByMail(string mail)
@@ -101,20 +100,6 @@ namespace VuonDau.Business.Services
             await UpdateAsyn(customer);
 
             return 1;
-        }
-
-        public async Task<string> Login(UserLoginRequest loginRequest, IConfiguration configuration)
-        {
-            FirebaseToken token = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(loginRequest.AccessToken); // re-check access token with firebase
-            object email;
-            token.Claims.TryGetValue("email", out email); // get email from the above re-check step, then check the email whether it's matched the request email
-            CustomerViewModel result = await GetByMail(email.ToString());
-            if (result != null)
-            {
-                string verifyRequestToken = TokenService.GenerateCustomerJWTWebToken(result, configuration);
-                return await Task.Run(() => verifyRequestToken); // return if everything is done
-            }
-            throw new ErrorResponse((int)ResponseStatusConstants.CREATED, "Email's not existed in database yet.");
         }
         //public override bool Equals(object obj)
         //{

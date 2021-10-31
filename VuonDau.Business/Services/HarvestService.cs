@@ -10,12 +10,16 @@ using System;
 using VuonDau.Business.Requests.Harvest;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IHarvestService
     {
-        Task<List<HarvestViewModel>> GetAllHarvests();
+        Task<List<HarvestViewModel>> GetAllHarvests(HarvestViewModel filter);
         Task<HarvestViewModel> GetHarvestById(Guid id);
+        Task<List<HarvestViewModel>> GetHarvestByFarmId(Guid id);
+        Task<List<HarvestViewModel>> GetHarvestByProductId(Guid id);
         Task<HarvestViewModel> CreateHarvest(CreateHarvestRequest request);
         Task<HarvestViewModel> UpdateHarvest(Guid id, UpdateHarvestRequest request);
         Task<int> DeleteHarvest(Guid id);
@@ -32,14 +36,22 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<HarvestViewModel>> GetAllHarvests()
+        public async Task<List<HarvestViewModel>> GetAllHarvests(HarvestViewModel filter)
         {
-            return await Get().ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<HarvestViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<HarvestViewModel> GetHarvestById(Guid id)
         {
             return await Get(p => p.Id == id).ProjectTo<HarvestViewModel>(_mapper).FirstOrDefaultAsync();
+        }
+        public async Task<List<HarvestViewModel>> GetHarvestByFarmId(Guid FarmId)
+        {
+            return await Get(p => p.FarmId == FarmId).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+        }
+        public async Task<List<HarvestViewModel>> GetHarvestByProductId(Guid ProductId)
+        {
+            return await Get(p => p.ProductId == ProductId).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<HarvestViewModel> CreateHarvest(CreateHarvestRequest request)

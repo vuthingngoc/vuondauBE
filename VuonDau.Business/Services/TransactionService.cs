@@ -10,12 +10,16 @@ using System;
 using VuonDau.Business.Requests.Transaction;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface ITransactionService
     {
-        Task<List<TransactionViewModel>> GetAllTransactions();
+        Task<List<TransactionViewModel>> GetAllTransactions(TransactionViewModel filter);
         Task<TransactionViewModel> GetTransactionById(Guid id);
+        Task<List<TransactionViewModel>> GetTransactionByOrderId(Guid id);
+        Task<List<TransactionViewModel>> GetTransactionByPaymentId(Guid id);
         Task<TransactionViewModel> CreateTransaction(CreateTransactionRequest request);
         Task<TransactionViewModel> UpdateTransaction(Guid id, UpdateTransactionRequest request);
         Task<int> DeleteTransaction(Guid id);
@@ -32,16 +36,23 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<TransactionViewModel>> GetAllTransactions()
+        public async Task<List<TransactionViewModel>> GetAllTransactions(TransactionViewModel filter)
         {
-            return await Get(p => p.Status == (int)Status.Active).ProjectTo<TransactionViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<TransactionViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<TransactionViewModel> GetTransactionById(Guid id)
         {
             return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<TransactionViewModel>(_mapper).FirstOrDefaultAsync();
         }
-
+        public async Task<List<TransactionViewModel>> GetTransactionByOrderId(Guid OrderId)
+        {
+            return await Get(p => p.OrderId == OrderId).ProjectTo<TransactionViewModel>(_mapper).ToListAsync();
+        }
+        public async Task<List<TransactionViewModel>> GetTransactionByPaymentId(Guid PaymentId)
+        {
+            return await Get(p => p.PaymentId == PaymentId).ProjectTo<TransactionViewModel>(_mapper).ToListAsync();
+        }
         public async Task<TransactionViewModel> CreateTransaction(CreateTransactionRequest request)
             {
             var mapper = _mapper.CreateMapper();

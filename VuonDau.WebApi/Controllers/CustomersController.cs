@@ -10,20 +10,21 @@ using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests;
 using VuonDau.Business.Requests.Customer;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
 {
     public partial class CustomersController : ControllerBase
     {
-        [HttpPost]
-        [Route("~/api/v1/login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
-        {
-            string token = await _customerService.Login(request, _configuration);
+        //[HttpPost]
+        //[Route("~/api/v1/login")]
+        //public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        //{
+        //    string token = await _customerService.Login(request, _configuration);
 
-            return await Task.Run(() => Ok(token));
-        }
+        //    return await Task.Run(() => Ok(token));
+        //}
 
         /// <summary>
         /// Get Customer by id
@@ -40,7 +41,7 @@ namespace VuonDau.WebApi.Controllers
             {
                 await _customerService.GetCustomerByType(id);
                 var customers = await _customerService.GetCustomerByType(id);
-                if (customers != null)
+                if (customers.Count > 0)
                 {
                     return Ok(customers);
                 }
@@ -57,34 +58,13 @@ namespace VuonDau.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [CustomAuthorized(AppRoles = "Admin")]
         [Route("~/api/v1/customers")]
         [SwaggerOperation(Tags = new[] { "Customers" })]
-        public async Task<IActionResult> GetCustomers()
+        public async Task<IActionResult> GetCustomers([FromQuery] CustomerViewModel filter)
         {
-            await _customerService.GetAllCustomers();
-            var customers = await _customerService.GetAllCustomers();
+            var customers = await _customerService.GetAllCustomers(filter);
             return Ok(customers);
         }
-
-        ///// <summary>
-        ///// Get Customer by id
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //[HttpGet]
-        //[Route("~/api/v1/customers/{id:Guid}")]
-        //[SwaggerOperation(Tags = new[] { "Customers" })]
-        //public async Task<IActionResult> GetCustomer([FromRoute] Guid id)
-        //{
-        //    var customer = await _customerService.GetCustomerById(id);
-        //    if (customer == null)
-        //    {
-        //        return NotFound("NOT_FOUND_MESSAGE");
-        //    }
-
-        //    return Ok(customer);
-        //}
 
         /// <summary>
         /// Tạo mới 1 Customer

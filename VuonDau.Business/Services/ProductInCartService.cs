@@ -10,13 +10,16 @@ using System;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using VuonDau.Business.Requests.ProductInCart;
+using Reso.Core.Utilities;
 
 namespace VuonDau.Business.Services
 {
     public partial interface IProductInCartService
     {
-        Task<List<ProductInCartViewModel>> GetAllProductInCarts();
+        Task<List<ProductInCartViewModel>> GetAllProductInCarts(ProductInCartViewModel filter);
         Task<ProductInCartViewModel> GetProductInCartById(Guid id);
+        Task<List<ProductInCartViewModel>> GetProductInCartByCustomerId(Guid id);
+        Task<List<ProductInCartViewModel>> GetProductInCartByHarvestSellingId(Guid id);
         Task<ProductInCartViewModel> CreateProductInCart(CreateProductInCartRequest request);
         Task<ProductInCartViewModel> UpdateProductInCart(Guid id, UpdateProductInCartRequest request);
         Task<int> DeleteProductInCart(Guid id);
@@ -33,21 +36,28 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<ProductInCartViewModel>> GetAllProductInCarts()
+        public async Task<List<ProductInCartViewModel>> GetAllProductInCarts(ProductInCartViewModel filter)
         {
-            return await Get(p => p.Status == (int)ProductInCartStatus.Active).ProjectTo<ProductInCartViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<ProductInCartViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<ProductInCartViewModel> GetProductInCartById(Guid id)
         {
-            return await Get(p => p.Id == id && p.Status == (int)ProductInCartStatus.Active).ProjectTo<ProductInCartViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<ProductInCartViewModel>(_mapper).FirstOrDefaultAsync();
         }
-
+        public async Task<List<ProductInCartViewModel>> GetProductInCartByCustomerId(Guid CustomerId)
+        {
+            return await Get(p => p.CustomerId == CustomerId).ProjectTo<ProductInCartViewModel>(_mapper).ToListAsync();
+        }
+        public async Task<List<ProductInCartViewModel>> GetProductInCartByHarvestSellingId(Guid HarvestSellingId)
+        {
+            return await Get(p => p.HarvestSellingId == HarvestSellingId).ProjectTo<ProductInCartViewModel>(_mapper).ToListAsync();
+        }
         public async Task<ProductInCartViewModel> CreateProductInCart(CreateProductInCartRequest request)
             {
             var mapper = _mapper.CreateMapper();
             var productInCart = mapper.Map<ProductInCart>(request);
-            productInCart.Status = (int)ProductInCartStatus.Active;
+            productInCart.Status = (int)Status.Active;
             await CreateAsyn(productInCart);
             var productInCartViewModel = mapper.Map<ProductInCartViewModel>(productInCart);
             return productInCartViewModel;
@@ -79,7 +89,7 @@ namespace VuonDau.Business.Services
                 return 0;
             }
 
-            productInCart.Status = (int)ProductInCartStatus.Inactive;
+            productInCart.Status = (int)Status.Inactive;
             await UpdateAsyn(productInCart);
 
             return 1;

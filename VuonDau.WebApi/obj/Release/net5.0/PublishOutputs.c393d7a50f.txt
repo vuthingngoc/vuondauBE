@@ -15,6 +15,9 @@ D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi\obj\Release\net5.0\Pub
 D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\Google.Apis.Auth.dll
 D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\Google.Apis.Core.dll
 D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\Humanizer.dll
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\IdentityModel.dll
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\IdentityModel.AspNetCore.OAuth2Introspection.dll
+D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\IdentityServer4.AccessTokenValidation.dll
 D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\Education\Ky7\vuondauBE-update-database\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\Microsoft.AspNetCore.JsonPatch.dll

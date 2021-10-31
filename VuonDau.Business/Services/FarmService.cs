@@ -10,13 +10,17 @@ using System;
 using VuonDau.Business.Requests.Farm;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IFarmService
     {
-        Task<List<FarmViewModel>> GetAllFarms();
+        Task<List<FarmViewModel>> GetAllFarms(FarmViewModel filter);
         Task<FarmViewModel> GetFarmById(Guid id);
         Task<List<FarmViewModel>> GetFarmByType(Guid id);
+        Task<List<FarmViewModel>> GetFarmByFarmerId(Guid id);
+        Task<List<FarmViewModel>> GetFarmByAreaId(Guid id);
         Task<FarmViewModel> CreateFarm(CreateFarmRequest request);
         Task<FarmViewModel> UpdateFarm(Guid id, UpdateFarmRequest request);
         Task<int> DeleteFarm(Guid id);
@@ -33,9 +37,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FarmViewModel>> GetAllFarms()
+        public async Task<List<FarmViewModel>> GetAllFarms(FarmViewModel filter)
         {
-            return await Get().ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<FarmViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<FarmViewModel> GetFarmById(Guid id)
@@ -46,11 +50,19 @@ namespace VuonDau.Business.Services
         {
             return await Get(p => p.FarmTypeId == FarmTypeId).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
         }
+        public async Task<List<FarmViewModel>> GetFarmByFarmerId(Guid FarmerId)
+        {
+            return await Get(p => p.FarmerId == FarmerId).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+        }
+        public async Task<List<FarmViewModel>> GetFarmByAreaId(Guid AreaId)
+        {
+            return await Get(p => p.AreaId == AreaId).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+        }
         public async Task<FarmViewModel> CreateFarm(CreateFarmRequest request)
             {
             var mapper = _mapper.CreateMapper();
             var farm = mapper.Map<Farm>(request);
-            farm.Status = (int)FarmerStatus.Active;
+            farm.Status = (int)Status.Active;
             farm.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(farm);
             var farmViewModel = mapper.Map<FarmViewModel>(farm);

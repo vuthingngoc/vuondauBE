@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pgcSe7zxDvwLVY8VGDsBBugRqpGDxGnh9kcctvJ5SbE+QX84WqkgdbDcBHwTH+q/v2cYedcoZTqwEZMUKqdtVw==",
+  "dgSpecHash": "Ea73luGu4hvyhc3C9lCNiNk+kvikZj88pd3tJjxELoqCRJI2KjpnwY1hGprXF4ZO494ttpVgybt+4Ct7N1p3hA==",
   "success": true,
-  "projectFilePath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+  "projectFilePath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\09323\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\09323\\.nuget\\packages\\firebaseadmin\\2.2.0\\firebaseadmin.2.2.0.nupkg.sha512",

@@ -10,12 +10,15 @@ using System;
 using VuonDau.Business.Requests.Feedback;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IFeedbackService
     {
-        Task<List<FeedbackViewModel>> GetAllFeedbacks();
+        Task<List<FeedbackViewModel>> GetAllFeedbacks(FeedbackViewModel filter);
         Task<FeedbackViewModel> GetFeedbackById(Guid id);
+        Task<List<FeedbackViewModel>> GetFeedbackByOrderId(Guid id);
         Task<FeedbackViewModel> CreateFeedback(CreateFeedbackRequest request);
         Task<FeedbackViewModel> UpdateFeedback(Guid id, UpdateFeedbackRequest request);
         Task<int> DeleteFeedback(Guid id);
@@ -32,16 +35,19 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FeedbackViewModel>> GetAllFeedbacks()
+        public async Task<List<FeedbackViewModel>> GetAllFeedbacks(FeedbackViewModel filter)
         {
-            return await Get(p => p.Status == (int)Status.Active).ProjectTo<FeedbackViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<FeedbackViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<FeedbackViewModel> GetFeedbackById(Guid id)
         {
             return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<FeedbackViewModel>(_mapper).FirstOrDefaultAsync();
         }
-
+        public async Task<List<FeedbackViewModel>> GetFeedbackByOrderId(Guid OrderId)
+        {
+            return await Get(p => p.OrderId == OrderId).ProjectTo<FeedbackViewModel>(_mapper).ToListAsync();
+        }
         public async Task<FeedbackViewModel> CreateFeedback(CreateFeedbackRequest request)
             {
             var mapper = _mapper.CreateMapper();
