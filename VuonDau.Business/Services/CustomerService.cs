@@ -20,7 +20,7 @@ namespace VuonDau.Business.Services
         Task<List<CustomerViewModel>> GetAllCustomers();
         Task<CustomerViewModel> GetCustomerById(Guid id);
         Task<List<CustomerViewModel>> GetCustomerByType(Guid id);
-        Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request);
+        Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request, IConfiguration configuration);
         Task<CustomerViewModel> UpdateCustomer(Guid id, UpdateCustomerRequest request);
         Task<int> DeleteCustomer(Guid id);
         Task<CustomerViewModel> GetByMail(string mail);
@@ -55,7 +55,7 @@ namespace VuonDau.Business.Services
         {
             return await Get(p => p.CustomerType == CustomerTypeId).ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
         }
-        public async Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request)
+        public async Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request, IConfiguration configuration)
             {
             var mapper = _mapper.CreateMapper();
             var customer = mapper.Map<Customer>(request);
@@ -63,6 +63,7 @@ namespace VuonDau.Business.Services
             customer.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(customer);
             var customerViewModel = mapper.Map<CustomerViewModel>(customer);
+            customerViewModel.jwtToken = TokenService.GenerateCustomerJWTWebToken(customerViewModel, configuration);
             return customerViewModel;
         }
         public async Task<CustomerViewModel> UpdateCustomer(Guid id, UpdateCustomerRequest request)

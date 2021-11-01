@@ -7,6 +7,7 @@ namespace VuonDau.Business.ViewModel
 {
     public class CustomerViewModel
     {
+        public string jwtToken { get; set; }
         public Guid Id { get; set; }
         public virtual CustomerTypeViewModel CustomerTypeNavigation { get; set; }
         public string Email { get; set; }

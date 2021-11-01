@@ -16,15 +16,6 @@ namespace VuonDau.WebApi.Controllers
 {
     public partial class CustomersController : ControllerBase
     {
-        //[HttpPost]
-        //[Route("~/api/v1/login")]
-        //public async Task<IActionResult> Login([FromBody] LoginRequest request)
-        //{
-        //    string token = await _customerService.Login(request, _configuration);
-
-        //    return await Task.Run(() => Ok(token));
-        //}
-
         /// <summary>
         /// Get Customer by id
         /// </summary>
@@ -76,7 +67,7 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "Customers" })]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request)
         {
-            var customer = await _customerService.CreateCustomer(request);
+            var customer = await _customerService.CreateCustomer(request, _configuration);
             if (customer == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
