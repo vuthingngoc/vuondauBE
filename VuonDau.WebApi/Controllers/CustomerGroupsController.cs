@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.CustomerGroup;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -21,10 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/customer-groups")]
         [SwaggerOperation(Tags = new[] { "CustomerGroups" })]
-        public async Task<IActionResult> GetCustomerGroups()
+        public async Task<IActionResult> GetCustomerGroups([FromQuery] CustomerGroupViewModel filter)
         {
-            await _customerGroupService.GetAllCustomerGroups();
-            var customerGroups = await _customerGroupService.GetAllCustomerGroups();
+            var customerGroups = await _customerGroupService.GetAllCustomerGroups(filter);
             return Ok(customerGroups);
         }
 
@@ -41,7 +41,16 @@ namespace VuonDau.WebApi.Controllers
             var customerGroup = await _customerGroupService.GetCustomerGroupById(id);
             if (customerGroup == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _customerGroupService.GetCustomerGroupByHarvestSellingId(id);
+                var customerGroups = await _customerGroupService.GetCustomerGroupByHarvestSellingId(id);
+                if (customerGroups.Count > 0)
+                {
+                    return Ok(customerGroups);
+                }
+                else
+                {
+                    return NotFound("NOT_FOUND_MESSAGE");
+                }
             }
 
             return Ok(customerGroup);

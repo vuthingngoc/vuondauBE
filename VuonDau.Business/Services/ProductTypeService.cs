@@ -10,11 +10,13 @@ using System;
 using VuonDau.Business.Requests.ProductType;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IProductTypeService
     {
-        Task<List<ProductTypeViewModel>> GetAllProductTypes();
+        Task<List<ProductTypeViewModel>> GetAllProductTypes(ProductTypeViewModel filter);
         Task<ProductTypeViewModel> GetProductTypeById(Guid id);
         Task<ProductTypeViewModel> CreateProductType(CreateProductTypeRequest request);
         Task<ProductTypeViewModel> UpdateProductType(Guid id, UpdateProductTypeRequest request);
@@ -32,9 +34,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<ProductTypeViewModel>> GetAllProductTypes()
+        public async Task<List<ProductTypeViewModel>> GetAllProductTypes(ProductTypeViewModel filter)
         {
-            return await Get().ProjectTo<ProductTypeViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<ProductTypeViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<ProductTypeViewModel> GetProductTypeById(Guid id)
@@ -82,7 +84,7 @@ namespace VuonDau.Business.Services
         }
         //public override bool Equals(object obj)
         //{
-        //    return obj is FarmerService service &&
+        //    return obj is ProductTypeService service &&
         //           EqualityComparer<IConfigurationProvider>.Default.Equals(this._mapper, service._mapper);
         //}
     }

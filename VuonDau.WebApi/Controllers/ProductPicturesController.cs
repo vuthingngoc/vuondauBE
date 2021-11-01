@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.ProductPicture;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -18,11 +19,10 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/product-pictures")]
         [SwaggerOperation(Tags = new[] { "ProductPictures" })]
-        public async Task<IActionResult> GetProductPictures()
+       public async Task<IActionResult> GetProductPictures([FromQuery] ProductPictureViewModel filter)
         {
-            await _productPictureService.GetAllProductPictures();
-            var productPictures = await _productPictureService.GetAllProductPictures();
-            return Ok(productPictures);
+            var products = await _productPictureService.GetAllProductPictures(filter);
+            return Ok(products);
         }
 
         /// Get ProductPicture by id

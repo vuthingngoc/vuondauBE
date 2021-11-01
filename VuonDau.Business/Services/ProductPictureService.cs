@@ -10,12 +10,14 @@ using System;
 using VuonDau.Business.Requests.ProductPicture;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IProductPictureService
     {
-        Task<List<ProductPictureViewModel>> GetAllProductPictures();
-        Task<ProductPictureViewModel> GetProductPictureById(Guid id);
+        Task<List<ProductPictureViewModel>> GetAllProductPictures(ProductPictureViewModel filter);
+        Task<List<ProductPictureViewModel>> GetProductPictureById(Guid id);
         Task<ProductPictureViewModel> CreateProductPicture(CreateProductPictureRequest request);
         Task<ProductPictureViewModel> UpdateProductPicture(Guid id, UpdateProductPictureRequest request);
         Task<int> DeleteProductPicture(Guid id);
@@ -32,14 +34,14 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<ProductPictureViewModel>> GetAllProductPictures()
+        public async Task<List<ProductPictureViewModel>> GetAllProductPictures(ProductPictureViewModel filter)
         {
-            return await Get().ProjectTo<ProductPictureViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<ProductPictureViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
-        public async Task<ProductPictureViewModel> GetProductPictureById(Guid id)
+        public async Task<List<ProductPictureViewModel>> GetProductPictureById(Guid id)
         {
-            return await Get(p => p.ProductId == id).ProjectTo<ProductPictureViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.ProductId == id).ProjectTo<ProductPictureViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<ProductPictureViewModel> CreateProductPicture(CreateProductPictureRequest request)

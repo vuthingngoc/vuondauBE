@@ -10,11 +10,13 @@ using System;
 using VuonDau.Business.Requests.Payment;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IPaymentService
     {
-        Task<List<PaymentViewModel>> GetAllPayments();
+        Task<List<PaymentViewModel>> GetAllPayments(PaymentViewModel filter);
         Task<PaymentViewModel> GetPaymentById(Guid id);
         Task<PaymentViewModel> CreatePayment(CreatePaymentRequest request);
         Task<PaymentViewModel> UpdatePayment(Guid id, UpdatePaymentRequest request);
@@ -32,9 +34,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<PaymentViewModel>> GetAllPayments()
+        public async Task<List<PaymentViewModel>> GetAllPayments(PaymentViewModel filter)
         {
-            return await Get().ProjectTo<PaymentViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<PaymentViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<PaymentViewModel> GetPaymentById(Guid id)

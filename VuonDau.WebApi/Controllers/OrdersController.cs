@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Order;
+using VuonDau.Business.ViewModel;
 
 namespace VuonDau.WebApi.Controllers
 {
@@ -16,10 +17,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/orders")]
         [SwaggerOperation(Tags = new[] { "Orders" })]
-        public async Task<IActionResult> GetOrders()
+        public async Task<IActionResult> GetOrders([FromQuery] OrderViewModel filter)
         {
-            await _orderService.GetAllOrders();
-            var orders = await _orderService.GetAllOrders();
+            var orders = await _orderService.GetAllOrders(filter);
             return Ok(orders);
         }
 
@@ -36,7 +36,16 @@ namespace VuonDau.WebApi.Controllers
             var order = await _orderService.GetOrderById(id);
             if (order == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _orderService.GetOrderByCustomerId(id);
+                var orders = await _orderService.GetOrderByCustomerId(id);
+                if (orders.Count > 0)
+                {
+                    return Ok(orders);
+                }
+                else
+                {
+                    return NotFound("NOT_FOUND_MESSAGE");
+                }
             }
 
             return Ok(order);

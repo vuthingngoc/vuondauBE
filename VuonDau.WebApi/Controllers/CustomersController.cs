@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests;
 using VuonDau.Business.Requests.Customer;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -31,7 +32,7 @@ namespace VuonDau.WebApi.Controllers
             {
                 await _customerService.GetCustomerByType(id);
                 var customers = await _customerService.GetCustomerByType(id);
-                if (customers != null)
+                if (customers.Count > 0)
                 {
                     return Ok(customers);
                 }
@@ -48,12 +49,12 @@ namespace VuonDau.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomAuthorized(AppRoles = "Admin")]
         [Route("~/api/v1/customers")]
         [SwaggerOperation(Tags = new[] { "Customers" })]
-        public async Task<IActionResult> GetCustomers()
+        public async Task<IActionResult> GetCustomers([FromQuery] CustomerViewModel filter)
         {
-            await _customerService.GetAllCustomers();
-            var customers = await _customerService.GetAllCustomers();
+            var customers = await _customerService.GetAllCustomers(filter);
             return Ok(customers);
         }
 

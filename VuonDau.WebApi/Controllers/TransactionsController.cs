@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Transaction;
+using VuonDau.Business.ViewModel;
 
 namespace VuonDau.WebApi.Controllers
 {
@@ -16,10 +17,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/transactions")]
         [SwaggerOperation(Tags = new[] { "Transactions" })]
-        public async Task<IActionResult> GetTransactions()
+        public async Task<IActionResult> GetTransactions([FromQuery] TransactionViewModel filter)
         {
-            await _transactionService.GetAllTransactions();
-            var transactions = await _transactionService.GetAllTransactions();
+            var transactions = await _transactionService.GetAllTransactions(filter);
             return Ok(transactions);
         }
 
@@ -36,7 +36,25 @@ namespace VuonDau.WebApi.Controllers
             var transaction = await _transactionService.GetTransactionById(id);
             if (transaction == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _transactionService.GetTransactionByOrderId(id);
+                var transactions = await _transactionService.GetTransactionByOrderId(id);
+                if (transactions.Count > 0)
+                {
+                    return Ok(transactions);
+                }
+                else
+                {
+                    await _transactionService.GetTransactionByPaymentId(id);
+                    transactions = await _transactionService.GetTransactionByPaymentId(id);
+                    if (transactions.Count > 0)
+                    {
+                        return Ok(transactions);
+                    }
+                    else
+                    {
+                        return NotFound("NOT_FOUND_MESSAGE");
+                    }
+                }
             }
 
             return Ok(transaction);

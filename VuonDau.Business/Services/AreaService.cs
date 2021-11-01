@@ -14,12 +14,13 @@ using VuonDau.Business.Requests;
 using Microsoft.Extensions.Configuration;
 using FirebaseAdmin.Auth;
 using VuonDau.Data.Common.Constants;
+using Reso.Core.Utilities;
 
 namespace VuonDau.Business.Services
 {
     public partial interface IAreaService
     {
-        Task<List<AreaViewModel>> GetAllAreas();
+        Task<List<AreaViewModel>> GetAllAreas(AreaViewModel filter);
         Task<AreaViewModel> GetAreaById(Guid id);
         Task<AreaViewModel> CreateArea(CreateAreaRequest request);
         Task<AreaViewModel> UpdateArea(Guid id, UpdateAreaRequest request);
@@ -37,9 +38,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<AreaViewModel>> GetAllAreas()
+        public async Task<List<AreaViewModel>> GetAllAreas(AreaViewModel filter)
         {
-            return await Get().ProjectTo<AreaViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<AreaViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<AreaViewModel> GetAreaById(Guid id)
@@ -86,7 +87,7 @@ namespace VuonDau.Business.Services
 
         //public override bool Equals(object obj)
         //{
-        //    return obj is FarmerService service &&
+        //    return obj is AreaService service &&
         //           EqualityComparer<IConfigurationProvider>.Default.Equals(this._mapper, service._mapper);
         //}
     }

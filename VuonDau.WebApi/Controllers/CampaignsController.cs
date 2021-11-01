@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests;
 using VuonDau.Business.Requests.Campaign;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -24,10 +25,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/campaigns")]
         [SwaggerOperation(Tags = new[] { "Campaigns" })]
-        public async Task<IActionResult> GetCampaigns()
+        public async Task<IActionResult> GetCampaigns([FromQuery] CampaignViewModel filter)
         {
-            await _campaignService.GetAllCampaigns();
-            var campaigns = await _campaignService.GetAllCampaigns();
+            var campaigns = await _campaignService.GetAllCampaigns(filter);
             return Ok(campaigns);
         }
         /// <summary>
@@ -43,7 +43,25 @@ namespace VuonDau.WebApi.Controllers
             var campaign = await _campaignService.GetCampaignById(id);
             if (campaign == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _campaignService.GetCampaignByHarvestSellingId(id);
+                var campaigns = await _campaignService.GetCampaignByHarvestSellingId(id);
+                if (campaigns.Count > 0)
+                {
+                    return Ok(campaigns);
+                }
+                else
+                {
+                    await _campaignService.GetCampaignByOrderId(id);
+                    campaigns = await _campaignService.GetCampaignByOrderId(id);
+                    if (campaigns.Count > 0)
+                    {
+                        return Ok(campaigns);
+                    }
+                    else
+                    {
+                        return NotFound("NOT_FOUND_MESSAGE");
+                    }
+                }
             }
 
             return Ok(campaign);

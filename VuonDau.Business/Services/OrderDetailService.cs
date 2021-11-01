@@ -10,12 +10,16 @@ using System;
 using VuonDau.Business.Requests.OrderDetail;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IOrderDetailService
     {
-        Task<List<OrderDetailViewModel>> GetAllOrderDetails();
+        Task<List<OrderDetailViewModel>> GetAllOrderDetails(OrderDetailViewModel filter);
         Task<OrderDetailViewModel> GetOrderDetailById(Guid id);
+        Task<List<OrderDetailViewModel>> GetOrderDetailByHarvestSellingId(Guid id);
+        Task<List<OrderDetailViewModel>> GetOrderDetailByOrderId(Guid id);
         Task<OrderDetailViewModel> CreateOrderDetail(CreateOrderDetailRequest request);
         Task<OrderDetailViewModel> UpdateOrderDetail(Guid id, UpdateOrderDetailRequest request);
         Task<int> DeleteOrderDetail(Guid id);
@@ -32,16 +36,23 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<OrderDetailViewModel>> GetAllOrderDetails()
+        public async Task<List<OrderDetailViewModel>> GetAllOrderDetails(OrderDetailViewModel filter)
         {
-            return await Get(p => p.Status == (int)Status.Active).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<OrderDetailViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<OrderDetailViewModel> GetOrderDetailById(Guid id)
         {
             return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<OrderDetailViewModel>(_mapper).FirstOrDefaultAsync();
         }
-
+        public async Task<List<OrderDetailViewModel>> GetOrderDetailByHarvestSellingId(Guid HarvestSellingId)
+        {
+            return await Get(p => p.HarvestsellingId == HarvestSellingId).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
+        }
+        public async Task<List<OrderDetailViewModel>> GetOrderDetailByOrderId(Guid OrderId)
+        {
+            return await Get(p => p.OrderId == OrderId).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
+        }
         public async Task<OrderDetailViewModel> CreateOrderDetail(CreateOrderDetailRequest request)
             {
             var mapper = _mapper.CreateMapper();

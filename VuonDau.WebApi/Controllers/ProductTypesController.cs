@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.ProductType;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -21,10 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/product-types")]
         [SwaggerOperation(Tags = new[] { "ProductTypes" })]
-        public async Task<IActionResult> GetProductTypes()
+        public async Task<IActionResult> GetProductTypes([FromQuery] ProductTypeViewModel filter)
         {
-            await _productTypeService.GetAllProductTypes();
-            var productTypes = await _productTypeService.GetAllProductTypes();
+            var productTypes = await _productTypeService.GetAllProductTypes(filter);
             return Ok(productTypes);
         }
 

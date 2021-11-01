@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Wallet;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -21,10 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/wallets")]
         [SwaggerOperation(Tags = new[] { "Wallets" })]
-        public async Task<IActionResult> GetWallets()
+        public async Task<IActionResult> GetWallets([FromQuery] WalletViewModel filter)
         {
-            await _walletService.GetAllWallets();
-            var wallets = await _walletService.GetAllWallets();
+            var wallets = await _walletService.GetAllWallets(filter);
             return Ok(wallets);
         }
 
@@ -41,7 +41,16 @@ namespace VuonDau.WebApi.Controllers
             var wallet = await _walletService.GetWalletById(id);
             if (wallet == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _walletService.GetWalletByCustomerId(id);
+                var wallets = await _walletService.GetWalletByCustomerId(id);
+                if (wallets.Count > 0)
+                {
+                    return Ok(wallets);
+                }
+                else
+                {
+                    return NotFound("NOT_FOUND_MESSAGE");
+                }
             }
 
             return Ok(wallet);

@@ -12,12 +12,13 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using VuonDau.Business.Requests;
 using Microsoft.Extensions.Configuration;
+using Reso.Core.Utilities;
 
 namespace VuonDau.Business.Services
 {
     public partial interface ICustomerService
     {
-        Task<List<CustomerViewModel>> GetAllCustomers();
+        Task<List<CustomerViewModel>> GetAllCustomers(CustomerViewModel filter);
         Task<CustomerViewModel> GetCustomerById(Guid id);
         Task<List<CustomerViewModel>> GetCustomerByType(Guid id);
         Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request, IConfiguration configuration);
@@ -37,9 +38,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CustomerViewModel>> GetAllCustomers()
+        public async Task<List<CustomerViewModel>> GetAllCustomers(CustomerViewModel filter)
         {
-            return await Get().ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<CustomerViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<CustomerViewModel> GetByMail(string mail)
@@ -101,6 +102,7 @@ namespace VuonDau.Business.Services
 
             return 1;
         }
+
         //public override bool Equals(object obj)
         //{
         //    return obj is FarmerService service &&

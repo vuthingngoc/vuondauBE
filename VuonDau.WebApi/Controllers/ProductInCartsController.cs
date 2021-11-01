@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.ProductInCart;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -18,11 +19,10 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/productInCarts")]
         [SwaggerOperation(Tags = new[] { "ProductInCarts" })]
-        public async Task<IActionResult> GetProductInCarts()
+        public async Task<IActionResult> GetProductInCarts([FromQuery] ProductInCartViewModel filter)
         {
-            await _productInCartService.GetAllProductInCarts();
-            var productInCarts = await _productInCartService.GetAllProductInCarts();
-            return Ok(productInCarts);
+            var products = await _productInCartService.GetAllProductInCarts(filter);
+            return Ok(products);
         }
 
         // GET: ProductInCarts/Details/5
@@ -34,9 +34,26 @@ namespace VuonDau.WebApi.Controllers
             var poductInCart = await _productInCartService.GetProductInCartById(id);
             if (poductInCart == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _productInCartService.GetProductInCartByCustomerId(id);
+                var productInCarts = await _productInCartService.GetProductInCartByCustomerId(id);
+                if (productInCarts.Count > 0)
+                {
+                    return Ok(productInCarts);
+                }
+                else
+                {
+                    await _productInCartService.GetProductInCartByHarvestSellingId(id);
+                    productInCarts = await _productInCartService.GetProductInCartByHarvestSellingId(id);
+                    if (productInCarts.Count > 0)
+                    {
+                        return Ok(productInCarts);
+                    }
+                    else
+                    {
+                        return NotFound("NOT_FOUND_MESSAGE");
+                    }
+                }
             }
-
             return Ok(poductInCart);
         }
 

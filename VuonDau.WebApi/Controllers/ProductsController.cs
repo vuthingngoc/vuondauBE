@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Product;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -18,10 +19,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/products")]
         [SwaggerOperation(Tags = new[] { "Products" })]
-        public async Task<IActionResult> GetProducts()
+        public async Task<IActionResult> GetProducts([FromQuery] ProductViewModel filter)
         {
-            await _productService.GetAllProducts();
-            var products = await _productService.GetAllProducts();
+            var products = await _productService.GetAllProducts(filter);
             return Ok(products);
         }
 
@@ -36,7 +36,7 @@ namespace VuonDau.WebApi.Controllers
             {
                 await _productService.GetProductByType(id);
                 var products = await _productService.GetProductByType(id);
-                if (products != null)
+                if (products.Count > 0)
                 {
                     return Ok(products);
                 } else
@@ -44,20 +44,6 @@ namespace VuonDau.WebApi.Controllers
                     return NotFound("NOT_FOUND_MESSAGE");
                 }
             }
-            return Ok(product);
-        }
-        // GET: Products/Details/Name
-        [HttpGet]
-        [Route("~/api/v1/products/{name:alpha}")]
-        [SwaggerOperation(Tags = new[] { "Products" })]
-        public async Task<IActionResult> GetProduct([FromRoute] string name)
-        {
-            var product = await _productService.GetProductByName(name);
-            if (product == null)
-            {
-                return NotFound("NOT_FOUND_MESSAGE");
-            }
-
             return Ok(product);
         }
         // GET: Products/Create

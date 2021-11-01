@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using VuonDau.Data.Models;
@@ -7,7 +8,8 @@ namespace VuonDau.Business.ViewModel
 {
     public class FarmFullViewModel
     {
-        public Guid Id { get; set; }
+        [BindNever]
+        public Guid? Id { get; set; }
         public Guid? FarmTypeId { get; set; }
         public Guid? FarmerId { get; set; }
         public Guid? AreaId { get; set; }
