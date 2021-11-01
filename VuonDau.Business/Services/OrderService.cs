@@ -10,12 +10,15 @@ using System;
 using VuonDau.Business.Requests.Order;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IOrderService
     {
-        Task<List<OrderViewModel>> GetAllOrders();
+        Task<List<OrderViewModel>> GetAllOrders(OrderViewModel filter);
         Task<OrderViewModel> GetOrderById(Guid id);
+        Task<List<OrderViewModel>> GetOrderByCustomerId(Guid id);
         Task<OrderViewModel> CreateOrder(CreateOrderRequest request);
         Task<OrderViewModel> UpdateOrder(Guid id, UpdateOrderRequest request);
         Task<int> DeleteOrder(Guid id);
@@ -32,16 +35,19 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<OrderViewModel>> GetAllOrders()
+        public async Task<List<OrderViewModel>> GetAllOrders(OrderViewModel filter)
         {
-            return await Get(p => p.Status == (int)Status.Active).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<OrderViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<OrderViewModel> GetOrderById(Guid id)
         {
             return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<OrderViewModel>(_mapper).FirstOrDefaultAsync();
         }
-
+        public async Task<List<OrderViewModel>> GetOrderByCustomerId(Guid CustomerId)
+        {
+            return await Get(p => p.CustomerId == CustomerId).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+        }
         public async Task<OrderViewModel> CreateOrder(CreateOrderRequest request)
             {
             var mapper = _mapper.CreateMapper();

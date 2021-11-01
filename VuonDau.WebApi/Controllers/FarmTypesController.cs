@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.FarmType;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -21,10 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/farm-types")]
         [SwaggerOperation(Tags = new[] { "FarmTypes" })]
-        public async Task<IActionResult> GetFarmTypes()
+        public async Task<IActionResult> GetFarmTypes([FromQuery] FarmTypeViewModel filter)
         {
-            await _farmTypeService.GetAllFarmTypes();
-            var farmTypes = await _farmTypeService.GetAllFarmTypes();
+            var farmTypes = await _farmTypeService.GetAllFarmTypes(filter);
             return Ok(farmTypes);
         }
 

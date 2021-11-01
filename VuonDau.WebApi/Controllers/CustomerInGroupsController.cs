@@ -9,8 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using VuonDau.Data.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.CustomerInGroup;
-
-
+using VuonDau.Business.ViewModel;
 
 namespace VuonDau.WebApi.Controllers
 {
@@ -23,10 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/customer-in-groups")]
         [SwaggerOperation(Tags = new[] { "CustomerInGroups" })]
-        public async Task<IActionResult> GetCustomerInGroups()
+        public async Task<IActionResult> GetCustomerInGroups([FromQuery] CustomerInGroupViewModel filter)
         {
-            await _customerInGroupService.GetAllCustomerInGroups();
-            var customerInGroups = await _customerInGroupService.GetAllCustomerInGroups();
+            var customerInGroups = await _customerInGroupService.GetAllCustomerInGroups(filter);
             return Ok(customerInGroups);
         }
 

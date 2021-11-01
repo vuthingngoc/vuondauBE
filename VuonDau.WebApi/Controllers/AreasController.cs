@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests;
 using VuonDau.Business.Requests.Area;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -23,10 +24,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/areas")]
         [SwaggerOperation(Tags = new[] { "Areas" })]
-        public async Task<IActionResult> GetAreas()
+        public async Task<IActionResult> GetAreas([FromQuery] AreaViewModel filter)
         {
-            await _areaService.GetAllAreas();
-            var areas = await _areaService.GetAllAreas();
+            var areas = await _areaService.GetAllAreas(filter);
             return Ok(areas);
         }
 

@@ -10,12 +10,15 @@ using System;
 using VuonDau.Business.Requests.Wallet;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IWalletService
     {
-        Task<List<WalletViewModel>> GetAllWallets();
+        Task<List<WalletViewModel>> GetAllWallets(WalletViewModel filter);
         Task<WalletViewModel> GetWalletById(Guid id);
+        Task<List<WalletViewModel>> GetWalletByCustomerId(Guid id);
         Task<WalletViewModel> CreateWallet(CreateWalletRequest request);
         Task<WalletViewModel> UpdateWallet(Guid id, UpdateWalletRequest request);
         Task<int> DeleteWallet(Guid id);
@@ -32,16 +35,19 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<WalletViewModel>> GetAllWallets()
+        public async Task<List<WalletViewModel>> GetAllWallets(WalletViewModel filter)
         {
-            return await Get().ProjectTo<WalletViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<WalletViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<WalletViewModel> GetWalletById(Guid id)
         {
             return await Get(p => p.Id == id ).ProjectTo<WalletViewModel>(_mapper).FirstOrDefaultAsync();
         }
-
+        public async Task<List<WalletViewModel>> GetWalletByCustomerId(Guid CustomerId)
+        {
+            return await Get(p => p.CustomerId == CustomerId).ProjectTo<WalletViewModel>(_mapper).ToListAsync();
+        }
         public async Task<WalletViewModel> CreateWallet(CreateWalletRequest request)
             {
             var mapper = _mapper.CreateMapper();

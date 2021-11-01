@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Payment;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -21,10 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/payments")]
         [SwaggerOperation(Tags = new[] { "Payments" })]
-        public async Task<IActionResult> GetPayments()
+        public async Task<IActionResult> GetPayments([FromQuery] PaymentViewModel filter)
         {
-            await _paymentService.GetAllPayments();
-            var payments = await _paymentService.GetAllPayments();
+            var payments = await _paymentService.GetAllPayments(filter);
             return Ok(payments);
         }
 

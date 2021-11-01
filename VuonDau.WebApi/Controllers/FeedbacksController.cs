@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Feedback;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -21,10 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/feedbacks")]
         [SwaggerOperation(Tags = new[] { "Feedbacks" })]
-        public async Task<IActionResult> GetFeedbacks()
+        public async Task<IActionResult> GetFeedbacks([FromQuery] FeedbackViewModel filter)
         {
-            await _feedbackService.GetAllFeedbacks();
-            var feedbacks = await _feedbackService.GetAllFeedbacks();
+            var feedbacks = await _feedbackService.GetAllFeedbacks(filter);
             return Ok(feedbacks);
         }
 
@@ -41,9 +41,17 @@ namespace VuonDau.WebApi.Controllers
             var feedback = await _feedbackService.GetFeedbackById(id);
             if (feedback == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _feedbackService.GetFeedbackByOrderId(id);
+                var feedbacks = await _feedbackService.GetFeedbackByOrderId(id);
+                if (feedbacks.Count > 0)
+                {
+                    return Ok(feedbacks);
+                }
+                else
+                {
+                    return NotFound("NOT_FOUND_MESSAGE");
+                }
             }
-
             return Ok(feedback);
         }
 

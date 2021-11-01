@@ -10,11 +10,13 @@ using System;
 using VuonDau.Business.Requests.CustomerInGroup;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface ICustomerInGroupService
     {
-        Task<List<CustomerInGroupViewModel>> GetAllCustomerInGroups();
+        Task<List<CustomerInGroupViewModel>> GetAllCustomerInGroups(CustomerInGroupViewModel filter);
         Task<CustomerInGroupViewModel> GetCustomerInGroupById(Guid id);
         Task<CustomerInGroupViewModel> CreateCustomerInGroup(CreateCustomerInGroupRequest request);
         Task<CustomerInGroupViewModel> UpdateCustomerInGroup(Guid id, UpdateCustomerInGroupRequest request);
@@ -32,9 +34,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CustomerInGroupViewModel>> GetAllCustomerInGroups()
+         public async Task<List<CustomerInGroupViewModel>> GetAllCustomerInGroups(CustomerInGroupViewModel filter)
         {
-            return await Get().ProjectTo<CustomerInGroupViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<CustomerInGroupViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<CustomerInGroupViewModel> GetCustomerInGroupById(Guid id)

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Farm;
+using VuonDau.Business.ViewModel;
 
 namespace VuonDau.WebApi.Controllers
 {
@@ -15,10 +16,9 @@ namespace VuonDau.WebApi.Controllers
         //[Authorize]
         [Route("~/api/v1/farms")]
         [SwaggerOperation(Tags = new[] { "Farms" })]
-        public async Task<IActionResult> GetFarms()
+        public async Task<IActionResult> GetFarms([FromQuery] FarmViewModel filter)
         {
-            await _farmService.GetAllFarms();
-            var farms = await _farmService.GetAllFarms();
+            var farms = await _farmService.GetAllFarms(filter);
             return Ok(farms);
         }
 
@@ -33,13 +33,31 @@ namespace VuonDau.WebApi.Controllers
             {
                 await _farmService.GetFarmByType(id);
                 var farms = await _farmService.GetFarmByType(id);
-                if (farms != null)
+                if (farms.Count > 0)
                 {
                     return Ok(farms);
                 }
                 else
                 {
-                    return NotFound("NOT_FOUND_MESSAGE");
+                    await _farmService.GetFarmByFarmerId(id);
+                    farms = await _farmService.GetFarmByFarmerId(id);
+                    if (farms.Count > 0)
+                    {
+                        return Ok(farms);
+                    }
+                    else
+                    {
+                        await _farmService.GetFarmByAreaId(id);
+                        farms = await _farmService.GetFarmByAreaId(id);
+                        if (farms.Count > 0)
+                        {
+                            return Ok(farms);
+                        }
+                        else
+                        {
+                            return NotFound("NOT_FOUND_MESSAGE");
+                        }
+                    }
                 }
             }
             return Ok(farm);

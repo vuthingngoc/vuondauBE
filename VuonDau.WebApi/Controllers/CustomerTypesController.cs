@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.CustomerType;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -21,10 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/customer-types")]
         [SwaggerOperation(Tags = new[] { "CustomerTypes" })]
-        public async Task<IActionResult> GetCustomerTypes()
+        public async Task<IActionResult> GetCustomerTypes([FromQuery] CustomerTypeViewModel filter)
         {
-            await _customerTypeService.GetAllCustomerTypes();
-            var customerTypes = await _customerTypeService.GetAllCustomerTypes();
+            var customerTypes = await _customerTypeService.GetAllCustomerTypes(filter);
             return Ok(customerTypes);
         }
 

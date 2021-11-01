@@ -14,13 +14,16 @@ using VuonDau.Business.Requests;
 using Microsoft.Extensions.Configuration;
 using FirebaseAdmin.Auth;
 using VuonDau.Data.Common.Constants;
+using Reso.Core.Utilities;
 
 namespace VuonDau.Business.Services
 {
     public partial interface ICampaignService
     {
-        Task<List<CampaignViewModel>> GetAllCampaigns();
+        Task<List<CampaignViewModel>> GetAllCampaigns(CampaignViewModel filter);
         Task<CampaignViewModel> GetCampaignById(Guid id);
+        Task<List<CampaignViewModel>> GetCampaignByHarvestSellingId(Guid id);
+        Task<List<CampaignViewModel>> GetCampaignByOrderId(Guid id);
         Task<CampaignViewModel> CreateCampaign(CreateCampaignRequest request);
         Task<CampaignViewModel> UpdateCampaign(Guid id, UpdateCampaignRequest request);
         Task<int> DeleteCampaign(Guid id);
@@ -37,15 +40,24 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CampaignViewModel>> GetAllCampaigns()
+        public async Task<List<CampaignViewModel>> GetAllCampaigns(CampaignViewModel filter)
         {
-            return await Get().ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<CampaignViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
-      
+
         public async Task<CampaignViewModel> GetCampaignById(Guid id)
         {
             return await Get(p => p.Id == id ).ProjectTo<CampaignViewModel>(_mapper).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<CampaignViewModel>> GetCampaignByHarvestSellingId(Guid HarvestSellingId)
+        {
+            return await Get(p => p.HarvestSellingId == HarvestSellingId).ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
+        }
+        public async Task<List<CampaignViewModel>> GetCampaignByOrderId(Guid OrderId)
+        {
+            return await Get(p => p.OrderId == OrderId).ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
         }
         public async Task<CampaignViewModel> CreateCampaign(CreateCampaignRequest request)
             {

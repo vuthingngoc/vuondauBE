@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.HarvestSelling;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -18,10 +19,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/harvest-sellings")]
         [SwaggerOperation(Tags = new[] { "HarvestSellings" })]
-        public async Task<IActionResult> GetHarvestSellings()
+        public async Task<IActionResult> GetHarvestSellings([FromQuery] HarvestSellingViewModel filter)
         {
-            await _harvestSellingService.GetAllHarvestSellings();
-            var harvestSellings = await _harvestSellingService.GetAllHarvestSellings();
+            var harvestSellings = await _harvestSellingService.GetAllHarvestSellings(filter);
             return Ok(harvestSellings);
         }
 
@@ -34,9 +34,17 @@ namespace VuonDau.WebApi.Controllers
             var harvestSelling = await _harvestSellingService.GetHarvestSellingById(id);
             if (harvestSelling == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _harvestSellingService.GetHarvestSellingByHarvestId(id);
+                var harvestSellings = await _harvestSellingService.GetHarvestSellingByHarvestId(id);
+                if (harvestSellings.Count > 0)
+                {
+                    return Ok(harvestSellings);
+                }
+                else
+                {
+                    return NotFound("NOT_FOUND_MESSAGE");
+                }
             }
-
             return Ok(harvestSelling);
         }
 

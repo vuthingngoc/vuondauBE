@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.FarmPicture;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -18,10 +19,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/farm-pictures")]
         [SwaggerOperation(Tags = new[] { "FarmPictures" })]
-        public async Task<IActionResult> GetFarmPictures()
+        public async Task<IActionResult> GetFarmPictures([FromQuery] FarmPictureViewModel filter)
         {
-            await _farmPictureService.GetAllFarmPictures();
-            var farmPictures = await _farmPictureService.GetAllFarmPictures();
+            var farmPictures = await _farmPictureService.GetAllFarmPictures(filter);
             return Ok(farmPictures);
         }
 

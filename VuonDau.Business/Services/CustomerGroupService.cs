@@ -10,13 +10,15 @@ using System;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using VuonDau.Business.Requests.CustomerGroup;
+using Reso.Core.Utilities;
 
 namespace VuonDau.Business.Services
 {
     public partial interface ICustomerGroupService
     {
-        Task<List<CustomerGroupViewModel>> GetAllCustomerGroups();
+        Task<List<CustomerGroupViewModel>> GetAllCustomerGroups(CustomerGroupViewModel filter);
         Task<CustomerGroupViewModel> GetCustomerGroupById(Guid id);
+        Task<List<CustomerGroupViewModel>> GetCustomerGroupByHarvestSellingId(Guid id);
         Task<CustomerGroupViewModel> CreateCustomerGroup(CreateCustomerGroupRequest request);
         Task<CustomerGroupViewModel> UpdateCustomerGroup(Guid id, UpdateCustomerGroupRequest request);
         Task<int> DeleteCustomerGroup(Guid id);
@@ -33,9 +35,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CustomerGroupViewModel>> GetAllCustomerGroups()
+        public async Task<List<CustomerGroupViewModel>> GetAllCustomerGroups(CustomerGroupViewModel filter)
         {
-            return await Get().ProjectTo<CustomerGroupViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<CustomerGroupViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<CustomerGroupViewModel> GetCustomerGroupById(Guid id)
@@ -43,6 +45,10 @@ namespace VuonDau.Business.Services
             return await Get(p => p.Id == id ).ProjectTo<CustomerGroupViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
+        public async Task<List<CustomerGroupViewModel>> GetCustomerGroupByHarvestSellingId(Guid HarvestSellingID)
+        {
+            return await Get(p => p.HarvestSellingId == HarvestSellingID).ProjectTo<CustomerGroupViewModel>(_mapper).ToListAsync();
+        }
         public async Task<CustomerGroupViewModel> CreateCustomerGroup(CreateCustomerGroupRequest request)
             {
             var mapper = _mapper.CreateMapper();

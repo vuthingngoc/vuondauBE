@@ -11,7 +11,7 @@ namespace VuonDau.Business.Services
     public partial interface IHarvestSellingPriceService:IBaseService<HarvestSellingPrice>
     {
     }
-    public partial class HarvestSellingPriceService:BaseService<HarvestSellingPrice>,IHarvestSellingPriceService
+    public partial class HarvestSellingPriceService : BaseService<HarvestSellingPrice>, IHarvestSellingPriceService
     {
         public HarvestSellingPriceService(IUnitOfWork unitOfWork,IHarvestSellingPriceRepository repository):base(unitOfWork,repository){}
     }

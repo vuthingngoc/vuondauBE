@@ -10,13 +10,14 @@ using System;
 using VuonDau.Business.Requests.Product;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IProductService
     {
-        Task<List<ProductViewModel>> GetAllProducts();
+        Task<List<ProductViewModel>> GetAllProducts(ProductViewModel filter);
         Task<ProductViewModel> GetProductById(Guid id);
-        Task<ProductViewModel> GetProductByName(String name);
         Task<List<ProductViewModel>> GetProductByType(Guid id);
         Task<ProductViewModel> CreateProduct(CreateProductRequest request);
         Task<ProductViewModel> UpdateProduct(Guid id, UpdateProductRequest request);
@@ -34,9 +35,9 @@ namespace VuonDau.Business.Services
         {
             _mapper = mapper.ConfigurationProvider;
         }
-        public async Task<List<ProductViewModel>> GetAllProducts()
+        public async Task<List<ProductViewModel>> GetAllProducts(ProductViewModel filter)
         {
-            return await Get().ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<ProductViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
         public async Task<ProductViewModel> GetProductById(Guid id)
         {
@@ -45,10 +46,6 @@ namespace VuonDau.Business.Services
         public async Task<List<ProductViewModel>> GetProductByType(Guid ProductTypeId)
         {
             return await Get(p => p.ProductTypeId == ProductTypeId).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
-        }
-        public async Task<ProductViewModel> GetProductByName(string name)
-        {
-            return await Get(p => p.Name.Equals(name)).ProjectTo<ProductViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<ProductViewModel> CreateProduct(CreateProductRequest request)
         {

@@ -10,12 +10,14 @@ using System;
 using VuonDau.Business.Requests.FarmPicture;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Reso.Core.Utilities;
+
 namespace VuonDau.Business.Services
 {
     public partial interface IFarmPictureService
     {
-        Task<List<FarmPictureViewModel>> GetAllFarmPictures();
-        Task<FarmPictureViewModel> GetFarmPictureById(Guid id);
+        Task<List<FarmPictureViewModel>> GetAllFarmPictures(FarmPictureViewModel filter);
+        Task<List<FarmPictureViewModel>> GetFarmPictureById(Guid id);
         Task<FarmPictureViewModel> CreateFarmPicture(CreateFarmPictureRequest request);
         Task<FarmPictureViewModel> UpdateFarmPicture(Guid id, UpdateFarmPictureRequest request);
         Task<int> DeleteFarmPicture(Guid id);
@@ -32,14 +34,14 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FarmPictureViewModel>> GetAllFarmPictures()
+        public async Task<List<FarmPictureViewModel>> GetAllFarmPictures(FarmPictureViewModel filter)
         {
-            return await Get().ProjectTo<FarmPictureViewModel>(_mapper).ToListAsync();
+            return await Get().ProjectTo<FarmPictureViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
-        public async Task<FarmPictureViewModel> GetFarmPictureById(Guid id)
+        public async Task<List<FarmPictureViewModel>> GetFarmPictureById(Guid id)
         {
-            return await Get(p => p.FarmId == id).ProjectTo<FarmPictureViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.FarmId == id).ProjectTo<FarmPictureViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<FarmPictureViewModel> CreateFarmPicture(CreateFarmPictureRequest request)

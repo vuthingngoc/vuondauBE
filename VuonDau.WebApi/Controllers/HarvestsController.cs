@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Harvest;
+using VuonDau.Business.ViewModel;
 using VuonDau.Data.Models;
 
 namespace VuonDau.WebApi.Controllers
@@ -20,10 +21,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/harvests")]
         [SwaggerOperation(Tags = new[] { "Harvests" })]
-        public async Task<IActionResult> GetHarvests()
+        public async Task<IActionResult> GetHarvests([FromQuery] HarvestViewModel filter)
         {
-            await _harvestService.GetAllHarvests();
-            var harvests = await _harvestService.GetAllHarvests();
+            var harvests = await _harvestService.GetAllHarvests(filter);
             return Ok(harvests);
         }
 
@@ -36,7 +36,25 @@ namespace VuonDau.WebApi.Controllers
             var harvest = await _harvestService.GetHarvestById(id);
             if (harvest == null)
             {
-                return NotFound("NOT_FOUND_MESSAGE");
+                await _harvestService.GetHarvestByFarmId(id);
+                var harvests = await _harvestService.GetHarvestByFarmId(id);
+                if (harvests.Count > 0)
+                {
+                    return Ok(harvests);
+                }
+                else
+                {
+                    await _harvestService.GetHarvestByProductId(id);
+                    harvests = await _harvestService.GetHarvestByProductId(id);
+                    if (harvests.Count > 0)
+                    {
+                        return Ok(harvests);
+                    }
+                    else
+                    {
+                        return NotFound("NOT_FOUND_MESSAGE");
+                    }
+                }
             }
 
             return Ok(harvest);
