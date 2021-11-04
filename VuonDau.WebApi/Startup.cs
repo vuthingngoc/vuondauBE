@@ -53,6 +53,7 @@ namespace VuonDau.WebApi
                 {
                     builder
                     .WithOrigins(GetDomain())
+                    .AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
@@ -78,13 +79,6 @@ namespace VuonDau.WebApi
             });
             services.AddRouting();
             AuthConfig.ConfigAuthentication(services, Configuration);
-            //services.AddAuthentication("Bearer")
-            //       .AddIdentityServerAuthentication(options =>
-            //       {
-            //           options.Authority = Configuration["IdentityServer:Domain"];
-            //           options.RequireHttpsMetadata = false;
-            //           options.ApiName = Configuration["IdentityServer:ApiName"];
-            //       });
         }
         private string[] GetDomain()
         {
@@ -127,11 +121,10 @@ namespace VuonDau.WebApi
             });
             #endregion
             app.ConfigMigration<VuondauDBContext>();
-            app.ConfigureErrorHandler(env);
+            //app.ConfigureErrorHandler(env);
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

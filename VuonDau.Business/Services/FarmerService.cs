@@ -11,6 +11,7 @@ using VuonDau.Business.Requests.Farmer;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
@@ -37,7 +38,7 @@ namespace VuonDau.Business.Services
 
         public async Task<List<FarmerViewModel>> GetAllFarmers(FarmerViewModel filter)
         {
-            return await Get().ProjectTo<FarmerViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            return await Get().OrderByDescending(s => s.Status).ProjectTo<FarmerViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<FarmerViewModel> GetFarmerById(Guid id)
@@ -75,7 +76,7 @@ namespace VuonDau.Business.Services
             farmer.Phone = farmerInRequest.Phone;
             farmer.BirthDay = farmerInRequest.BirthDay;
             farmer.Gender = farmerInRequest.Gender;
-            farmer.Status = 1;
+            farmer.Status = farmerInRequest.Status;
             await UpdateAsyn(farmer);
             return mapper.Map<FarmerViewModel>(farmer);
         }

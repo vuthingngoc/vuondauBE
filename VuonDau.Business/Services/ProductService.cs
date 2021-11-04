@@ -69,7 +69,7 @@ namespace VuonDau.Business.Services
             product.ProductTypeId = productInRequest.ProductTypeId;
             product.Name = productInRequest.Name;
             product.Description = productInRequest.Description;
-            product.Status = 1;
+            product.Status = productInRequest.Status;
             await UpdateAsyn(product);
             return mapper.Map<ProductViewModel>(product);
         }

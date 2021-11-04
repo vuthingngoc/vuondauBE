@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {}
+    "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {}
   },
   "projects": {
-    "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {
+    "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj",
+        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj",
         "projectName": "VuonDau.Data",
-        "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj",
+        "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj",
         "packagesPath": "C:\\Users\\09323\\.nuget\\packages\\",
-        "outputPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\obj\\",
+        "outputPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

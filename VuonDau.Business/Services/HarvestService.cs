@@ -77,6 +77,7 @@ namespace VuonDau.Business.Services
             harvest.FarmId = harvestInRequest.FarmId;
             harvest.ProductId = harvestInRequest.ProductId;
             harvest.Description = harvestInRequest.Description;
+            harvest.Status = harvestInRequest.Status;
             await UpdateAsyn(harvest);
             return mapper.Map<HarvestViewModel>(harvest);
         }
