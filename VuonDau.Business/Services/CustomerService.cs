@@ -82,7 +82,7 @@ namespace VuonDau.Business.Services
             customer.Phone = customerInRequest.Phone;
             customer.Birthday = customerInRequest.Birthday;
             customer.Gender = customerInRequest.Gender;
-            customer.Status = 1;
+            customer.Status = customerInRequest.Status;
             await UpdateAsyn(customer);
             return mapper.Map<CustomerViewModel>(customer);
         }

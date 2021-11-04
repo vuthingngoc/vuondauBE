@@ -75,7 +75,7 @@ namespace VuonDau.Business.Services
             productInCart.CustomerId = productInCartRequest.CustomerId;
             productInCart.HarvestSellingId = productInCartRequest.HarvestSellingId;
             productInCart.Quantity = productInCartRequest.Quantity;
-            productInCart.Status = 1;
+            productInCart.Status = productInCartRequest.Status;
             await UpdateAsyn(productInCart);
             return mapper.Map<ProductInCartViewModel>(productInCart);
         }

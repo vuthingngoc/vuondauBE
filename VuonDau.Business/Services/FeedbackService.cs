@@ -70,7 +70,7 @@ namespace VuonDau.Business.Services
             }
             feedback.OrderId = feedbackInRequest.OrderId;
             feedback.Description = feedbackInRequest.Description;
-            feedback.Status = 1;
+            feedback.Status = feedbackInRequest.Status;
             await UpdateAsyn(feedback);
             return mapper.Map<FeedbackViewModel>(feedback);
         }

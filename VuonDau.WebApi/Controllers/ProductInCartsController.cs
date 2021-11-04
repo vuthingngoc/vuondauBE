@@ -78,19 +78,19 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="id"></param>
         /// <param name="request"></param>
         /// <returns></returns>
-        //[HttpPut]
-        //[Route("~/api/v1/productInCarts/{id:Guid}")]
-        //[SwaggerOperation(Tags = new[] { "ProductInCarts" })]
-        //public async Task<IActionResult> UpdateProductInCart([FromRoute] Guid id, UpdateProductInCartRequest request)
-        //{
-        //    var productInCart = await _productInCartService.UpdateProductInCart(id, request);
-        //    if (productInCart == null)
-        //    {
-        //        return NotFound("Message");
-        //    }
+        [HttpPut]
+        [Route("~/api/v1/productInCarts/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "ProductInCarts" })]
+        public async Task<IActionResult> UpdateProductInCart([FromRoute] Guid id, UpdateProductInCartRequest request)
+        {
+            var productInCart = await _productInCartService.UpdateProductInCart(id, request);
+            if (productInCart == null)
+            {
+                return NotFound("Message");
+            }
 
-        //    return Ok(productInCart);
-        //}
+            return Ok(productInCart);
+        }
 
         /// <summary>
         /// Xóa 1 productInCart qua id

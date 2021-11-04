@@ -13,6 +13,7 @@ using AutoMapper;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
@@ -77,7 +78,7 @@ namespace VuonDau.Business.Services
             farmer.Phone = farmerInRequest.Phone;
             farmer.BirthDay = farmerInRequest.BirthDay;
             farmer.Gender = farmerInRequest.Gender;
-            farmer.Status = 1;
+            farmer.Status = farmerInRequest.Status;
             await UpdateAsyn(farmer);
             return mapper.Map<FarmerViewModel>(farmer);
         }

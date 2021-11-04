@@ -121,7 +121,7 @@ namespace VuonDau.WebApi
             });
             #endregion
             app.ConfigMigration<VuondauDBContext>();
-            app.ConfigureErrorHandler(env);
+            //app.ConfigureErrorHandler(env);
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

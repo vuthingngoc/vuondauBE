@@ -115,6 +115,26 @@ namespace VuonDau.Business.Services
 
             return handler.WriteToken(secToken);
         }
+        //public static string GenerateNotExistJWTWebToken(IConfiguration configuration)
+        //{
+        //    setPrivateKey(configuration);
+
+        //    var securityKey = new SymmetricSecurityKey(Convert.FromBase64String(secretKey));
+
+        //    var credential = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
+
+        //    var header = new JwtHeader(credential);
+
+        //    var payload = new JwtPayload
+        //    {
+        //       { "ROLE", ((int)RoleEnum.NotExist).ToString()}
+        //    };
+
+        //    var secToken = new JwtSecurityToken(header, payload);
+        //    var handler = new JwtSecurityTokenHandler();
+
+        //    return handler.WriteToken(secToken);
+        //}
         public static TokenViewModel ReadJWTTokenToModel(string token, IConfiguration configuration)
         {
             setPrivateKey(configuration);
