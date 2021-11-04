@@ -85,7 +85,7 @@ namespace VuonDau.Business.Services
             farm.Address = farmInRequest.Address;
             farm.Description = farmInRequest.Description;
             farm.DateUpdate = DateTime.UtcNow;
-            farm.Status = 1;
+            farm.Status = farmInRequest.Status;
             await UpdateAsyn(farm);
             return mapper.Map<FarmViewModel>(farm);
         }

@@ -9,10 +9,11 @@ namespace VuonDau.Business.ViewModel
     public class FarmerViewModel
     {
         [BindNever]
+        public string jwtToken { get; set; }
+        [BindNever]
         public Guid? Id { get; set; }
         public string Email { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FullName { get; set; }
         public string Phone { get; set; }
         public DateTime? BirthDay { get; set; }
         public int? Gender { get; set; }

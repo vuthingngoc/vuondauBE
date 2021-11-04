@@ -7,8 +7,7 @@ namespace VuonDau.Business.Requests.Customer
     public class UpdateCustomerRequest
     {
         public Guid CustomerType { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FullName { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
         public DateTime? BirthDay { get; set; }

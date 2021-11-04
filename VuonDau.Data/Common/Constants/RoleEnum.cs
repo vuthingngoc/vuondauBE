@@ -7,9 +7,9 @@ namespace VuonDau.Data.Common.Constants
 {
     public enum RoleEnum
     {
-        NotExist,
         Farmer,
         Customer,
-        Admin
+        Admin,
+        NotExist
     }
 }

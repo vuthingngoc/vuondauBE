@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Order;
+using VuonDau.Business.Services;
 using VuonDau.Business.ViewModel;
 
 namespace VuonDau.WebApi.Controllers
@@ -11,7 +12,7 @@ namespace VuonDau.WebApi.Controllers
     public partial class OrdersController : ControllerBase
     {
         /// <summary>
-        /// Get List Customer
+        /// Get List Order
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -24,7 +25,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         /// <summary>
-        /// Get Customer by id
+        /// Get Order by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -52,7 +53,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         /// <summary>
-        /// Tạo mới 1 Customer
+        /// Tạo mới 1 Order
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -71,7 +72,7 @@ namespace VuonDau.WebApi.Controllers
         }
 
         /// <summary>
-        /// Cập nhập 1 Customer
+        /// Cập nhập 1 Order
         /// </summary>
         /// <param name="id"></param>
         /// <param name="request"></param>
@@ -89,9 +90,28 @@ namespace VuonDau.WebApi.Controllers
 
             return Ok(order);
         }
+        /// <summary>
+        /// Cập nhập 1 Status order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/api/v1/orders/status{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Orders" })]
+        public async Task<IActionResult> UpdateStatusOrder([FromRoute] Guid id, UpdateOrderStatusRequest request)
+        {
+            var order = await _orderService.UpdateStatusOrder(id, request);
+            if (order == null)
+            {
+                return NotFound("Message");
+            }
+
+            return Ok(order);
+        }
 
         /// <summary>
-        /// Xóa 1 Customer qua id
+        /// Xóa 1 Order qua id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

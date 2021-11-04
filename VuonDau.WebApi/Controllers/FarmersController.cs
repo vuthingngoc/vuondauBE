@@ -26,7 +26,7 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/farmers")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
-        public async Task<IActionResult> GetFarmers([FromQuery] FarmerViewModel filter)
+        public async Task<IActionResult> GetFarmers([FromQuery] SearchFarmerRequest filter)
         {
             var farmers = await _farmerService.GetAllFarmers(filter);
             return Ok(farmers);
@@ -61,7 +61,7 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "Farmers" })]
         public async Task<IActionResult> CreateFarmer([FromBody] CreateFarmerRequest request)
         {
-            var farmer = await _farmerService.CreateFarmer(request);
+            var farmer = await _farmerService.CreateFarmer(request, _configuration);
             if (farmer == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");
@@ -96,7 +96,7 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("~/api/farmers/{id:Guid}")]
+        [Route("~/api/v1/farmers/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
         public async Task<IActionResult> DeleteFarmer([FromRoute] Guid id)
         {

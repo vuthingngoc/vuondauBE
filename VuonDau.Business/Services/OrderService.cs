@@ -11,6 +11,7 @@ using VuonDau.Business.Requests.Order;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
+using VuonDau.Business.Requests.OrderDetail;
 
 namespace VuonDau.Business.Services
 {
@@ -21,6 +22,7 @@ namespace VuonDau.Business.Services
         Task<List<OrderViewModel>> GetOrderByCustomerId(Guid id);
         Task<OrderViewModel> CreateOrder(CreateOrderRequest request);
         Task<OrderViewModel> UpdateOrder(Guid id, UpdateOrderRequest request);
+        Task<OrderViewModel> UpdateStatusOrder(Guid id, UpdateOrderStatusRequest request);
         Task<int> DeleteOrder(Guid id);
     }
 
@@ -28,10 +30,14 @@ namespace VuonDau.Business.Services
     public partial class OrderService
     {
         private readonly IConfigurationProvider _mapper;
+        private readonly IOrderDetailService _orderDetailService;
+        private readonly IProductInCartService _productInCartService;
 
-        public OrderService(IUnitOfWork unitOfWork, IOrderRepository repository, IMapper mapper) : base(unitOfWork,
+        public OrderService(IUnitOfWork unitOfWork, IOrderRepository repository, IMapper mapper, IOrderDetailService orderDetailService, IProductInCartService productInCartService) : base(unitOfWork,
             repository)
         {
+            _orderDetailService = orderDetailService;
+            _productInCartService = productInCartService;
             _mapper = mapper.ConfigurationProvider;
         }
 
@@ -56,6 +62,23 @@ namespace VuonDau.Business.Services
             order.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(order);
             var orderViewModel = mapper.Map<OrderViewModel>(order);
+            if(orderViewModel != null)
+            {
+                ProductInCartViewModel filter = new ProductInCartViewModel();
+                List<ProductInCartViewModel> products = await _productInCartService.GetAllProductInCarts(filter);
+                if (products != null)
+                {
+                    CreateOrderDetailRequest req = new CreateOrderDetailRequest();
+                    foreach(ProductInCartViewModel product in products)
+                    {
+                        req.OrderId = orderViewModel.Id;
+                        req.HarvestsellingId = product.HarvestSelling.Id;
+                        req.Weight = product.Quantity;
+                        req.Price = product.Price;
+                        var orderDetail = await _orderDetailService.CreateOrderDetail(req);
+                    }
+                }
+            }
             return orderViewModel;
         }
 
@@ -69,9 +92,25 @@ namespace VuonDau.Business.Services
                 return null;
             }
             order.CustomerId = orderInRequest.CustomerId;
+            order.CampaignId = orderInRequest.CampaignId;
+            order.FullName = orderInRequest.FullName;
+            order.Message = orderInRequest.Message;
+            order.Phone = orderInRequest.Phone;
             order.Address = orderInRequest.Address;
             order.TotalPrice = orderInRequest.TotalPrice;
             order.Status = orderInRequest.Status;
+            await UpdateAsyn(order);
+            return mapper.Map<OrderViewModel>(order);
+        }
+        public async Task<OrderViewModel> UpdateStatusOrder(Guid id, UpdateOrderStatusRequest request)
+        {
+            var mapper = _mapper.CreateMapper();
+            var order = await Get(p => p.Id == id).FirstOrDefaultAsync();
+            if (order == null)
+            {
+                return null;
+            }
+            order.Status = request.Status;
             await UpdateAsyn(order);
             return mapper.Map<OrderViewModel>(order);
         }

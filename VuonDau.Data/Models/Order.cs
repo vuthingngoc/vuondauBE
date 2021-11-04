@@ -9,7 +9,6 @@ namespace VuonDau.Data.Models
     {
         public Order()
         {
-            Campaigns = new HashSet<Campaign>();
             Feedbacks = new HashSet<Feedback>();
             OrderDetails = new HashSet<OrderDetail>();
             Transactions = new HashSet<Transaction>();
@@ -17,13 +16,17 @@ namespace VuonDau.Data.Models
 
         public Guid Id { get; set; }
         public Guid? CustomerId { get; set; }
+        public Guid? CampaignId { get; set; }
         public DateTime? DateOfCreate { get; set; }
+        public string FullName { get; set; }
+        public string Message { get; set; }
+        public string Phone { get; set; }
         public string Address { get; set; }
         public double? TotalPrice { get; set; }
         public int? Status { get; set; }
 
+        public virtual Campaign Campaign { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual ICollection<Campaign> Campaigns { get; set; }
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }

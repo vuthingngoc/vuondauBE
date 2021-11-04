@@ -35,37 +35,37 @@ namespace VuonDau.WebApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("~/api/v1/campaigns/{id:Guid}")]
-        [SwaggerOperation(Tags = new[] { "Campaigns" })]
-        public async Task<IActionResult> GetCampaign([FromRoute] Guid id)
-        {
-            var campaign = await _campaignService.GetCampaignById(id);
-            if (campaign == null)
-            {
-                await _campaignService.GetCampaignByHarvestSellingId(id);
-                var campaigns = await _campaignService.GetCampaignByHarvestSellingId(id);
-                if (campaigns.Count > 0)
-                {
-                    return Ok(campaigns);
-                }
-                else
-                {
-                    await _campaignService.GetCampaignByOrderId(id);
-                    campaigns = await _campaignService.GetCampaignByOrderId(id);
-                    if (campaigns.Count > 0)
-                    {
-                        return Ok(campaigns);
-                    }
-                    else
-                    {
-                        return NotFound("NOT_FOUND_MESSAGE");
-                    }
-                }
-            }
+        //[HttpGet]
+        //[Route("~/api/v1/campaigns/{id:Guid}")]
+        //[SwaggerOperation(Tags = new[] { "Campaigns" })]
+        //public async Task<IActionResult> GetCampaign([FromRoute] Guid id)
+        //{
+        //    var campaign = await _campaignService.GetCampaignById(id);
+        //    if (campaign == null)
+        //    {
+        //        await _campaignService.GetCampaignByHarvestSellingId(id);
+        //        var campaigns = await _campaignService.GetCampaignByHarvestSellingId(id);
+        //        if (campaigns.Count > 0)
+        //        {
+        //            return Ok(campaigns);
+        //        }
+        //        else
+        //        {
+        //            await _campaignService.GetCampaignByOrderId(id);
+        //            campaigns = await _campaignService.GetCampaignByOrderId(id);
+        //            if (campaigns.Count > 0)
+        //            {
+        //                return Ok(campaigns);
+        //            }
+        //            else
+        //            {
+        //                return NotFound("NOT_FOUND_MESSAGE");
+        //            }
+        //        }
+        //    }
 
-            return Ok(campaign);
-        }
+        //    return Ok(campaign);
+        //}
 
 
         ///// <summary>

@@ -67,6 +67,9 @@ namespace VuonDau.Business.Services
                 return null;
             }
             harvestSelling.HarvestId = harvestSellingInRequest.HarvestId;
+            harvestSelling.CampaignId = harvestSellingInRequest.CampaignId;
+            harvestSelling.DateOfCreate = harvestSellingInRequest.DateOfCreate;
+            harvestSelling.EndDate = harvestSellingInRequest.EndDate;
             harvestSelling.MinWeight = harvestSellingInRequest.MinWeight;
             harvestSelling.TotalWeight = harvestSellingInRequest.TotalWeight;
             harvestSelling.Status = harvestSellingInRequest.Status;

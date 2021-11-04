@@ -9,6 +9,8 @@ namespace VuonDau.Data.Models
     {
         public Harvest()
         {
+            Feedbacks = new HashSet<Feedback>();
+            HarvestPictures = new HashSet<HarvestPicture>();
             HarvestSellings = new HashSet<HarvestSelling>();
         }
 
@@ -23,6 +25,8 @@ namespace VuonDau.Data.Models
 
         public virtual Farm Farm { get; set; }
         public virtual Product Product { get; set; }
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
+        public virtual ICollection<HarvestPicture> HarvestPictures { get; set; }
         public virtual ICollection<HarvestSelling> HarvestSellings { get; set; }
     }
 }

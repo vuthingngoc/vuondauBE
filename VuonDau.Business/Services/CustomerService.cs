@@ -77,8 +77,7 @@ namespace VuonDau.Business.Services
                 return null;
             }
             customer.CustomerType = customerInRequest.CustomerType;
-            customer.FirstName = customerInRequest.FirstName;
-            customer.LastName = customerInRequest.LastName;
+            customer.FullName = customerInRequest.FullName;
             customer.Password = customerInRequest.Password;
             customer.Phone = customerInRequest.Phone;
             customer.Birthday = customerInRequest.Birthday;

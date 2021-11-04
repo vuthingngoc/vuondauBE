@@ -9034,11 +9034,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+      "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
       "projectName": "VuonDau.WebApi",
-      "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+      "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
       "packagesPath": "C:\\Users\\09323\\.nuget\\packages\\",
-      "outputPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.WebApi\\obj\\",
+      "outputPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -9059,11 +9059,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj": {
-              "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj"
+            "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj": {
+              "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Business\\VuonDau.Business.csproj"
             },
-            "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {
-              "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj"
+            "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj": {
+              "projectPath": "D:\\Education\\Ky7\\vuondauBE-update-database\\VuonDau.Data\\VuonDau.Data.csproj"
             }
           }
         }
