@@ -71,7 +71,7 @@ namespace VuonDau.Business.Services
             order.CustomerId = orderInRequest.CustomerId;
             order.Address = orderInRequest.Address;
             order.TotalPrice = orderInRequest.TotalPrice;
-            order.Status = 1;
+            order.Status = orderInRequest.Status;
             await UpdateAsyn(order);
             return mapper.Map<OrderViewModel>(order);
         }

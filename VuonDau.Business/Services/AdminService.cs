@@ -57,8 +57,10 @@ namespace VuonDau.Business.Services
                     {
                         string verifyRequestToken = TokenService.GenerateAdminJWTWebToken(result3, configuration);
                         return await Task.Run(() => verifyRequestToken); // return if everything is done
+                    } else {
+                        string verifyRequestToken = TokenService.GenerateNotExistJWTWebToken(configuration);
+                        return await Task.Run(() => verifyRequestToken); // return if everything is done
                     }
-                    throw new ErrorResponse((int)ResponseStatusConstants.CREATED, "Email's not existed in database yet.");
                 }
                 else
                 {

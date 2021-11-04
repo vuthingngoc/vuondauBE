@@ -17,15 +17,6 @@ namespace VuonDau.WebApi.Controllers
 {
     public partial class CustomersController : ControllerBase
     {
-        //[HttpPost]
-        //[Route("~/api/v1/login")]
-        //public async Task<IActionResult> Login([FromBody] LoginRequest request)
-        //{
-        //    string token = await _customerService.Login(request, _configuration);
-
-        //    return await Task.Run(() => Ok(token));
-        //}
-
         /// <summary>
         /// Get Customer by id
         /// </summary>
@@ -60,11 +51,15 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         [CustomAuthorized(AppRoles = "Admin")]
 =======
 >>>>>>> update-database
 =======
 >>>>>>> b80301f358fce8737aa58cbd3a6ad0d1fecf2c06
+=======
+        [CustomAuthorized(AppRoles = "Admin")]
+>>>>>>> 2a68c653fee721c9c8133eebbb6a46552a6c8b43
         [Route("~/api/v1/customers")]
         [SwaggerOperation(Tags = new[] { "Customers" })]
         public async Task<IActionResult> GetCustomers([FromQuery] CustomerViewModel filter)
@@ -83,7 +78,7 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "Customers" })]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request)
         {
-            var customer = await _customerService.CreateCustomer(request);
+            var customer = await _customerService.CreateCustomer(request, _configuration);
             if (customer == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "INTERNAL_SERVER_ERROR");

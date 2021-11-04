@@ -24,7 +24,7 @@ namespace VuonDau.Business.Services
         Task<List<CustomerViewModel>> GetAllCustomers(CustomerViewModel filter);
         Task<CustomerViewModel> GetCustomerById(Guid id);
         Task<List<CustomerViewModel>> GetCustomerByType(Guid id);
-        Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request);
+        Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request, IConfiguration configuration);
         Task<CustomerViewModel> UpdateCustomer(Guid id, UpdateCustomerRequest request);
         Task<int> DeleteCustomer(Guid id);
         Task<CustomerViewModel> GetByMail(string mail);
@@ -59,7 +59,7 @@ namespace VuonDau.Business.Services
         {
             return await Get(p => p.CustomerType == CustomerTypeId).ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
         }
-        public async Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request)
+        public async Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request, IConfiguration configuration)
             {
             var mapper = _mapper.CreateMapper();
             var customer = mapper.Map<Customer>(request);
@@ -67,6 +67,7 @@ namespace VuonDau.Business.Services
             customer.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(customer);
             var customerViewModel = mapper.Map<CustomerViewModel>(customer);
+            customerViewModel.jwtToken = TokenService.GenerateCustomerJWTWebToken(customerViewModel, configuration);
             return customerViewModel;
         }
         public async Task<CustomerViewModel> UpdateCustomer(Guid id, UpdateCustomerRequest request)
@@ -85,7 +86,7 @@ namespace VuonDau.Business.Services
             customer.Phone = customerInRequest.Phone;
             customer.Birthday = customerInRequest.Birthday;
             customer.Gender = customerInRequest.Gender;
-            customer.Status = 1;
+            customer.Status = customerInRequest.Status;
             await UpdateAsyn(customer);
             return mapper.Map<CustomerViewModel>(customer);
         }
@@ -104,6 +105,7 @@ namespace VuonDau.Business.Services
 
             return 1;
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 <<<<<<< HEAD
@@ -124,6 +126,9 @@ namespace VuonDau.Business.Services
 >>>>>>> update-database
 =======
 >>>>>>> b80301f358fce8737aa58cbd3a6ad0d1fecf2c06
+=======
+
+>>>>>>> 2a68c653fee721c9c8133eebbb6a46552a6c8b43
         //public override bool Equals(object obj)
         //{
         //    return obj is FarmerService service &&

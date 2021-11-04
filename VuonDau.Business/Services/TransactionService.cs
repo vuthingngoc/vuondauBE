@@ -76,7 +76,7 @@ namespace VuonDau.Business.Services
             transaction.Price = transactionInRequest.Price;
             transaction.PaymentId = transactionInRequest.PaymentId;
             transaction.Description = transactionInRequest.Description;
-            transaction.Status = 1;
+            transaction.Status = transactionInRequest.Status;
             await UpdateAsyn(transaction);
             return mapper.Map<TransactionViewModel>(transaction);
         }

@@ -8,5 +8,6 @@ namespace VuonDau.Business.Requests.Feedback
     {
         public Guid? OrderId { get; set; }
         public string Description { get; set; }
+        public int? Status { get; set; }
     }
 }
