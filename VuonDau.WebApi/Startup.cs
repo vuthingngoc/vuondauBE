@@ -58,7 +58,7 @@ namespace VuonDau.WebApi
                     .AllowAnyMethod();
                 });
             });
-            //services.ConfigureFilter<ErrorHandlingFilter>();
+            services.ConfigureFilter<ErrorHandlingFilter>();
             services.JsonFormatConfig();
             services.ConfigureSwagger();
             services.AddDbContext<VuondauDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VuonDauDatabase"))
@@ -121,7 +121,7 @@ namespace VuonDau.WebApi
             });
             #endregion
             app.ConfigMigration<VuondauDBContext>();
-            //app.ConfigureErrorHandler(env);
+            app.ConfigureErrorHandler(env);
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

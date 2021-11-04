@@ -8,7 +8,7 @@ namespace VuonDau.Business.ViewModel
 {
     public class FarmViewModel
     {
-        [BindNever]
+        //[BindNever]
         public Guid? Id { get; set; }
         public virtual FarmTypeViewModel? FarmType { get; set; }
         public virtual FarmerViewModel? Farmer { get; set; }

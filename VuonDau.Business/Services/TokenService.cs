@@ -35,7 +35,10 @@ namespace VuonDau.Business.Services
             var payload = new JwtPayload
             {
                { "ID", customViewModel.Id.ToString()},
-               { "ROLE", ((int)RoleEnum.Customer).ToString()}
+               { "Email", customViewModel.Email.ToString()},
+               { "FIRSTNAME", customViewModel.FullName.ToString()},
+               { "ROLE", ((int)RoleEnum.Customer).ToString()},
+               { "STATUS", customViewModel.Status.ToString()}
             };
 
             var secToken = new JwtSecurityToken(header, payload);
@@ -57,7 +60,10 @@ namespace VuonDau.Business.Services
             var payload = new JwtPayload
             {
                { "ID", farmerViewModel.Id.ToString()},
-               { "ROLE", ((int)RoleEnum.Farmer).ToString()}
+               { "Email", farmerViewModel.Email.ToString()},
+               { "FULLNAME", farmerViewModel.FullName.ToString()},
+               { "ROLE", ((int)RoleEnum.Farmer).ToString()},
+               { "STATUS", farmerViewModel.Status.ToString()}
             };
 
             var secToken = new JwtSecurityToken(header, payload);
@@ -79,7 +85,9 @@ namespace VuonDau.Business.Services
             var payload = new JwtPayload
             {
                { "ID", adminViewModel.Id.ToString()},
-               { "ROLE", ((int)RoleEnum.Admin).ToString()}
+               { "Email", adminViewModel.UserName.ToString()},
+               { "ROLE", ((int)RoleEnum.Admin).ToString()},
+               { "STATUS", adminViewModel.Status.ToString()}
             };
 
             var secToken = new JwtSecurityToken(header, payload);
@@ -121,8 +129,12 @@ namespace VuonDau.Business.Services
             var result = new JwtSecurityTokenHandler().ReadJwtToken(token);
 
             Guid id = Guid.Parse(result.Claims.First(claim => claim.Type == PayloadKeyConstants.ID).Value);
+            string email = result.Claims.First(claim => claim.Type == PayloadKeyConstants.EMAIL).Value;
+            string firstName = result.Claims.First(claim => claim.Type == PayloadKeyConstants.FIRSTNAME).Value;
+            string lastName = result.Claims.First(claim => claim.Type == PayloadKeyConstants.LASTNAME).Value;
             int role = int.Parse(result.Claims.First(claim => claim.Type == PayloadKeyConstants.ROLE).Value);
-            return new TokenViewModel(id, role);
+            int status = int.Parse(result.Claims.First(claim => claim.Type == PayloadKeyConstants.STATUS).Value);
+            return new TokenViewModel(id, email, firstName, lastName, role, status);
         }
 
         private static SecurityKey GetSymmetricSecurityKey()

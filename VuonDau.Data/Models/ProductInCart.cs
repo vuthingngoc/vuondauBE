@@ -10,7 +10,7 @@ namespace VuonDau.Data.Models
         public Guid Id { get; set; }
         public Guid? CustomerId { get; set; }
         public Guid? HarvestSellingId { get; set; }
-        public DateTime? DateCreate { get; set; }
+        public double? Price { get; set; }
         public int? Quantity { get; set; }
         public int? Status { get; set; }
 

@@ -1,4 +1,10 @@
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.csprojAssemblyReference.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.AssemblyInfoInputs.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.AssemblyInfo.cs
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.csproj.CoreCompileInputs.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\NLog.config
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\appsettings.json
@@ -175,12 +181,6 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\V
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\VuonDau.Data.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\VuonDau.Business.pdb
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\VuonDau.Data.pdb
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.AssemblyInfoInputs.cache
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.AssemblyInfo.cs
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.csproj.CoreCompileInputs.cache
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\staticwebassets\VuonDau.WebApi.StaticWebAssets.Manifest.cache
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\staticwebassets\VuonDau.WebApi.StaticWebAssets.xml
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\scopedcss\bundle\VuonDau.WebApi.styles.css

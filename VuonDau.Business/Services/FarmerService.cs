@@ -10,16 +10,17 @@ using System;
 using VuonDau.Business.Requests.Farmer;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
-using Reso.Core.Utilities;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
+using Reso.Core.Utilities;
 
 namespace VuonDau.Business.Services
 {
     public partial interface IFarmerService
     {
-        Task<List<FarmerViewModel>> GetAllFarmers(FarmerViewModel filter);
+        Task<List<FarmerViewModel>> GetAllFarmers(SearchFarmerRequest filter);
         Task<FarmerViewModel> GetFarmerById(Guid id);
-        Task<FarmerViewModel> CreateFarmer(CreateFarmerRequest request);
+        Task<FarmerViewModel> CreateFarmer(CreateFarmerRequest request, IConfiguration configuration);
         Task<FarmerViewModel> UpdateFarmer(Guid id, UpdateFarmerRequest request);
         Task<FarmerViewModel> GetByMail(string mail);
         Task<int> DeleteFarmer(Guid id);
@@ -28,7 +29,7 @@ namespace VuonDau.Business.Services
 
     public partial class FarmerService 
     {
-        private readonly IConfigurationProvider _mapper;
+        private readonly AutoMapper.IConfigurationProvider _mapper;
 
         public FarmerService(IUnitOfWork unitOfWork, IFarmerRepository repository, IMapper mapper) : base(unitOfWork,
             repository)
@@ -36,21 +37,21 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FarmerViewModel>> GetAllFarmers(FarmerViewModel filter)
+        public async Task<List<FarmerViewModel>> GetAllFarmers(SearchFarmerRequest filter)
         {
-            return await Get().OrderByDescending(s => s.Status).ProjectTo<FarmerViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            return await Get(f => f.DateOfCreate == filter.DateOfCreate).OrderByDescending(f => f.Status).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<FarmerViewModel> GetFarmerById(Guid id)
         {
             return await Get(p => p.Id == id).ProjectTo<FarmerViewModel>(_mapper).FirstOrDefaultAsync();
-        }
+        } 
         public async Task<FarmerViewModel> GetByMail(string mail)
         {
             return await Get(c => c.Email.Equals(mail)).ProjectTo<FarmerViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
-        public async Task<FarmerViewModel> CreateFarmer(CreateFarmerRequest request)
+        public async Task<FarmerViewModel> CreateFarmer(CreateFarmerRequest request, IConfiguration configuration)
             {
             var mapper = _mapper.CreateMapper();
             var farmer = mapper.Map<Farmer>(request);
@@ -58,6 +59,7 @@ namespace VuonDau.Business.Services
             farmer.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(farmer);
             var farmerViewModel = mapper.Map<FarmerViewModel>(farmer);
+            farmerViewModel.jwtToken = TokenService.GenerateFarmerJWTWebToken(farmerViewModel, configuration);
             return farmerViewModel;
         }
 
@@ -70,8 +72,7 @@ namespace VuonDau.Business.Services
             {
                 return null;
             }
-            farmer.FirstName = farmerInRequest.FirstName;
-            farmer.LastName = farmerInRequest.LastName;
+            farmer.FullName = farmerInRequest.FullName;
             farmer.Password = farmerInRequest.Password;
             farmer.Phone = farmerInRequest.Phone;
             farmer.BirthDay = farmerInRequest.BirthDay;

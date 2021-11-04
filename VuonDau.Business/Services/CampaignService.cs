@@ -22,8 +22,6 @@ namespace VuonDau.Business.Services
     {
         Task<List<CampaignViewModel>> GetAllCampaigns(CampaignViewModel filter);
         Task<CampaignViewModel> GetCampaignById(Guid id);
-        Task<List<CampaignViewModel>> GetCampaignByHarvestSellingId(Guid id);
-        Task<List<CampaignViewModel>> GetCampaignByOrderId(Guid id);
         Task<CampaignViewModel> CreateCampaign(CreateCampaignRequest request);
         Task<CampaignViewModel> UpdateCampaign(Guid id, UpdateCampaignRequest request);
         Task<int> DeleteCampaign(Guid id);
@@ -51,14 +49,14 @@ namespace VuonDau.Business.Services
             return await Get(p => p.Id == id ).ProjectTo<CampaignViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
-        public async Task<List<CampaignViewModel>> GetCampaignByHarvestSellingId(Guid HarvestSellingId)
-        {
-            return await Get(p => p.HarvestSellingId == HarvestSellingId).ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
-        }
-        public async Task<List<CampaignViewModel>> GetCampaignByOrderId(Guid OrderId)
-        {
-            return await Get(p => p.OrderId == OrderId).ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
-        }
+        //public async Task<List<CampaignViewModel>> GetCampaignByHarvestSellingId(Guid HarvestSellingId)
+        //{
+        //    return await Get(p => p.HarvestSellingId == HarvestSellingId).ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
+        //}
+        //public async Task<List<CampaignViewModel>> GetCampaignByOrderId(Guid OrderId)
+        //{
+        //    return await Get(p => p.OrderId == OrderId).ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
+        //}
         public async Task<CampaignViewModel> CreateCampaign(CreateCampaignRequest request)
             {
             var mapper = _mapper.CreateMapper();
@@ -78,12 +76,10 @@ namespace VuonDau.Business.Services
             {
                 return null;
             }
-            campaign.HarvestSellingId = campaignInRequest.HarvestSellingId;
-            campaign.OrderId = campaignInRequest.OrderId;
             campaign.StartTime = campaignInRequest.StartTime;
             campaign.EndTime = campaignInRequest.EndTime;
             campaign.MinOrderAmount = campaignInRequest.MinOrderAmount;
-            campaign.Status = 1;
+            campaign.Status = (int)Status.Active;
             await UpdateAsyn(campaign);
             return mapper.Map<CampaignViewModel>(campaign);
         }

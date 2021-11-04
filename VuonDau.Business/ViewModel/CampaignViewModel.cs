@@ -10,8 +10,6 @@ namespace VuonDau.Business.ViewModel
     {
         [BindNever]
         public Guid? Id { get; set; }
-        public virtual HarvestSellingViewModel? HarvestSelling { get; set; }
-        public Guid? OrderId { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
         public int? MinOrderAmount { get; set; }
