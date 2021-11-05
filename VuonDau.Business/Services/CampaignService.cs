@@ -20,7 +20,7 @@ namespace VuonDau.Business.Services
 {
     public partial interface ICampaignService
     {
-        Task<List<CampaignViewModel>> GetAllCampaigns(CampaignViewModel filter);
+        Task<List<CampaignViewModel>> GetAllCampaigns(SearchCampaignRequest filter);
         Task<CampaignViewModel> GetCampaignById(Guid id);
         Task<CampaignViewModel> CreateCampaign(CreateCampaignRequest request);
         Task<CampaignViewModel> UpdateCampaign(Guid id, UpdateCampaignRequest request);
@@ -38,9 +38,10 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CampaignViewModel>> GetAllCampaigns(CampaignViewModel filter)
+        public async Task<List<CampaignViewModel>> GetAllCampaigns(SearchCampaignRequest request)
         {
-            return await Get().ProjectTo<CampaignViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            //request.Name = request.Name == null ? "" : request.FullName;
+            return await Get().ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
         }
 
 

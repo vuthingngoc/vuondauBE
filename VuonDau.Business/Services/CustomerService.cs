@@ -13,12 +13,13 @@ using AutoMapper;
 using VuonDau.Business.Requests;
 using Microsoft.Extensions.Configuration;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
     public partial interface ICustomerService
     {
-        Task<List<CustomerViewModel>> GetAllCustomers(CustomerViewModel filter);
+        Task<List<CustomerViewModel>> GetAllCustomers(SearchCustomerRequest request);
         Task<CustomerViewModel> GetCustomerById(Guid id);
         Task<List<CustomerViewModel>> GetCustomerByType(Guid id);
         Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request, IConfiguration configuration);
@@ -38,9 +39,20 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CustomerViewModel>> GetAllCustomers(CustomerViewModel filter)
+        public async Task<List<CustomerViewModel>> GetAllCustomers(SearchCustomerRequest request)
         {
-            return await Get().ProjectTo<CustomerViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            request.Email = request.Email == null ? "" : request.Email;
+            request.FullName = request.FullName == null ? "" : request.FullName;
+            if (request.Status == null)
+            {
+                return await Get(c => c.Email.Contains(request.Email) && c.FullName.Contains(request.FullName))
+                    .OrderByDescending(c => c.Status).OrderBy(c => c.FullName).ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
+            }
+            else
+            {
+                return await Get(c => c.Email.Contains(request.Email) && c.FullName.Contains(request.FullName) && c.Status == request.Status)
+                    .OrderByDescending(c => c.Status).OrderBy(c => c.FullName).ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
+            }
         }
 
         public async Task<CustomerViewModel> GetByMail(string mail)

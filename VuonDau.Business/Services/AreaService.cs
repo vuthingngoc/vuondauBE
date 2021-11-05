@@ -20,7 +20,7 @@ namespace VuonDau.Business.Services
 {
     public partial interface IAreaService
     {
-        Task<List<AreaViewModel>> GetAllAreas(AreaViewModel filter);
+        Task<List<AreaViewModel>> GetAllAreas(string name);
         Task<AreaViewModel> GetAreaById(Guid id);
         Task<AreaViewModel> CreateArea(CreateAreaRequest request);
         Task<AreaViewModel> UpdateArea(Guid id, UpdateAreaRequest request);
@@ -38,9 +38,10 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<AreaViewModel>> GetAllAreas(AreaViewModel filter)
+        public async Task<List<AreaViewModel>> GetAllAreas(string name)
         {
-            return await Get().ProjectTo<AreaViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            name = name == null ? "" : name;
+            return await Get(a => a.Name.Contains(name)).ProjectTo<AreaViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<AreaViewModel> GetAreaById(Guid id)

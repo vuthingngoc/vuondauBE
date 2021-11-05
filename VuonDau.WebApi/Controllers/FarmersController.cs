@@ -26,9 +26,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/farmers")]
         [SwaggerOperation(Tags = new[] { "Farmers" })]
-        public async Task<IActionResult> GetFarmers([FromQuery] SearchFarmerRequest filter)
+        public async Task<IActionResult> GetFarmers([FromQuery] SearchFarmerRequest request)
         {
-            var farmers = await _farmerService.GetAllFarmers(filter);
+            var farmers = await _farmerService.GetAllFarmers(request);
             return Ok(farmers);
         }
 

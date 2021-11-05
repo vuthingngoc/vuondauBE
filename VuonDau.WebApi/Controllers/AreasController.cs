@@ -24,9 +24,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/areas")]
         [SwaggerOperation(Tags = new[] { "Areas" })]
-        public async Task<IActionResult> GetAreas([FromQuery] AreaViewModel filter)
+        public async Task<IActionResult> GetAreas([FromQuery] string name)
         {
-            var areas = await _areaService.GetAllAreas(filter);
+            var areas = await _areaService.GetAllAreas(name);
             return Ok(areas);
         }
 

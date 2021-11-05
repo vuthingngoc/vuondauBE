@@ -51,9 +51,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/customers")]
         [SwaggerOperation(Tags = new[] { "Customers" })]
-        public async Task<IActionResult> GetCustomers([FromQuery] CustomerViewModel filter)
+        public async Task<IActionResult> GetCustomers([FromQuery] SearchCustomerRequest request)
         {
-            var customers = await _customerService.GetAllCustomers(filter);
+            var customers = await _customerService.GetAllCustomers(request);
             return Ok(customers);
         }
 

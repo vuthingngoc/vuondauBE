@@ -38,9 +38,19 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FarmerViewModel>> GetAllFarmers(SearchFarmerRequest filter)
+        public async Task<List<FarmerViewModel>> GetAllFarmers(SearchFarmerRequest request)
         {
-            return await Get(f => f.DateOfCreate == filter.DateOfCreate).OrderByDescending(f => f.Status).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
+            request.Email = request.Email == null ? "" : request.Email;
+            request.FullName = request.FullName == null ? "" : request.FullName;
+            if (request.Status == null)
+            {
+                return await Get(f => f.Email.Contains(request.Email) && f.FullName.Contains(request.FullName))
+                    .OrderByDescending(f => f.Status).OrderBy(f => f.FullName).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
+            }
+            else {
+                return await Get(f => f.Email.Contains(request.Email) && f.FullName.Contains(request.FullName) && f.Status == request.Status)
+                    .OrderByDescending(f => f.Status).OrderBy(f => f.FullName).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
+            }
         }
 
         public async Task<FarmerViewModel> GetFarmerById(Guid id)
