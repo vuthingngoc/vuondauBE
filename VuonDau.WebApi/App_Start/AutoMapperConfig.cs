@@ -27,6 +27,7 @@ namespace VuonDau.WebApi.App_Start
                 mc.ConfigFarmPictureModule();
                 mc.ConfigFarmTypeModule();
                 mc.ConfigHarvestModule();
+                mc.ConfigHarvestPictureModule();
                 mc.ConfigHarvestSellingModule();
                 mc.ConfigHarvestSellingPriceModule();
                 mc.ConfigCustomerModule();
