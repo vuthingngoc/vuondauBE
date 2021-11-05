@@ -22,14 +22,14 @@ namespace VuonDau.WebApi.Controllers
         /// Get List Campaign
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        [Route("~/api/v1/campaigns")]
-        [SwaggerOperation(Tags = new[] { "Campaigns" })]
-        public async Task<IActionResult> GetCampaigns([FromQuery] CampaignViewModel filter)
-        {
-            var campaigns = await _campaignService.GetAllCampaigns(filter);
-            return Ok(campaigns);
-        }
+        //[HttpGet]
+        //[Route("~/api/v1/campaigns")]
+        //[SwaggerOperation(Tags = new[] { "Campaigns" })]
+        //public async Task<IActionResult> GetCampaigns([FromQuery] CampaignViewModel filter)
+        //{
+        //    var campaigns = await _campaignService.GetAllCampaigns(filter);
+        //    return Ok(campaigns);
+        //}
         /// <summary>
         /// Get Campaign by id
         /// </summary>
