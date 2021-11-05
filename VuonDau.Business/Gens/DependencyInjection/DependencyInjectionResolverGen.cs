@@ -55,7 +55,10 @@ namespace VuonDau.Data.Gens.Commons
         
             services.AddScoped<IHarvestSellingPriceService, HarvestSellingPriceService>();
             services.AddScoped<IHarvestSellingPriceRepository, HarvestSellingPriceRepository>();
-        
+
+            services.AddScoped<IHarvestPictureService, HarvestPictureService>();
+            services.AddScoped<IHarvestPictureRepository, HarvestPictureRepository>();
+
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderRepository, OrderRepository>();
         

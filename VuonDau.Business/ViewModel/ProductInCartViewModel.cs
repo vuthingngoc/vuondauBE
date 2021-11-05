@@ -12,7 +12,7 @@ namespace VuonDau.Business.ViewModel
         public Guid? Id { get; set; }
         public virtual CustomerViewModel? Customer { get; set; }
         public virtual HarvestSellingViewModel? HarvestSelling { get; set; }
-        public DateTime? DateCreate { get; set; }
+        public double? Price { get; set; }
         public int? Quantity { get; set; }
         public int? Status { get; set; }
     }

@@ -69,6 +69,7 @@ namespace VuonDau.Business.Services
                 return null;
             }
             feedback.OrderId = feedbackInRequest.OrderId;
+            feedback.HarvestId = feedbackInRequest.HarvestId;
             feedback.Description = feedbackInRequest.Description;
             feedback.Status = feedbackInRequest.Status;
             await UpdateAsyn(feedback);

@@ -11,6 +11,7 @@ namespace VuonDau.Business.ViewModel
         [BindNever]
         public Guid? Id { get; set; }
         public virtual HarvestViewModel Harvest { get; set; }
+        public virtual CampaignViewModel Campaign { get; set; }
         public DateTime? DateOfCreate { get; set; }
         public DateTime? EndDate { get; set; }
         public double? MinWeight { get; set; }
