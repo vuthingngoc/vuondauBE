@@ -1851,7 +1851,10 @@
         },
         "runtime": {
           "bin/placeholder/VuonDau.Data.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -6536,25 +6539,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\09323\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\vuong\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Business\\VuonDau.Business.csproj",
+      "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\VuonDau.Business.csproj",
       "projectName": "VuonDau.Business",
-      "projectPath": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Business\\VuonDau.Business.csproj",
-      "packagesPath": "C:\\Users\\09323\\.nuget\\packages\\",
-      "outputPath": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Business\\obj\\",
+      "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\VuonDau.Business.csproj",
+      "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\09323\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -6567,8 +6565,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Data\\VuonDau.Data.csproj": {
-              "projectPath": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Data\\VuonDau.Data.csproj"
+            "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj": {
+              "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj"
             }
           }
         }
@@ -6603,11 +6601,14 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }
