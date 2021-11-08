@@ -11,12 +11,13 @@ using VuonDau.Business.Requests.Harvest;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
     public partial interface IHarvestService
     {
-        Task<List<HarvestViewModel>> GetAllHarvests(HarvestViewModel filter);
+        Task<List<HarvestViewModel>> GetAllHarvests(SearchHarvestRequest request);
         Task<HarvestViewModel> GetHarvestById(Guid id);
         Task<List<HarvestViewModel>> GetHarvestByFarmId(Guid id);
         Task<List<HarvestViewModel>> GetHarvestByProductId(Guid id);
@@ -36,9 +37,15 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<HarvestViewModel>> GetAllHarvests(HarvestViewModel filter)
+        public async Task<List<HarvestViewModel>> GetAllHarvests(SearchHarvestRequest request)
         {
-            return await Get().ProjectTo<HarvestViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            if (request.FarmId == null)
+            {
+                return await Get(h => h.FarmId==request.FarmId)
+                    .OrderByDescending(h => h.Status).OrderBy(h => h.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+            }
+            return await Get()
+                    .OrderByDescending(h => h.Status).OrderBy(h => h.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<HarvestViewModel> GetHarvestById(Guid id)

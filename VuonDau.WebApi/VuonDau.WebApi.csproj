@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Firebase\firebase_config.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="FirebaseAdmin" Version="2.2.0" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
@@ -40,6 +36,10 @@
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Firebase\firebase_config.json" />
   </ItemGroup>
 
 </Project>
