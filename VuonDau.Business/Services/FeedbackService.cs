@@ -70,6 +70,7 @@ namespace VuonDau.Business.Services
             }
             feedback.OrderId = feedbackInRequest.OrderId;
             feedback.HarvestId = feedbackInRequest.HarvestId;
+            feedback.FarmerId = feedbackInRequest.FarmerId;
             feedback.Description = feedbackInRequest.Description;
             feedback.Status = feedbackInRequest.Status;
             await UpdateAsyn(feedback);

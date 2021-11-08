@@ -10,6 +10,7 @@ namespace VuonDau.Data.Models
         public Farmer()
         {
             Farms = new HashSet<Farm>();
+            Feedbacks = new HashSet<Feedback>();
         }
 
         public Guid Id { get; set; }
@@ -23,5 +24,6 @@ namespace VuonDau.Data.Models
         public int? Status { get; set; }
 
         public virtual ICollection<Farm> Farms { get; set; }
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
     }
 }

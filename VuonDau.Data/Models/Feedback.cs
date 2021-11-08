@@ -10,11 +10,13 @@ namespace VuonDau.Data.Models
         public Guid Id { get; set; }
         public Guid? OrderId { get; set; }
         public Guid? HarvestId { get; set; }
+        public Guid? FarmerId { get; set; }
         public DateTime? DateOfCreate { get; set; }
         public string Description { get; set; }
         public int? Status { get; set; }
 
         public virtual Harvest Harvest { get; set; }
         public virtual Order Order { get; set; }
+        public virtual Farmer Farmer { get; set; }
     }
 }
