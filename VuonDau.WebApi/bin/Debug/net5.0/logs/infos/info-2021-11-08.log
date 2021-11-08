@@ -53,3 +53,4 @@
 2021-11-08 09:25:44.9375||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. |url: |action: 
 2021-11-08 09:25:44.9375||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development |url: |action: 
 2021-11-08 09:25:44.9443||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi |url: |action: 
+2021-11-08 09:42:13.4579||DEBUG|VuonDau.WebApi.Program|init main |url: |action: 
