@@ -11,12 +11,13 @@ using VuonDau.Business.Requests.Product;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
     public partial interface IProductService
     {
-        Task<List<ProductViewModel>> GetAllProducts(ProductViewModel filter);
+        Task<List<ProductViewModel>> GetAllProducts(SearchProductRequest request);
         Task<ProductViewModel> GetProductById(Guid id);
         Task<List<ProductViewModel>> GetProductByType(Guid id);
         Task<ProductViewModel> CreateProduct(CreateProductRequest request);
@@ -35,17 +36,42 @@ namespace VuonDau.Business.Services
         {
             _mapper = mapper.ConfigurationProvider;
         }
-        public async Task<List<ProductViewModel>> GetAllProducts(ProductViewModel filter)
+        public async Task<List<ProductViewModel>> GetAllProducts(SearchProductRequest request)
         {
-            return await Get().ProjectTo<ProductViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            request.Name = request.Name == null ? "" : request.Name;
+            if (request.Status == null)
+            {
+                if(request.ProductTypeId == null)
+                {
+                    return await Get(p =>p.Name.Contains(request.Name))
+                    .OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+                }else
+                {
+                    return await Get(p => p.ProductTypeId == request.ProductTypeId && p.Name.Contains(request.Name))
+                    .OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+                }
+            }
+            else
+            {
+                if (request.ProductTypeId == null)
+                {
+                    return await Get(p => p.Name.Contains(request.Name) && p.Status == request.Status)
+                    .OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+                }
+                else
+                {
+                    return await Get(p => p.ProductTypeId == request.ProductTypeId && p.Name.Contains(request.Name) && p.Status == request.Status)
+                    .OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+                }
+            }
         }
         public async Task<ProductViewModel> GetProductById(Guid id)
         {
-            return await Get(p => p.Id == id).ProjectTo<ProductViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id).OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<ProductViewModel>> GetProductByType(Guid ProductTypeId)
         {
-            return await Get(p => p.ProductTypeId == ProductTypeId).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.ProductTypeId == ProductTypeId).OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
         }
         public async Task<ProductViewModel> CreateProduct(CreateProductRequest request)
         {

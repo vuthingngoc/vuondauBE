@@ -15,8 +15,6 @@ namespace VuonDau.WebApi.Controllers
 {
     public partial class HarvestsController : ControllerBase
     {
-
-
         // GET: Harvests
         [HttpGet]
         [Route("~/api/v1/harvests")]

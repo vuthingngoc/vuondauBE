@@ -11,12 +11,13 @@ using VuonDau.Business.Requests.Harvest;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
     public partial interface IHarvestService
     {
-        Task<List<HarvestViewModel>> GetAllHarvests(HarvestViewModel filter);
+        Task<List<HarvestViewModel>> GetAllHarvests(SearchHarvestRequest request);
         Task<HarvestViewModel> GetHarvestById(Guid id);
         Task<List<HarvestViewModel>> GetHarvestByFarmId(Guid id);
         Task<List<HarvestViewModel>> GetHarvestByProductId(Guid id);
@@ -36,22 +37,42 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<HarvestViewModel>> GetAllHarvests(HarvestViewModel filter)
+        public async Task<List<HarvestViewModel>> GetAllHarvests(SearchHarvestRequest request)
         {
-            return await Get().ProjectTo<HarvestViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            request.Name = request.Name == null ? "" : request.Name;
+            if (request.Status == null)
+            {
+                if(request.FarmId == null)
+                {
+                    return await Get(c =>  c.Name.Contains(request.Name))
+                    .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+                }
+                return await Get(c => c.Name.Contains(request.Name) && c.FarmId ==request.FarmId)
+                    .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+            }
+            else
+            {
+                if (request.FarmId == null)
+                {
+                    return await Get(c => c.Name.Contains(request.Name) && c.Status == request.Status)
+                    .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+                }
+                return await Get(c => c.Name.Contains(request.Name) && c.FarmId == request.FarmId && c.Status == request.Status)
+                    .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+            }
         }
 
         public async Task<HarvestViewModel> GetHarvestById(Guid id)
         {
-            return await Get(p => p.Id == id).ProjectTo<HarvestViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id).OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<HarvestViewModel>> GetHarvestByFarmId(Guid FarmId)
         {
-            return await Get(p => p.FarmId == FarmId).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.FarmId == FarmId).OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
         }
         public async Task<List<HarvestViewModel>> GetHarvestByProductId(Guid ProductId)
         {
-            return await Get(p => p.ProductId == ProductId).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.ProductId == ProductId).OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<HarvestViewModel> CreateHarvest(CreateHarvestRequest request)

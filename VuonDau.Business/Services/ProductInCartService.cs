@@ -11,6 +11,7 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using VuonDau.Business.Requests.ProductInCart;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
@@ -38,20 +39,20 @@ namespace VuonDau.Business.Services
 
         public async Task<List<ProductInCartViewModel>> GetAllProductInCarts(ProductInCartViewModel filter)
         {
-            return await Get().ProjectTo<ProductInCartViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            return await Get().ProjectTo<ProductInCartViewModel>(_mapper).OrderByDescending(p => p.Status).OrderBy(p => p.Quantity).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<ProductInCartViewModel> GetProductInCartById(Guid id)
         {
-            return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<ProductInCartViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id && p.Status == (int)Status.Active).OrderByDescending(p => p.Status).OrderBy(p => p.Quantity).ProjectTo<ProductInCartViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<ProductInCartViewModel>> GetProductInCartByCustomerId(Guid CustomerId)
         {
-            return await Get(p => p.CustomerId == CustomerId).ProjectTo<ProductInCartViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.CustomerId == CustomerId).OrderByDescending(p => p.Status).OrderBy(p => p.Quantity).ProjectTo<ProductInCartViewModel>(_mapper).ToListAsync();
         }
         public async Task<List<ProductInCartViewModel>> GetProductInCartByHarvestSellingId(Guid HarvestSellingId)
         {
-            return await Get(p => p.HarvestSellingId == HarvestSellingId).ProjectTo<ProductInCartViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.HarvestSellingId == HarvestSellingId).OrderByDescending(p => p.Status).OrderBy(p => p.Quantity).ProjectTo<ProductInCartViewModel>(_mapper).ToListAsync();
         }
         public async Task<ProductInCartViewModel> CreateProductInCart(CreateProductInCartRequest request)
             {

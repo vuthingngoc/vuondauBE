@@ -18,9 +18,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/orders")]
         [SwaggerOperation(Tags = new[] { "Orders" })]
-        public async Task<IActionResult> GetOrders([FromQuery] OrderViewModel filter)
+        public async Task<IActionResult> GetOrders([FromQuery] SearchOrderRequest request)
         {
-            var orders = await _orderService.GetAllOrders(filter);
+            var orders = await _orderService.GetAllOrders(request);
             return Ok(orders);
         }
 
