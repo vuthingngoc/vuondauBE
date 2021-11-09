@@ -11,6 +11,7 @@ using VuonDau.Business.Requests.Wallet;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
@@ -37,16 +38,16 @@ namespace VuonDau.Business.Services
 
         public async Task<List<WalletViewModel>> GetAllWallets(WalletViewModel filter)
         {
-            return await Get().ProjectTo<WalletViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            return await Get().OrderByDescending(p => p.Customer.FullName).ProjectTo<WalletViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<WalletViewModel> GetWalletById(Guid id)
         {
-            return await Get(p => p.Id == id ).ProjectTo<WalletViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id ).OrderByDescending(p => p.Customer.FullName).ProjectTo<WalletViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<WalletViewModel>> GetWalletByCustomerId(Guid CustomerId)
         {
-            return await Get(p => p.CustomerId == CustomerId).ProjectTo<WalletViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.CustomerId == CustomerId).OrderByDescending(p => p.Customer.FullName).ProjectTo<WalletViewModel>(_mapper).ToListAsync();
         }
         public async Task<WalletViewModel> CreateWallet(CreateWalletRequest request)
             {
