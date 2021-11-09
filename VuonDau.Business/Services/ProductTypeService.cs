@@ -11,6 +11,7 @@ using VuonDau.Business.Requests.ProductType;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
@@ -36,12 +37,12 @@ namespace VuonDau.Business.Services
 
         public async Task<List<ProductTypeViewModel>> GetAllProductTypes(ProductTypeViewModel filter)
         {
-            return await Get().ProjectTo<ProductTypeViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            return await Get().OrderByDescending(p => p.Name).ProjectTo<ProductTypeViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<ProductTypeViewModel> GetProductTypeById(Guid id)
         {
-            return await Get(p => p.Id == id ).ProjectTo<ProductTypeViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id ).OrderByDescending(p => p.Name).ProjectTo<ProductTypeViewModel>(_mapper).FirstOrDefaultAsync();
         }
 
         public async Task<ProductTypeViewModel> CreateProductType(CreateProductTypeRequest request)

@@ -11,6 +11,7 @@ using VuonDau.Business.Requests.Transaction;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
@@ -38,16 +39,16 @@ namespace VuonDau.Business.Services
 
         public async Task<List<TransactionViewModel>> GetAllTransactions(TransactionViewModel filter)
         {
-            return await Get().ProjectTo<TransactionViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            return await Get().OrderByDescending(p => p.Status).ProjectTo<TransactionViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<TransactionViewModel> GetTransactionById(Guid id)
         {
-            return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<TransactionViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get().OrderByDescending(p => p.Status).ProjectTo<TransactionViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<TransactionViewModel>> GetTransactionByOrderId(Guid OrderId)
         {
-            return await Get(p => p.OrderId == OrderId).ProjectTo<TransactionViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.OrderId == OrderId).OrderByDescending(p => p.Status).ProjectTo<TransactionViewModel>(_mapper).ToListAsync();
         }
         public async Task<List<TransactionViewModel>> GetTransactionByPaymentId(Guid PaymentId)
         {

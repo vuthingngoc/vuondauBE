@@ -20,6 +20,5 @@ D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\V
 D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.AssemblyInfoInputs.cache
 D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.AssemblyInfo.cs
 D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.csproj.CoreCompileInputs.cache
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.csproj.CopyComplete
 D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.dll
 D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.pdb
