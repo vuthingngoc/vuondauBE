@@ -22,9 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/farm-types")]
         [SwaggerOperation(Tags = new[] { "FarmTypes" })]
-        public async Task<IActionResult> GetFarmTypes([FromQuery] FarmTypeViewModel filter)
+        public async Task<IActionResult> GetFarmTypes([FromQuery] string name)
         {
-            var farmTypes = await _farmTypeService.GetAllFarmTypes(filter);
+            var farmTypes = await _farmTypeService.GetAllFarmTypes(name);
             return Ok(farmTypes);
         }
 

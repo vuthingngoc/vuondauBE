@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using FirebaseAdmin.Auth;
 using VuonDau.Data.Common.Constants;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
@@ -40,8 +41,18 @@ namespace VuonDau.Business.Services
 
         public async Task<List<CampaignViewModel>> GetAllCampaigns(SearchCampaignRequest request)
         {
-            //request.Name = request.Name == null ? "" : request.FullName;
-            return await Get().ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
+            request.StartTime = request.StartTime == null ? DateTime.UtcNow : request.StartTime;
+            request.EndTime = request.EndTime == null ? DateTime.UtcNow : request.EndTime;
+            request.MinOrderAmount = request.MinOrderAmount == null ? 0 : request.MinOrderAmount;
+            if (request.Status != null)
+            {
+                return await Get(c => c.Status == request.Status&&c.StartTime<=request.EndTime&&c.EndTime>=request.StartTime
+                &&request.StartTime<=request.EndTime&&c.MinOrderAmount>=request.MinOrderAmount).OrderBy(c => c.StartTime).OrderByDescending(c => c.Status)
+                .ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
+            }
+            return await Get(c => c.StartTime <= request.EndTime && c.EndTime >= request.StartTime
+                && request.StartTime <= request.EndTime && c.MinOrderAmount >= request.MinOrderAmount).OrderBy(c => c.StartTime)
+                .ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
         }
 
 
@@ -49,15 +60,6 @@ namespace VuonDau.Business.Services
         {
             return await Get(p => p.Id == id ).ProjectTo<CampaignViewModel>(_mapper).FirstOrDefaultAsync();
         }
-
-        //public async Task<List<CampaignViewModel>> GetCampaignByHarvestSellingId(Guid HarvestSellingId)
-        //{
-        //    return await Get(p => p.HarvestSellingId == HarvestSellingId).ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
-        //}
-        //public async Task<List<CampaignViewModel>> GetCampaignByOrderId(Guid OrderId)
-        //{
-        //    return await Get(p => p.OrderId == OrderId).ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
-        //}
         public async Task<CampaignViewModel> CreateCampaign(CreateCampaignRequest request)
             {
             var mapper = _mapper.CreateMapper();

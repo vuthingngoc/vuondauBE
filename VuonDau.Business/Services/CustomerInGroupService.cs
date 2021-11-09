@@ -16,7 +16,7 @@ namespace VuonDau.Business.Services
 {
     public partial interface ICustomerInGroupService
     {
-        Task<List<CustomerInGroupViewModel>> GetAllCustomerInGroups(CustomerInGroupViewModel filter);
+        Task<List<CustomerInGroupViewModel>> GetAllCustomerInGroups();
         Task<CustomerInGroupViewModel> GetCustomerInGroupById(Guid id);
         Task<CustomerInGroupViewModel> CreateCustomerInGroup(CreateCustomerInGroupRequest request);
         Task<CustomerInGroupViewModel> UpdateCustomerInGroup(Guid id, UpdateCustomerInGroupRequest request);
@@ -34,9 +34,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-         public async Task<List<CustomerInGroupViewModel>> GetAllCustomerInGroups(CustomerInGroupViewModel filter)
+         public async Task<List<CustomerInGroupViewModel>> GetAllCustomerInGroups()
         {
-            return await Get().ProjectTo<CustomerInGroupViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            return await Get().ProjectTo<CustomerInGroupViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<CustomerInGroupViewModel> GetCustomerInGroupById(Guid id)

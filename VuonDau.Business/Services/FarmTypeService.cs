@@ -16,7 +16,7 @@ namespace VuonDau.Business.Services
 {
     public partial interface IFarmTypeService
     {
-        Task<List<FarmTypeViewModel>> GetAllFarmTypes(FarmTypeViewModel filter);
+        Task<List<FarmTypeViewModel>> GetAllFarmTypes(string name);
         Task<FarmTypeViewModel> GetFarmTypeById(Guid id);
         Task<FarmTypeViewModel> CreateFarmType(CreateFarmTypeRequest request);
         Task<FarmTypeViewModel> UpdateFarmType(Guid id, UpdateFarmTypeRequest request);
@@ -34,9 +34,10 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FarmTypeViewModel>> GetAllFarmTypes(FarmTypeViewModel filter)
+        public async Task<List<FarmTypeViewModel>> GetAllFarmTypes(string name)
         {
-            return await Get().ProjectTo<FarmTypeViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            name = name == null ? "" : name;
+            return await Get(f => f.Name.Contains(name)).ProjectTo<FarmTypeViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<FarmTypeViewModel> GetFarmTypeById(Guid id)

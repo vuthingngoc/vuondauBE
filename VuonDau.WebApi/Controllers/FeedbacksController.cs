@@ -22,9 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/feedbacks")]
         [SwaggerOperation(Tags = new[] { "Feedbacks" })]
-        public async Task<IActionResult> GetFeedbacks([FromQuery] FeedbackViewModel filter)
+        public async Task<IActionResult> GetFeedbacks([FromQuery] SearchFeedbackRequest request)
         {
-            var feedbacks = await _feedbackService.GetAllFeedbacks(filter);
+            var feedbacks = await _feedbackService.GetAllFeedbacks(request);
             return Ok(feedbacks);
         }
 

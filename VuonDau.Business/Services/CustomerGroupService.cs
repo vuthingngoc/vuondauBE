@@ -11,12 +11,13 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using VuonDau.Business.Requests.CustomerGroup;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
     public partial interface ICustomerGroupService
     {
-        Task<List<CustomerGroupViewModel>> GetAllCustomerGroups(CustomerGroupViewModel filter);
+        Task<List<CustomerGroupViewModel>> GetAllCustomerGroups(SearchCustomerGroupRequest request);
         Task<CustomerGroupViewModel> GetCustomerGroupById(Guid id);
         Task<List<CustomerGroupViewModel>> GetCustomerGroupByHarvestSellingId(Guid id);
         Task<CustomerGroupViewModel> CreateCustomerGroup(CreateCustomerGroupRequest request);
@@ -35,9 +36,12 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CustomerGroupViewModel>> GetAllCustomerGroups(CustomerGroupViewModel filter)
+        public async Task<List<CustomerGroupViewModel>> GetAllCustomerGroups(SearchCustomerGroupRequest request)
         {
-            return await Get().ProjectTo<CustomerGroupViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            request.Name = request.Name == null ? "" : request.Name;
+            request.Location = request.Location == null ? "" : request.Location;
+            return await Get(c => c.Name.ToLower().Contains(request.Name.ToLower())&& c.Location.ToLower().Contains(request.Location.ToLower()))
+                .OrderBy(c => c.Name).ProjectTo<CustomerGroupViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<CustomerGroupViewModel> GetCustomerGroupById(Guid id)
