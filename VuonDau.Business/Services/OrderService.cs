@@ -25,7 +25,7 @@ namespace VuonDau.Business.Services
         Task<List<OrderViewModel>> CreateOrder(CreateOrderRequest request);
         Task<OrderViewModel> UpdateOrder(Guid id, UpdateOrderRequest request);
         Task<OrderViewModel> UpdateStatusOrder(Guid id, UpdateOrderStatusRequest request);
-        Task<OrderViewModel> UpdatePriceOrderById(Guid id, UpdateOrderPriceRequest request);
+        Task<OrderViewModel> UpdatePriceOrderById(Order order, UpdateOrderPriceRequest request);
         Task<int> DeleteOrder(Guid id);
     }
 
@@ -214,7 +214,7 @@ namespace VuonDau.Business.Services
                                         req.Price = product.Price;
                                         var orderDetail = await _orderDetailService.CreateOrderDetail(req);
                                         totalPrice = totalPrice + (product.Price * product.Quantity);
-                                        //   await _productInCartService.DeleteProductInCart((Guid)product.Id);
+                                         await _productInCartService.DeleteProductInCart((Guid)product.Id);
                                     }
                                 }
                             }
@@ -222,7 +222,7 @@ namespace VuonDau.Business.Services
                         orderViewModel.TotalPrice = totalPrice;
                         requestPrice.TotalPrice = requestPrice.TotalPrice == null ? 0 : totalPrice;
                         requestPrice.TotalPrice = totalPrice;
-                        //var updatedPrice = await UpdatePriceOrderById((Guid)orderViewModel.Id, requestPrice);
+                        var updatedPrice = await UpdatePriceOrderById(order, requestPrice);
                         listOrder.Add(orderViewModel);
                         requestTransaction.OrderId = orderViewModel.Id;
                         requestTransaction.PaymentId = request.PaymentId;
@@ -266,14 +266,9 @@ namespace VuonDau.Business.Services
             await UpdateAsyn(order);
             return mapper.Map<OrderViewModel>(order);
         }
-        public async Task<OrderViewModel> UpdatePriceOrderById(Guid id, UpdateOrderPriceRequest request)
+        public async Task<OrderViewModel> UpdatePriceOrderById(Order order, UpdateOrderPriceRequest request)
         {
             var mapper = _mapper.CreateMapper();
-            var order = await Get(p => p.Id == id).FirstOrDefaultAsync();
-            if (order == null)
-            {
-                return null;
-            }
             order.TotalPrice = request.TotalPrice;
             await UpdateAsyn(order);
             return mapper.Map<OrderViewModel>(order);
