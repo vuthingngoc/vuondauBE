@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using Reso.Core.Extension;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Wallet;
 using VuonDau.Business.ViewModel;
@@ -24,8 +26,37 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "Wallets" })]
         public async Task<IActionResult> GetWallets([FromQuery] WalletViewModel filter)
         {
+            List<WalletViewModel> rs;
+            _memoryCache.TryGetValue(WALLET_CACHE, out rs);
+            if (rs != null)
+            {
+                return Ok(rs);
+            }
+            try
+            {
+                rs = await _distributedCache.GetAsync<List<WalletViewModel>>(WALLET_CACHE);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            if (rs != null)
+            {
+                return Ok(rs);
+            }
             var wallets = await _walletService.GetAllWallets(filter);
-            return Ok(wallets);
+            rs = wallets;
+            _memoryCache.Set(WALLET_CACHE, rs);
+            try
+            {
+                await _distributedCache.SetObjectAsync(WALLET_CACHE, rs);
+            }
+            catch (Exception)
+            {
+            }
+            return Ok(rs);
+            //var wallets = await _walletService.GetAllWallets(filter);
+            //return Ok(wallets);
         }
 
         /// <summary>

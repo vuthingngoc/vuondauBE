@@ -12,6 +12,8 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
 using System.Linq;
+using VuonDau.Data.Common.Response;
+using VuonDau.Data.Common.Constants;
 
 namespace VuonDau.Business.Services
 {
@@ -24,6 +26,7 @@ namespace VuonDau.Business.Services
         Task<List<FarmViewModel>> GetFarmByAreaId(Guid id);
         Task<FarmViewModel> CreateFarm(CreateFarmRequest request);
         Task<FarmViewModel> UpdateFarm(Guid id, UpdateFarmRequest request);
+        Task<FarmViewModel> UpdateFarmStatus(Guid id, int status);
         Task<int> DeleteFarm(Guid id);
     }
 
@@ -50,27 +53,27 @@ namespace VuonDau.Business.Services
                         if (request.AreaId == null)
                         {
                             return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()))
-                                    .OrderBy(f => f.Name).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
                         }
                         else
                         {
                             return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.AreaId == request.AreaId)
-                                    .OrderBy(f => f.Name).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
                         }
                     }
                     else
                     {
                         if (request.AreaId == null)
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) 
+                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower())
                                     && f.FarmerId == request.FarmerId)
-                                    .OrderBy(f => f.Name).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
                         }
                         else
                         {
                             return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower())
                                     && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId)
-                                    .OrderBy(f => f.Name).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
 
                         }
                     }
@@ -82,12 +85,12 @@ namespace VuonDau.Business.Services
                         if (request.AreaId == null)
                         {
                             return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId)
-                                    .OrderBy(f => f.Name).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
                         }
                         else
                         {
                             return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
-                                    && f.AreaId == request.AreaId).OrderBy(f => f.Name).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    && f.AreaId == request.AreaId).OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
                         }
                     }
                     else
@@ -95,18 +98,19 @@ namespace VuonDau.Business.Services
                         if (request.AreaId == null)
                         {
                             return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
-                                    && f.FarmerId == request.FarmerId).OrderBy(f => f.Name).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    && f.FarmerId == request.FarmerId).OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
                         }
                         else
                         {
                             return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
                                     && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId)
-                                    .OrderBy(f => f.Name).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
                         }
                     }
                 }
             }
-            else {
+            else
+            {
                 if (request.FarmTypeId == null)
                 {
                     if (request.FarmerId == null)
@@ -195,7 +199,7 @@ namespace VuonDau.Business.Services
             {
             var mapper = _mapper.CreateMapper();
             var farm = mapper.Map<Farm>(request);
-            farm.Status = (int)Status.Active;
+            farm.Status = (int)Status.NotApprove;
             farm.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(farm);
             var farmViewModel = mapper.Map<FarmViewModel>(farm);
@@ -219,6 +223,19 @@ namespace VuonDau.Business.Services
             farm.Description = farmInRequest.Description;
             farm.DateUpdate = DateTime.UtcNow;
             farm.Status = farmInRequest.Status;
+            await UpdateAsyn(farm);
+            return mapper.Map<FarmViewModel>(farm);
+        }
+
+        public async Task<FarmViewModel> UpdateFarmStatus(Guid id, int status)
+        {
+            var mapper = _mapper.CreateMapper();
+            var farm = await Get(p => p.Id == id).FirstOrDefaultAsync();
+            if (farm == null)
+            {
+                return null;
+            }
+            farm.Status = status;
             await UpdateAsyn(farm);
             return mapper.Map<FarmViewModel>(farm);
         }

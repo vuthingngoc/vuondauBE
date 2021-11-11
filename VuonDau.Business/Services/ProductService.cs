@@ -44,11 +44,11 @@ namespace VuonDau.Business.Services
                 if(request.ProductTypeId == null)
                 {
                     return await Get(p =>p.Name.Contains(request.Name))
-                    .OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+                    .OrderBy(p => p.Name).OrderByDescending(p => p.Status).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
                 }else
                 {
                     return await Get(p => p.ProductTypeId == request.ProductTypeId && p.Name.Contains(request.Name))
-                    .OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+                    .OrderBy(p => p.Name).OrderByDescending(p => p.Status).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
                 }
             }
             else
@@ -56,22 +56,22 @@ namespace VuonDau.Business.Services
                 if (request.ProductTypeId == null)
                 {
                     return await Get(p => p.Name.Contains(request.Name) && p.Status == request.Status)
-                    .OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+                    .OrderBy(p => p.Name).OrderByDescending(p => p.Status).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
                 }
                 else
                 {
                     return await Get(p => p.ProductTypeId == request.ProductTypeId && p.Name.Contains(request.Name) && p.Status == request.Status)
-                    .OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+                    .OrderBy(p => p.Name).OrderByDescending(p => p.Status).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
                 }
             }
         }
         public async Task<ProductViewModel> GetProductById(Guid id)
         {
-            return await Get(p => p.Id == id).OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id).OrderBy(p => p.Name).OrderByDescending(p => p.Status).ProjectTo<ProductViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<ProductViewModel>> GetProductByType(Guid ProductTypeId)
         {
-            return await Get(p => p.ProductTypeId == ProductTypeId).OrderByDescending(p => p.Status).OrderBy(p => p.Name).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.ProductTypeId == ProductTypeId).OrderBy(p => p.Name).OrderByDescending(p => p.Status).ProjectTo<ProductViewModel>(_mapper).ToListAsync();
         }
         public async Task<ProductViewModel> CreateProduct(CreateProductRequest request)
         {

@@ -3,6 +3,8 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcor
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Business.pdb
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Data.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Data.pdb
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\en\VuonDau.Data.resources.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\vi\VuonDau.Data.resources.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.csprojAssemblyReference.cache
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.AssemblyInfoInputs.cache
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.AssemblyInfo.cs

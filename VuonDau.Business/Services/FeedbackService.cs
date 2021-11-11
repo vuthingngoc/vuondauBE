@@ -41,10 +41,10 @@ namespace VuonDau.Business.Services
             if (request.Status == null) {
                 if (request.HarvestId == null)
                 {
-                    return await Get().ProjectTo<FeedbackViewModel>(_mapper).OrderBy(f => f.Status) .ToListAsync();
+                    return await Get().ProjectTo<FeedbackViewModel>(_mapper).OrderByDescending(f => f.Status) .ToListAsync();
                 }
                 else {
-                    return await Get(f => f.HarvestId == request.HarvestId).ProjectTo<FeedbackViewModel>(_mapper).OrderBy(f => f.Status).ToListAsync();
+                    return await Get(f => f.HarvestId == request.HarvestId).ProjectTo<FeedbackViewModel>(_mapper).OrderByDescending(f => f.Status).ToListAsync();
                 }
             } 
             else

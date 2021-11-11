@@ -43,40 +43,40 @@ namespace VuonDau.Business.Services
                 if(request.startPrice == null && request.endPrice == null)
                 {
                     HarvestSellingPriceViewModel filter = new HarvestSellingPriceViewModel();
-                    return await Get().OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<HarvestSellingPriceViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+                    return await Get().OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingPriceViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
                 }
                 if(request.startPrice == null)
                 {
                     return await Get(o => o.Price <= request.endPrice)
-                   .OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
+                   .OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
                 }
                 if(request.endPrice == null)
                 {
                     return await Get(o => o.Price >= request.startPrice)
-                   .OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
+                   .OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
                 }
                 return await Get(o => o.Price >= request.startPrice && o.Price <= request.endPrice)
-                   .OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
+                   .OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
             }
             else
             {
                 if (request.startPrice == null && request.endPrice == null)
                 {
                     return await Get(o => o.HarvestSellingId == request.HarvesrSellingId)
-                   .OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
+                   .OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
                 }
                 if (request.startPrice == null)
                 {
                     return await Get(o => o.Price <= request.endPrice && o.HarvestSellingId == request.HarvesrSellingId)
-                   .OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
+                   .OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
                 }
                 if (request.endPrice == null)
                 {
                     return await Get(o => o.Price >= request.startPrice && o.HarvestSellingId == request.HarvesrSellingId)
-                   .OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
+                   .OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
                 }
                 return await Get(o => o.Price >= request.startPrice && o.Price <= request.endPrice && o.HarvestSellingId == request.HarvesrSellingId)
-                   .OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
+                   .OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingPriceViewModel>(_mapper).ToListAsync();
             }
         }
 

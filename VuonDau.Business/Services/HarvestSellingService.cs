@@ -137,11 +137,11 @@ namespace VuonDau.Business.Services
         }
         public async Task<HarvestSellingViewModel> GetHarvestSellingById(Guid id)
         {
-            return await Get(p => p.Id == id).OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id).OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<HarvestSellingViewModel>> GetHarvestSellingByHarvestId(Guid HarvestId)
         {
-            return await Get(p => p.HarvestId == HarvestId).OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.HarvestId == HarvestId).OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
         }
         //public async Task<List<HarvestSellingViewModel>> GetHarvestSellingByCustomerId(Guid CustomerId)
         //{

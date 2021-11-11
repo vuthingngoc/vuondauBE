@@ -2559,6 +2559,14 @@
         "runtime": {
           "VuonDau.Data.dll": {}
         },
+        "resources": {
+          "en/VuonDau.Data.resources.dll": {
+            "locale": "en"
+          },
+          "vi/VuonDau.Data.resources.dll": {
+            "locale": "vi"
+          }
+        },
         "compile": {
           "VuonDau.Data.dll": {}
         }

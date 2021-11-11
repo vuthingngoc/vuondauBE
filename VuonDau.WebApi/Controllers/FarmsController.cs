@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Farm;
 using VuonDau.Business.ViewModel;
+using Reso.Core.Extension;
 
 namespace VuonDau.WebApi.Controllers
 {
@@ -18,6 +21,33 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "Farms" })]
         public async Task<IActionResult> GetFarms([FromQuery] SearchFarmRequest request)
         {
+            //List<FarmViewModel> rs;
+            //_memoryCache.TryGetValue(FARM_CACHE, out rs);
+            //if (rs != null)
+            //{
+            //    return Ok(rs);
+            //}
+            //try
+            //{
+            //    rs = await _distributedCache.GetAsync<List<FarmViewModel>>(FARM_CACHE);
+            //} catch (Exception)
+            //{
+            //    throw;
+            //}
+            //if (rs != null)
+            //{
+            //    return Ok(rs);
+            //}
+            //var farms = await _farmService.GetAllFarms(request, page, size);
+            //rs = farms.Data;
+            //_memoryCache.Set(FARM_CACHE, rs);
+            //try
+            //{
+            //    await _distributedCache.SetObjectAsync(FARM_CACHE, rs);
+            //} catch (Exception)
+            //{
+            //}
+            //return Ok(rs);
             var farms = await _farmService.GetAllFarms(request);
             return Ok(farms);
         }
@@ -83,6 +113,21 @@ namespace VuonDau.WebApi.Controllers
         public async Task<IActionResult> UpdateFarm([FromRoute] Guid id, UpdateFarmRequest request)
         {
             var farm = await _farmService.UpdateFarm(id, request);
+            if (farm == null)
+            {
+                return NotFound("Message");
+            }
+
+            return Ok(farm);
+        }
+
+        /// Cập nhập 1 farm
+        [HttpPut]
+        [Route("~/api/v1/farms/update-status/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Farms" })]
+        public async Task<IActionResult> UpdateFarmStatus([FromRoute] Guid id, int status)
+        {
+            var farm = await _farmService.UpdateFarmStatus(id, status);
             if (farm == null)
             {
                 return NotFound("Message");

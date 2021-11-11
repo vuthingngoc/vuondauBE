@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using Reso.Core.Extension;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Payment;
 using VuonDau.Business.ViewModel;
@@ -24,8 +26,37 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "Payments" })]
         public async Task<IActionResult> GetPayments([FromQuery] PaymentViewModel filter)
         {
+            List<PaymentViewModel> rs;
+            _memoryCache.TryGetValue(PAYMENT_CACHE, out rs);
+            if (rs != null)
+            {
+                return Ok(rs);
+            }
+            try
+            {
+                rs = await _distributedCache.GetAsync<List<PaymentViewModel>>(PAYMENT_CACHE);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            if (rs != null)
+            {
+                return Ok(rs);
+            }
             var payments = await _paymentService.GetAllPayments(filter);
-            return Ok(payments);
+            rs = payments;
+            _memoryCache.Set(PAYMENT_CACHE, rs);
+            try
+            {
+                await _distributedCache.SetObjectAsync(PAYMENT_CACHE, rs);
+            }
+            catch (Exception)
+            {
+            }
+            return Ok(rs);
+            //var payments = await _paymentService.GetAllPayments(filter);
+            //return Ok(payments);
         }
 
         /// <summary>

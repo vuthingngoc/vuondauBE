@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using Reso.Core.Extension;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Transaction;
 using VuonDau.Business.ViewModel;
@@ -19,8 +22,37 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "Transactions" })]
         public async Task<IActionResult> GetTransactions([FromQuery] TransactionViewModel filter)
         {
+            List<TransactionViewModel> rs;
+            _memoryCache.TryGetValue(TRANSACTION_CACHE, out rs);
+            if (rs != null)
+            {
+                return Ok(rs);
+            }
+            try
+            {
+                rs = await _distributedCache.GetAsync<List<TransactionViewModel>>(TRANSACTION_CACHE);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            if (rs != null)
+            {
+                return Ok(rs);
+            }
             var transactions = await _transactionService.GetAllTransactions(filter);
-            return Ok(transactions);
+            rs = transactions;
+            _memoryCache.Set(TRANSACTION_CACHE, rs);
+            try
+            {
+                await _distributedCache.SetObjectAsync(TRANSACTION_CACHE, rs);
+            }
+            catch (Exception)
+            {
+            }
+            return Ok(rs);
+            //var transactions = await _transactionService.GetAllTransactions(filter);
+            //return Ok(transactions);
         }
 
         /// <summary>

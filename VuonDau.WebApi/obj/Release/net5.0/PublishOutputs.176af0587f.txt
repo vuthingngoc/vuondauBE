@@ -170,4 +170,6 @@ D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\V
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\VuonDau.Data.dll
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\VuonDau.Business.pdb
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\VuonDau.Data.pdb
+D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\en\VuonDau.Data.resources.dll
+D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\vi\VuonDau.Data.resources.dll
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\VuonDau.WebApi.deps.json

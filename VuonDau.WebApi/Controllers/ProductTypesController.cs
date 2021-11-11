@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using Reso.Core.Extension;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.ProductType;
 using VuonDau.Business.ViewModel;
@@ -24,8 +26,37 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "ProductTypes" })]
         public async Task<IActionResult> GetProductTypes([FromQuery] ProductTypeViewModel filter)
         {
-            var productTypes = await _productTypeService.GetAllProductTypes(filter);
-            return Ok(productTypes);
+            List<ProductTypeViewModel> rs;
+            _memoryCache.TryGetValue(PRODUCTTYPE_CACHE, out rs);
+            if (rs != null)
+            {
+                return Ok(rs);
+            }
+            try
+            {
+                rs = await _distributedCache.GetAsync<List<ProductTypeViewModel>>(PRODUCTTYPE_CACHE);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            if (rs != null)
+            {
+                return Ok(rs);
+            }
+            var ProductTypes = await _productTypeService.GetAllProductTypes(filter);
+            rs = ProductTypes;
+            _memoryCache.Set(PRODUCTTYPE_CACHE, rs);
+            try
+            {
+                await _distributedCache.SetObjectAsync(PRODUCTTYPE_CACHE, rs);
+            }
+            catch (Exception)
+            {
+            }
+            return Ok(rs);
+            //var productTypes = await _productTypeService.GetAllProductTypes(filter);
+            //return Ok(productTypes);
         }
 
         /// <summary>

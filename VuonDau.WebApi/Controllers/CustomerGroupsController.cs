@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using Reso.Core.Extension;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.CustomerGroup;
 using VuonDau.Business.ViewModel;
@@ -24,8 +26,37 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "CustomerGroups" })]
         public async Task<IActionResult> GetCustomerGroups([FromQuery] SearchCustomerGroupRequest request)
         {
+            List<CustomerGroupViewModel> rs;
+            _memoryCache.TryGetValue(CUSTOMERGROUP_CACHE, out rs);
+            if (rs != null)
+            {
+                return Ok(rs);
+            }
+            try
+            {
+                rs = await _distributedCache.GetAsync<List<CustomerGroupViewModel>>(CUSTOMERGROUP_CACHE);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            if (rs != null)
+            {
+                return Ok(rs);
+            }
             var customerGroups = await _customerGroupService.GetAllCustomerGroups(request);
-            return Ok(customerGroups);
+            rs = customerGroups;
+            _memoryCache.Set(CUSTOMERGROUP_CACHE, rs);
+            try
+            {
+                await _distributedCache.SetObjectAsync(CUSTOMERGROUP_CACHE, rs);
+            }
+            catch (Exception)
+            {
+            }
+            return Ok(rs);
+            //var customerGroups = await _customerGroupService.GetAllCustomerGroups(request);
+            //return Ok(customerGroups);
         }
 
         /// <summary>

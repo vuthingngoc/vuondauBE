@@ -77,7 +77,7 @@ namespace VuonDau.Business.Services
             {
                 return 0;
             }
-            await UpdateAsyn(farmPicture);
+            await DeleteAsyn(farmPicture);
 
             return 1;
         }

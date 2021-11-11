@@ -6,19 +6,17 @@ namespace VuonDau.Business.ViewModel
 {
     public class TokenViewModel
     {
-        public TokenViewModel(Guid id, string email, string firstName, string lastName, int role, int status)
+        public TokenViewModel(Guid id, string email, string fullName, int role, int status)
         {
             Id = id;
             Email = email;
-            FirstName = firstName;
-            LastName = lastName;
+            FullName = fullName;
             Role = role;
             Status = status;
         }
         public Guid Id { get; set; }
         public string Email { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FullName { get; set; }
         public int Role { get; set; }
         public int Status { get; set; }
     }

@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using VuonDau.Data.Models;
 using VuonDau.Business.Services;
 using System.Linq;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
+
 namespace VuonDau.WebApi.Controllers
 {
     [ApiController]
@@ -12,10 +15,15 @@ namespace VuonDau.WebApi.Controllers
     {
         private readonly IFarmService _farmService;
         private readonly IConfigurationProvider _mapper;
-        public FarmsController(IFarmService farmService, IMapper mapper)
+        //private readonly IMemoryCache _memoryCache;// cache tren ram
+        //private readonly IDistributedCache _distributedCache;// redis
+        //private const string FARM_CACHE = "FARM_CACHE";
+        public FarmsController(IFarmService farmService, IMapper mapper/*, IMemoryCache memoryCache, IDistributedCache distributedCache*/)
         {
             _farmService = farmService;
             _mapper = mapper.ConfigurationProvider;
+            //_memoryCache = memoryCache;
+            //_distributedCache = distributedCache;
         }
     }
 }

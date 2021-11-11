@@ -97,7 +97,7 @@ namespace VuonDau.WebApi.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("~/api/v1/orders/status{id:Guid}")]
+        [Route("~/api/v1/orders/status/{id:Guid}")]
         [SwaggerOperation(Tags = new[] { "Orders" })]
         public async Task<IActionResult> UpdateStatusOrder([FromRoute] Guid id, UpdateOrderStatusRequest request)
         {

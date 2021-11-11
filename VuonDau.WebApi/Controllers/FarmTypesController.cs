@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using Reso.Core.Extension;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.FarmType;
 using VuonDau.Business.ViewModel;
@@ -24,6 +26,7 @@ namespace VuonDau.WebApi.Controllers
         [SwaggerOperation(Tags = new[] { "FarmTypes" })]
         public async Task<IActionResult> GetFarmTypes([FromQuery] string name)
         {
+
             var farmTypes = await _farmTypeService.GetAllFarmTypes(name);
             return Ok(farmTypes);
         }
