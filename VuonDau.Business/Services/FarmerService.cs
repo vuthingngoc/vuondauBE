@@ -12,8 +12,6 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
-using Reso.Core.Utilities;
-using System.Linq;
 
 namespace VuonDau.Business.Services
 {

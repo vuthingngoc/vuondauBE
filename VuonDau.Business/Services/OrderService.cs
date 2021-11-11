@@ -13,6 +13,7 @@ using AutoMapper;
 using Reso.Core.Utilities;
 using VuonDau.Business.Requests.OrderDetail;
 using System.Linq;
+using VuonDau.Business.Requests.Transaction;
 
 namespace VuonDau.Business.Services
 {
@@ -21,9 +22,10 @@ namespace VuonDau.Business.Services
         Task<List<OrderViewModel>> GetAllOrders(SearchOrderRequest request);
         Task<OrderViewModel> GetOrderById(Guid id);
         Task<List<OrderViewModel>> GetOrderByCustomerId(Guid id);
-        Task<OrderViewModel> CreateOrder(CreateOrderRequest request);
+        Task<List<OrderViewModel>> CreateOrder(CreateOrderRequest request);
         Task<OrderViewModel> UpdateOrder(Guid id, UpdateOrderRequest request);
         Task<OrderViewModel> UpdateStatusOrder(Guid id, UpdateOrderStatusRequest request);
+        Task<OrderViewModel> UpdatePriceOrderById(Guid id, UpdateOrderPriceRequest request);
         Task<int> DeleteOrder(Guid id);
     }
 
@@ -33,12 +35,16 @@ namespace VuonDau.Business.Services
         private readonly IConfigurationProvider _mapper;
         private readonly IOrderDetailService _orderDetailService;
         private readonly IProductInCartService _productInCartService;
+        private readonly IHarvestSellingService _harvestSellingService;
+        private readonly ITransactionService _transactionService;
 
-        public OrderService(IUnitOfWork unitOfWork, IOrderRepository repository, IMapper mapper, IOrderDetailService orderDetailService, IProductInCartService productInCartService) : base(unitOfWork,
-            repository)
+        public OrderService(IUnitOfWork unitOfWork, IOrderRepository repository, IMapper mapper, IOrderDetailService orderDetailService,
+            IProductInCartService productInCartService, ITransactionService transactionService, IHarvestSellingService harvestSellingService) : base(unitOfWork, repository)
         {
             _orderDetailService = orderDetailService;
             _productInCartService = productInCartService;
+            _harvestSellingService = harvestSellingService;
+            _transactionService = transactionService;
             _mapper = mapper.ConfigurationProvider;
         }
 
@@ -46,7 +52,7 @@ namespace VuonDau.Business.Services
         {
             if (request.Status == null)
             {
-                if(request.CustomerId == null)
+                if (request.CustomerId == null)
                 {
                     if (request.StartDate == null && request.EndDate == null)
                     {
@@ -65,7 +71,8 @@ namespace VuonDau.Business.Services
                     }
                     return await Get(o => request.StartDate <= o.DateOfCreate && o.DateOfCreate <= request.EndDate)
                     .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
-                } else
+                }
+                else
                 {
                     if (request.StartDate == null && request.EndDate == null)
                     {
@@ -85,11 +92,11 @@ namespace VuonDau.Business.Services
                     return await Get(o => request.StartDate <= o.DateOfCreate && o.DateOfCreate <= request.EndDate && o.CustomerId == request.CustomerId)
                     .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                 }
-                
+
             }
             else
-            { 
-                if(request.CustomerId == null)
+            {
+                if (request.CustomerId == null)
                 {
                     if (request.StartDate == null && request.EndDate == null)
                     {
@@ -108,7 +115,8 @@ namespace VuonDau.Business.Services
                     }
                     return await Get(o => request.StartDate <= o.DateOfCreate && o.DateOfCreate <= request.EndDate && o.Status == request.Status)
                     .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
-                } else
+                }
+                else
                 {
                     if (request.StartDate == null && request.EndDate == null)
                     {
@@ -138,35 +146,92 @@ namespace VuonDau.Business.Services
         {
             return await Get(p => p.CustomerId == CustomerId).OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
         }
-        public async Task<OrderViewModel> CreateOrder(CreateOrderRequest request)
+        public async Task<List<OrderViewModel>> CreateOrder(CreateOrderRequest request)
+        {
+            List<ProductInCartViewModel> listCart = await _productInCartService.GetProductInCartByCustomerId((Guid)request.CustomerId);
+            List<HarvestSellingViewModel> listHarvestSellings = new List<HarvestSellingViewModel>();
+            List<CampaignViewModel> listCampaignId = new List<CampaignViewModel>();
+            if (listCart != null)
             {
-            var mapper = _mapper.CreateMapper();
-            var order = mapper.Map<Order>(request);
-            order.Status = (int)Status.Active;
-            order.DateOfCreate = DateTime.UtcNow;
-            await CreateAsyn(order);
-            var orderViewModel = mapper.Map<OrderViewModel>(order);
-            if(orderViewModel != null)
-            {
-                ProductInCartViewModel filter = new ProductInCartViewModel();
-                List<ProductInCartViewModel> products = await _productInCartService.GetAllProductInCarts(filter);
-                double? totalPrice = 0;
-                if (products != null)
+                foreach (ProductInCartViewModel item in listCart)
                 {
-                    CreateOrderDetailRequest req = new CreateOrderDetailRequest();
-                    foreach(ProductInCartViewModel product in products)
+                    listHarvestSellings.Add(await _harvestSellingService.GetHarvestSellingById((Guid)item.HarvestSelling.Id));
+                }
+
+            }
+            foreach (HarvestSellingViewModel campaign in listHarvestSellings)
+            {
+                if (listCampaignId.Count == 0)
+                {
+                    listCampaignId.Add(campaign.Campaign);
+                }
+                else
+                {
+                    int count = 0;
+                    foreach (CampaignViewModel id in listCampaignId)
                     {
-                        req.OrderId = orderViewModel.Id;
-                        req.HarvestsellingId = product.HarvestSelling.Id;
-                        req.Weight = product.Quantity;
-                        req.Price = product.Price;
-                        var orderDetail = await _orderDetailService.CreateOrderDetail(req);
-                        totalPrice += product.Price;
+                        if(id.Id == campaign.Campaign.Id)
+                        {
+                            count++;
+                            break;
+                        }
                     }
-                    orderViewModel.TotalPrice = totalPrice;
+                    if(count ==0)
+                    {
+                        listCampaignId.Add(campaign.Campaign);
+                    }
                 }
             }
-            return orderViewModel;
+            if (listCampaignId != null)
+            {
+                List<OrderViewModel> listOrder = new List<OrderViewModel>();
+                foreach (CampaignViewModel itemCampaign in listCampaignId)
+                {
+                    var mapper = _mapper.CreateMapper();
+                    var order = mapper.Map<Order>(request);
+                    order.Status = (int)Status.Active;
+                    order.DateOfCreate = DateTime.UtcNow;
+                    order.CampaignId = itemCampaign.Id;
+                    await CreateAsyn(order);
+                    var orderViewModel = mapper.Map<OrderViewModel>(order);
+                    if (orderViewModel != null)
+                    {
+                        double? totalPrice = 0;
+                        CreateOrderDetailRequest req = new CreateOrderDetailRequest();
+                        UpdateOrderPriceRequest requestPrice = new UpdateOrderPriceRequest();
+                        CreateTransactionRequest requestTransaction = new CreateTransactionRequest();
+                        foreach (HarvestSellingViewModel itemListHarvestSelling in listHarvestSellings)
+                        {
+                            if (itemCampaign.Id == itemListHarvestSelling.Campaign.Id)
+                            {
+                                foreach (ProductInCartViewModel product in listCart)
+                                {
+                                    if (product.HarvestSelling.Id == itemListHarvestSelling.Id)
+                                    {
+                                        req.OrderId = orderViewModel.Id;
+                                        req.HarvestsellingId = product.HarvestSelling.Id;
+                                        req.Weight = product.Quantity;
+                                        req.Price = product.Price;
+                                        var orderDetail = await _orderDetailService.CreateOrderDetail(req);
+                                        totalPrice = totalPrice + (product.Price * product.Quantity);
+                                        //   await _productInCartService.DeleteProductInCart((Guid)product.Id);
+                                    }
+                                }
+                            }
+                        }
+                        orderViewModel.TotalPrice = totalPrice;
+                        requestPrice.TotalPrice = requestPrice.TotalPrice == null ? 0 : totalPrice;
+                        requestPrice.TotalPrice = totalPrice;
+                        //var updatedPrice = await UpdatePriceOrderById((Guid)orderViewModel.Id, requestPrice);
+                        listOrder.Add(orderViewModel);
+                        requestTransaction.OrderId = orderViewModel.Id;
+                        requestTransaction.PaymentId = request.PaymentId;
+                        await _transactionService.CreateTransaction(requestTransaction);
+                    }
+                }
+                return listOrder;
+            }
+            return null;
         }
 
         public async Task<OrderViewModel> UpdateOrder(Guid id, UpdateOrderRequest request)
@@ -198,6 +263,18 @@ namespace VuonDau.Business.Services
                 return null;
             }
             order.Status = request.Status;
+            await UpdateAsyn(order);
+            return mapper.Map<OrderViewModel>(order);
+        }
+        public async Task<OrderViewModel> UpdatePriceOrderById(Guid id, UpdateOrderPriceRequest request)
+        {
+            var mapper = _mapper.CreateMapper();
+            var order = await Get(p => p.Id == id).FirstOrDefaultAsync();
+            if (order == null)
+            {
+                return null;
+            }
+            order.TotalPrice = request.TotalPrice;
             await UpdateAsyn(order);
             return mapper.Map<OrderViewModel>(order);
         }

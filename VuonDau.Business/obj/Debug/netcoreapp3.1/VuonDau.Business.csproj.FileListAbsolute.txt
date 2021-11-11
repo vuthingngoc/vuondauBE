@@ -3,6 +3,8 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcor
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Business.pdb
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Data.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Data.pdb
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\en\VuonDau.Data.resources.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\vi\VuonDau.Data.resources.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.csprojAssemblyReference.cache
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.AssemblyInfoInputs.cache
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.AssemblyInfo.cs
@@ -10,20 +12,3 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcor
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.csproj.CopyComplete
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.pdb
-<<<<<<< HEAD
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\en\VuonDau.Data.resources.dll
-C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\vi\VuonDau.Data.resources.dll
-=======
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Business.deps.json
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Business.dll
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Business.pdb
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Data.dll
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\bin\Debug\netcoreapp3.1\VuonDau.Data.pdb
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.csproj.AssemblyReference.cache
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.GeneratedMSBuildEditorConfig.editorconfig
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.AssemblyInfoInputs.cache
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.AssemblyInfo.cs
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.csproj.CoreCompileInputs.cache
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.dll
-D:\Education\Ky7\vuondauBE-FullFilter\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.pdb
->>>>>>> updateNew
