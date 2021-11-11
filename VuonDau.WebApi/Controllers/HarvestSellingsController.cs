@@ -19,9 +19,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/harvest-sellings")]
         [SwaggerOperation(Tags = new[] { "HarvestSellings" })]
-        public async Task<IActionResult> GetHarvestSellings([FromQuery] HarvestSellingViewModel filter)
+        public async Task<IActionResult> GetHarvestSellings([FromQuery] SearchHarvestSellingRequest request)
         {
-            var harvestSellings = await _harvestSellingService.GetAllHarvestSellings(filter);
+            var harvestSellings = await _harvestSellingService.GetAllHarvestSellings(request);
             return Ok(harvestSellings);
         }
 

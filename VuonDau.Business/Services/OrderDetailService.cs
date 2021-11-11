@@ -11,6 +11,7 @@ using VuonDau.Business.Requests.OrderDetail;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
@@ -38,20 +39,20 @@ namespace VuonDau.Business.Services
 
         public async Task<List<OrderDetailViewModel>> GetAllOrderDetails(OrderDetailViewModel filter)
         {
-            return await Get().ProjectTo<OrderDetailViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            return await Get().ProjectTo<OrderDetailViewModel>(_mapper).OrderByDescending(o => o.Status).OrderBy(o => o.Price).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<OrderDetailViewModel> GetOrderDetailById(Guid id)
         {
-            return await Get(p => p.Id == id && p.Status == (int)Status.Active).ProjectTo<OrderDetailViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id && p.Status == (int)Status.Active).OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<OrderDetailViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<OrderDetailViewModel>> GetOrderDetailByHarvestSellingId(Guid HarvestSellingId)
         {
-            return await Get(p => p.HarvestsellingId == HarvestSellingId).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.HarvestsellingId == HarvestSellingId).OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
         }
         public async Task<List<OrderDetailViewModel>> GetOrderDetailByOrderId(Guid OrderId)
         {
-            return await Get(p => p.OrderId == OrderId).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.OrderId == OrderId).OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
         }
         public async Task<OrderDetailViewModel> CreateOrderDetail(CreateOrderDetailRequest request)
             {

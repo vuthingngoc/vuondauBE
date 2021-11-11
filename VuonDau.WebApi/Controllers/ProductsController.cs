@@ -19,9 +19,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/products")]
         [SwaggerOperation(Tags = new[] { "Products" })]
-        public async Task<IActionResult> GetProducts([FromQuery] ProductViewModel filter)
+        public async Task<IActionResult> GetProducts([FromQuery] SearchProductRequest request)
         {
-            var products = await _productService.GetAllProducts(filter);
+            var products = await _productService.GetAllProducts(request);
             return Ok(products);
         }
 
