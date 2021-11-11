@@ -377,8 +377,8 @@ D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\staticwebass
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\staticwebassets\VuonDau.WebApi.StaticWebAssets.xml
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\scopedcss\bundle\VuonDau.WebApi.styles.css
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\VuonDau.WebApi.RazorTargetAssemblyInfo.cache
-D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\VuonDau.WebApi.csproj.CopyComplete
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\VuonDau.WebApi.dll
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\ref\VuonDau.WebApi.dll
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\VuonDau.WebApi.pdb
 D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\VuonDau.WebApi.genruntimeconfig.cache
+D:\Education\Ky7\vuondauBE-paging\VuonDau.WebApi\obj\Release\net5.0\VuonDau.WebApi.csproj.CopyComplete

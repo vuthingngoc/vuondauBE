@@ -167,13 +167,18 @@ namespace VuonDau.Business.Services
                 }
                 else
                 {
-                    foreach(CampaignViewModel id in listCampaignId)
+                    int count = 0;
+                    foreach (CampaignViewModel id in listCampaignId)
                     {
-                        if(id.Id != campaign.Campaign.Id)
+                        if(id.Id == campaign.Campaign.Id)
                         {
-                            listCampaignId.Add(campaign.Campaign);
+                            count++;
                             break;
                         }
+                    }
+                    if(count ==0)
+                    {
+                        listCampaignId.Add(campaign.Campaign);
                     }
                 }
             }
