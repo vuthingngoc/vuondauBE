@@ -109,18 +109,6 @@ namespace VuonDau.WebApi.Controllers
 
             return Ok(order);
         }
-        [HttpPut]
-        [Route("~/api/v1/orders/price{id:Guid}")]
-        [SwaggerOperation(Tags = new[] { "Orders" })]
-        public async Task<IActionResult> UpdatePriceOrder([FromRoute] Guid id, UpdateOrderPriceRequest request)
-        {
-            var order = await _orderService.UpdatePriceOrderById(id, request);
-            if (order == null)
-            {
-                return NotFound("Message");
-            }
-            return Ok(order);
-        }
 
         /// <summary>
         /// Xóa 1 Order qua id
