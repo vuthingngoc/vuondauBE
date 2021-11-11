@@ -46,19 +46,19 @@ namespace VuonDau.Business.Services
                     {
                         HarvestSellingViewModel filter = new HarvestSellingViewModel();
                         return await Get()
-                            .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+                            .OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
                     }
                     return await Get(o => o.DateOfCreate >= request.endDate)
-                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
+                    .OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
                 } else
                 {
                     if (request.endDate == null)
                     {
                         return await Get(o => o.HarvestId == request.HarvestId)
-                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
+                    .OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
                     }
                     return await Get(o => o.DateOfCreate >= request.endDate && o.HarvestId == request.HarvestId)
-                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
+                    .OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
                 }
             } else
             {
@@ -68,30 +68,30 @@ namespace VuonDau.Business.Services
                     {
                         HarvestSellingViewModel filter = new HarvestSellingViewModel();
                         return await Get(o => o.Status == request.Status)
-                            .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+                            .OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
                     }
                     return await Get(o => o.DateOfCreate >= request.endDate && o.Status == request.Status)
-                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
+                    .OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
                 }
                 else
                 {
                     if (request.endDate == null)
                     {
                         return await Get(o => o.HarvestId == request.HarvestId && o.Status == request.Status)
-                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
+                    .OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
                     }
                     return await Get(o => o.DateOfCreate >= request.endDate && o.HarvestId == request.HarvestId && o.Status == request.Status)
-                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
+                    .OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
                 }
             }
         }
         public async Task<HarvestSellingViewModel> GetHarvestSellingById(Guid id)
         {
-            return await Get(p => p.Id == id).OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id).OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<HarvestSellingViewModel>> GetHarvestSellingByHarvestId(Guid HarvestId)
         {
-            return await Get(p => p.HarvestId == HarvestId).OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.HarvestId == HarvestId).OrderBy(o => o.DateOfCreate).OrderByDescending(o => o.Status).ProjectTo<HarvestSellingViewModel>(_mapper).ToListAsync();
         }
         public async Task<HarvestSellingViewModel> CreateHarvestSelling(CreateHarvestSellingRequest request)
             {

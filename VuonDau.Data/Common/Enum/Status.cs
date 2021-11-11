@@ -7,6 +7,7 @@ namespace VuonDau.Data.Common.Enum
     public enum Status
     {
         Inactive,
-        Active
+        Active, 
+        NotApprove
     }
 }

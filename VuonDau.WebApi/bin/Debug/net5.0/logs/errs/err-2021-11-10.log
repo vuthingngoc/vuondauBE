@@ -1,0 +1,108 @@
+2021-11-10 23:16:19.0590||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|FirebaseAdmin.Auth.FirebaseAuthException: Incorrect number of segments in ID token.
+   at FirebaseAdmin.Auth.Jwt.FirebaseTokenVerifier.VerifyTokenAsync(String token, CancellationToken cancellationToken)
+   at FirebaseAdmin.Auth.AbstractFirebaseAuth.VerifyIdTokenAsync(String idToken, Boolean checkRevoked, CancellationToken cancellationToken)
+   at FirebaseAdmin.Auth.AbstractFirebaseAuth.VerifyIdTokenAsync(String idToken, CancellationToken cancellationToken)
+   at FirebaseAdmin.Auth.AbstractFirebaseAuth.VerifyIdTokenAsync(String idToken)
+   at VuonDau.Business.Services.AdminService.Login(LoginRequest loginRequest, IConfiguration configuration) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\Services\AdminService.cs:line 46
+   at VuonDau.WebApi.Controllers.AdminsController.Login(LoginRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\Controllers\AdminsController.cs:line 16
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-11-10 23:17:49.3228||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|FirebaseAdmin.Auth.FirebaseAuthException: Firebase ID token expired at 1636211813. Expected to be greater than 1636561069.
+   at FirebaseAdmin.Auth.Jwt.FirebaseTokenVerifier.VerifyTokenAsync(String token, CancellationToken cancellationToken)
+   at FirebaseAdmin.Auth.AbstractFirebaseAuth.VerifyIdTokenAsync(String idToken, Boolean checkRevoked, CancellationToken cancellationToken)
+   at FirebaseAdmin.Auth.AbstractFirebaseAuth.VerifyIdTokenAsync(String idToken, CancellationToken cancellationToken)
+   at FirebaseAdmin.Auth.AbstractFirebaseAuth.VerifyIdTokenAsync(String idToken)
+   at VuonDau.Business.Services.AdminService.Login(LoginRequest loginRequest, IConfiguration configuration) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\Services\AdminService.cs:line 46
+   at VuonDau.WebApi.Controllers.AdminsController.Login(LoginRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\Controllers\AdminsController.cs:line 16
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-11-10 23:21:40.9219||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|FirebaseAdmin.Auth.FirebaseAuthException: Incorrect number of segments in ID token.
+   at FirebaseAdmin.Auth.Jwt.FirebaseTokenVerifier.VerifyTokenAsync(String token, CancellationToken cancellationToken)
+   at FirebaseAdmin.Auth.AbstractFirebaseAuth.VerifyIdTokenAsync(String idToken, Boolean checkRevoked, CancellationToken cancellationToken)
+   at FirebaseAdmin.Auth.AbstractFirebaseAuth.VerifyIdTokenAsync(String idToken, CancellationToken cancellationToken)
+   at FirebaseAdmin.Auth.AbstractFirebaseAuth.VerifyIdTokenAsync(String idToken)
+   at VuonDau.Business.Services.AdminService.Login(LoginRequest loginRequest, IConfiguration configuration) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\Services\AdminService.cs:line 46
+   at VuonDau.WebApi.Controllers.AdminsController.Login(LoginRequest request) in C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\Controllers\AdminsController.cs:line 16
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-11-10 23:36:41.9353||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Localization.IStringLocalizer' while attempting to activate 'VuonDau.WebApi.Controllers.AdminsController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method99(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-11-10 23:37:19.9987||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Localization.IStringLocalizer' while attempting to activate 'VuonDau.WebApi.Controllers.AdminsController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method99(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-11-10 23:38:39.7501||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Localization.IStringLocalizer' while attempting to activate 'VuonDau.WebApi.Controllers.AdminsController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method99(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-11-10 23:39:15.2863||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Localization.IStringLocalizer' while attempting to activate 'VuonDau.WebApi.Controllers.AdminsController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method99(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-11-10 23:42:17.8703||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Localization.IStringLocalizer' while attempting to activate 'VuonDau.WebApi.Controllers.AdminsController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method99(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-11-10 23:42:58.5191||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Localization.IStringLocalizer' while attempting to activate 'VuonDau.WebApi.Controllers.AdminsController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method99(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 
+2021-11-10 23:53:26.2660||ERROR|VuonDau.WebApi.Handlers.ErrorHandlingFilter|System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Localization.IStringLocalizer' while attempting to activate 'VuonDau.WebApi.Controllers.AdminsController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method99(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted) 

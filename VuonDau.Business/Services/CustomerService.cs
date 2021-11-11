@@ -46,10 +46,10 @@ namespace VuonDau.Business.Services
             if (request.Status == null)
             {
                 return await Get(c => c.Email.Contains(request.Email) && c.FullName.Contains(request.FullName))
-                    .OrderBy(c => c.FullName).ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
+                    .OrderBy(c => c.FullName).OrderByDescending(c => c.Status).ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
             }
             return await Get(c => c.Email.Contains(request.Email) && c.FullName.Contains(request.FullName) && c.Status == request.Status)
-                    .OrderByDescending(c => c.Status).OrderBy(c => c.FullName).ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
+                    .OrderBy(c => c.FullName).OrderByDescending(c => c.Status).ProjectTo<CustomerViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<CustomerViewModel> GetByMail(string mail)

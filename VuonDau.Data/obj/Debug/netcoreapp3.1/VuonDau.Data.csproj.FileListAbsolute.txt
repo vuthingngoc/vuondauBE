@@ -10,3 +10,12 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.pdb
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.genruntimeconfig.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\bin\Debug\netcoreapp3.1\en\VuonDau.Data.resources.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\bin\Debug\netcoreapp3.1\vi\VuonDau.Data.resources.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.Resources.Resource.en.resources
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.Resources.Resource.vi.resources
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.Resources.Resource1.en.resources
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.Resources.Resource1.vi.resources
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\VuonDau.Data.csproj.GenerateResource.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\en\VuonDau.Data.resources.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Debug\netcoreapp3.1\vi\VuonDau.Data.resources.dll

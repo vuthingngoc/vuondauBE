@@ -10,3 +10,5 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcor
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.csproj.CopyComplete
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\obj\Debug\netcoreapp3.1\VuonDau.Business.pdb
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\en\VuonDau.Data.resources.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Business\bin\Debug\netcoreapp3.1\vi\VuonDau.Data.resources.dll

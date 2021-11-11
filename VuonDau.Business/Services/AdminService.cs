@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using FirebaseAdmin.Auth;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Reso.Core.BaseConnect;
 using System;
 using System.Collections.Generic;
@@ -28,13 +30,16 @@ namespace VuonDau.Business.Services
         private readonly AutoMapper.IConfigurationProvider _mapper;
         private readonly ICustomerService _customerService;
         private readonly IFarmerService _farmerService;
+        private readonly IStringLocalizer<VuonDau.Data.Resources.Resource> _localize;
 
-        public AdminService(IUnitOfWork unitOfWork, IAdminRepository repository, IMapper mapper, ICustomerService customerService, IFarmerService farmerService) : base(unitOfWork,
+        public AdminService(IUnitOfWork unitOfWork, IAdminRepository repository, IMapper mapper, 
+            ICustomerService customerService, IFarmerService farmerService, IStringLocalizer<VuonDau.Data.Resources.Resource> localizer) : base(unitOfWork,
             repository)
         {
             _customerService = customerService;
             _farmerService = farmerService;
             _mapper = mapper.ConfigurationProvider;
+            _localize = localizer;
         }
 
         public async Task<AdminViewModel> GetByMail(string mail)
@@ -43,7 +48,14 @@ namespace VuonDau.Business.Services
         }
         public async Task<string> Login(LoginRequest loginRequest, IConfiguration configuration)
         {
-            FirebaseToken token = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(loginRequest.AccessToken); // re-check access token with firebase
+            FirebaseToken token = null;
+            try
+            {
+                token = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(loginRequest.AccessToken); // re-check access token with firebase
+            }
+            catch {
+                throw new MyHttpException(StatusCodes.Status500InternalServerError, _localize["Internal Server Error"]);
+            }
             object email;
             token.Claims.TryGetValue("email", out email); // get email from the above re-check step, then check the email whether it's matched the request email
             var result1 = await _customerService.GetByMail(email.ToString());

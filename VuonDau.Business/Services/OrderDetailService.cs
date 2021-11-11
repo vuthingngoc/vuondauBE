@@ -39,20 +39,20 @@ namespace VuonDau.Business.Services
 
         public async Task<List<OrderDetailViewModel>> GetAllOrderDetails(OrderDetailViewModel filter)
         {
-            return await Get().ProjectTo<OrderDetailViewModel>(_mapper).OrderByDescending(o => o.Status).OrderBy(o => o.Price).DynamicFilter(filter).ToListAsync();
+            return await Get().ProjectTo<OrderDetailViewModel>(_mapper).OrderBy(o => o.Price).OrderByDescending(o => o.Status).DynamicFilter(filter).ToListAsync();
         }
 
         public async Task<OrderDetailViewModel> GetOrderDetailById(Guid id)
         {
-            return await Get(p => p.Id == id && p.Status == (int)Status.Active).OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<OrderDetailViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id && p.Status == (int)Status.Active).OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<OrderDetailViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<OrderDetailViewModel>> GetOrderDetailByHarvestSellingId(Guid HarvestSellingId)
         {
-            return await Get(p => p.HarvestsellingId == HarvestSellingId).OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.HarvestsellingId == HarvestSellingId).OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
         }
         public async Task<List<OrderDetailViewModel>> GetOrderDetailByOrderId(Guid OrderId)
         {
-            return await Get(p => p.OrderId == OrderId).OrderByDescending(o => o.Status).OrderBy(o => o.Price).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.OrderId == OrderId).OrderBy(o => o.Price).OrderByDescending(o => o.Status).ProjectTo<OrderDetailViewModel>(_mapper).ToListAsync();
         }
         public async Task<OrderDetailViewModel> CreateOrderDetail(CreateOrderDetailRequest request)
             {

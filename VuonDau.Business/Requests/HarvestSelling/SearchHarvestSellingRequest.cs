@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VuonDau.Business.ViewModel;
 
 namespace VuonDau.Business.Requests.HarvestSelling
 {

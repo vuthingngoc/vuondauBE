@@ -170,4 +170,6 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Release\net5.0
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\VuonDau.Data.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\VuonDau.Business.pdb
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\VuonDau.Data.pdb
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\en\VuonDau.Data.resources.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\vi\VuonDau.Data.resources.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Release\net5.0\PubTmp\Out\VuonDau.WebApi.deps.json

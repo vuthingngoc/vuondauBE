@@ -10,8 +10,7 @@ namespace VuonDau.Data.Common.Constants
     {
         public static string ID = "id";
         public static string EMAIL = "email";
-        public static string FIRSTNAME = "firstName";
-        public static string LASTNAME = "lastName";
+        public static string FULLNAME = "fullName";
         public static string ROLE = "role";
         public static string STATUS = "status";
     }

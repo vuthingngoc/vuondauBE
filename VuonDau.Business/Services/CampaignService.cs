@@ -51,7 +51,7 @@ namespace VuonDau.Business.Services
                 .ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
             }
             return await Get(c => c.StartTime <= request.EndTime && c.EndTime >= request.StartTime
-                && request.StartTime <= request.EndTime && c.MinOrderAmount >= request.MinOrderAmount).OrderBy(c => c.StartTime)
+                && request.StartTime <= request.EndTime && c.MinOrderAmount >= request.MinOrderAmount).OrderBy(c => c.StartTime).OrderByDescending(c => c.Status)
                 .ProjectTo<CampaignViewModel>(_mapper).ToListAsync();
         }
 

@@ -190,3 +190,5 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\V
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\ref\VuonDau.WebApi.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.pdb
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\obj\Debug\net5.0\VuonDau.WebApi.genruntimeconfig.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\en\VuonDau.Data.resources.dll
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.WebApi\bin\Debug\net5.0\vi\VuonDau.Data.resources.dll

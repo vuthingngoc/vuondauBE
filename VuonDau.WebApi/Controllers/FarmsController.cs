@@ -91,6 +91,21 @@ namespace VuonDau.WebApi.Controllers
             return Ok(farm);
         }
 
+        /// Cập nhập 1 farm
+        [HttpPut]
+        [Route("~/api/v1/farms/update-status/{id:Guid}")]
+        [SwaggerOperation(Tags = new[] { "Farms" })]
+        public async Task<IActionResult> UpdateFarmStatus([FromRoute] Guid id, int status)
+        {
+            var farm = await _farmService.UpdateFarmStatus(id, status);
+            if (farm == null)
+            {
+                return NotFound("Message");
+            }
+
+            return Ok(farm);
+        }
+
         /// Xóa 1 farmer qua id
         [HttpDelete]
         [Route("~/api/v1/farms/{id:Guid}")]

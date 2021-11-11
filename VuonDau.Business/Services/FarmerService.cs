@@ -45,10 +45,10 @@ namespace VuonDau.Business.Services
             if (request.Status == null)
             {
                 return await Get(f => f.Email.Contains(request.Email) && f.FullName.Contains(request.FullName))
-                    .OrderBy(f => f.FullName).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
+                    .OrderBy(f => f.FullName).OrderByDescending(f => f.Status).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
             }
             return await Get(f => f.Email.Contains(request.Email) && f.FullName.Contains(request.FullName) && f.Status == request.Status)
-                    .OrderByDescending(f => f.Status).OrderBy(f => f.FullName).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
+                    .OrderBy(f => f.FullName).OrderByDescending(f => f.Status).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<FarmerViewModel> GetFarmerById(Guid id)
@@ -64,7 +64,7 @@ namespace VuonDau.Business.Services
             {
             var mapper = _mapper.CreateMapper();
             var farmer = mapper.Map<Farmer>(request);
-            farmer.Status = (int)Status.Active;
+            farmer.Status = (int)Status.NotApprove;
             farmer.DateOfCreate = DateTime.UtcNow;
             await CreateAsyn(farmer);
             var farmerViewModel = mapper.Map<FarmerViewModel>(farmer);

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -16,6 +17,7 @@ namespace VuonDau.Business.Services
     public static class TokenService
     {
         private static string secretKey;
+        private static IStringLocalizer<VuonDau.Data.Resources.Resource> _localize;
 
         private static void setPrivateKey(IConfiguration configuration)
         {
@@ -36,7 +38,7 @@ namespace VuonDau.Business.Services
             {
                { "ID", customViewModel.Id.ToString()},
                { "Email", customViewModel.Email.ToString()},
-               { "FIRSTNAME", customViewModel.FullName.ToString()},
+               { "FULLNAME", customViewModel.FullName.ToString()},
                { "ROLE", ((int)RoleEnum.Customer).ToString()},
                { "STATUS", customViewModel.Status.ToString()}
             };
@@ -143,18 +145,17 @@ namespace VuonDau.Business.Services
 
             if (!isValid)
             {
-                throw new ErrorResponse((int)ResponseStatusConstants.UNAUTHORIZED, "Request Secret Token is invalid");
+                throw new MyHttpException(StatusCodes.Status400BadRequest, _localize["Bad Request"]);
             }
 
             var result = new JwtSecurityTokenHandler().ReadJwtToken(token);
 
             Guid id = Guid.Parse(result.Claims.First(claim => claim.Type == PayloadKeyConstants.ID).Value);
             string email = result.Claims.First(claim => claim.Type == PayloadKeyConstants.EMAIL).Value;
-            string firstName = result.Claims.First(claim => claim.Type == PayloadKeyConstants.FIRSTNAME).Value;
-            string lastName = result.Claims.First(claim => claim.Type == PayloadKeyConstants.LASTNAME).Value;
+            string firstName = result.Claims.First(claim => claim.Type == PayloadKeyConstants.FULLNAME).Value;
             int role = int.Parse(result.Claims.First(claim => claim.Type == PayloadKeyConstants.ROLE).Value);
             int status = int.Parse(result.Claims.First(claim => claim.Type == PayloadKeyConstants.STATUS).Value);
-            return new TokenViewModel(id, email, firstName, lastName, role, status);
+            return new TokenViewModel(id, email, firstName, role, status);
         }
 
         private static SecurityKey GetSymmetricSecurityKey()
