@@ -42,22 +42,42 @@ namespace VuonDau.Business.Services
             request.Name = request.Name == null ? "" : request.Name;
             if (request.Status == null)
             {
-                if(request.FarmId == null)
+                if (request.FarmId == null)
                 {
-                    return await Get(c =>  c.Name.Contains(request.Name))
+                    if (request.ProductTypeId == null)
+                    {
+                        return await Get(c => c.Name.Contains(request.Name))
+                    .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+                    }
+                    return await Get(c => c.Name.Contains(request.Name) && c.Product.ProductTypeId == request.ProductTypeId)
                     .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
                 }
-                return await Get(c => c.Name.Contains(request.Name) && c.FarmId ==request.FarmId)
+                if (request.ProductTypeId == null)
+                {
+                    return await Get(c => c.Name.Contains(request.Name) && c.FarmId == request.FarmId)
+                .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+                }
+                return await Get(c => c.Name.Contains(request.Name) && c.FarmId == request.FarmId && c.Product.ProductTypeId == request.ProductTypeId)
                     .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
             }
             else
             {
                 if (request.FarmId == null)
                 {
-                    return await Get(c => c.Name.Contains(request.Name) && c.Status == request.Status)
+                    if (request.ProductTypeId == null)
+                    {
+                        return await Get(c => c.Name.Contains(request.Name) && c.Status == request.Status)
+                    .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+                    }
+                    return await Get(c => c.Name.Contains(request.Name) && c.Product.ProductTypeId == request.ProductTypeId && c.Status == request.Status)
                     .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
                 }
-                return await Get(c => c.Name.Contains(request.Name) && c.FarmId == request.FarmId && c.Status == request.Status)
+                if (request.ProductTypeId == null)
+                {
+                    return await Get(c => c.Name.Contains(request.Name) && c.FarmId == request.FarmId && c.Status == request.Status)
+                .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
+                }
+                return await Get(c => c.Name.Contains(request.Name) && c.FarmId == request.FarmId && c.Product.ProductTypeId == request.ProductTypeId && c.Status == request.Status)
                     .OrderByDescending(c => c.Status).OrderBy(c => c.Name).ProjectTo<HarvestViewModel>(_mapper).ToListAsync();
             }
         }
@@ -76,7 +96,7 @@ namespace VuonDau.Business.Services
         }
 
         public async Task<HarvestViewModel> CreateHarvest(CreateHarvestRequest request)
-            {
+        {
             var mapper = _mapper.CreateMapper();
             var harvest = mapper.Map<Harvest>(request);
             harvest.Status = (int)Status.Active;

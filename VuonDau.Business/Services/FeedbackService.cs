@@ -11,12 +11,13 @@ using VuonDau.Business.Requests.Feedback;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
+using System.Linq;
 
 namespace VuonDau.Business.Services
 {
     public partial interface IFeedbackService
     {
-        Task<List<FeedbackViewModel>> GetAllFeedbacks(FeedbackViewModel filter);
+        Task<List<FeedbackViewModel>> GetAllFeedbacks(SearchFeedbackRequest request);
         Task<FeedbackViewModel> GetFeedbackById(Guid id);
         Task<List<FeedbackViewModel>> GetFeedbackByOrderId(Guid id);
         Task<FeedbackViewModel> CreateFeedback(CreateFeedbackRequest request);
@@ -35,9 +36,29 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FeedbackViewModel>> GetAllFeedbacks(FeedbackViewModel filter)
+        public async Task<List<FeedbackViewModel>> GetAllFeedbacks(SearchFeedbackRequest request)
         {
-            return await Get().ProjectTo<FeedbackViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            if (request.Status == null) {
+                if (request.HarvestId == null)
+                {
+                    return await Get().ProjectTo<FeedbackViewModel>(_mapper).OrderBy(f => f.Status) .ToListAsync();
+                }
+                else {
+                    return await Get(f => f.HarvestId == request.HarvestId).ProjectTo<FeedbackViewModel>(_mapper).OrderBy(f => f.Status).ToListAsync();
+                }
+            } 
+            else
+            {
+                if (request.HarvestId == null)
+                {
+                    return await Get(f => f.Status == request.Status).ProjectTo<FeedbackViewModel>(_mapper).OrderBy(f => f.Status).ToListAsync();
+                }
+                else
+                {
+                    return await Get(f => f.HarvestId == request.HarvestId && f.Status == request.Status)
+                        .ProjectTo<FeedbackViewModel>(_mapper).OrderBy(f => f.Status).ToListAsync();
+                }
+            }
         }
 
         public async Task<FeedbackViewModel> GetFeedbackById(Guid id)

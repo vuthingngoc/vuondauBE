@@ -16,7 +16,7 @@ namespace VuonDau.Business.Services
 {
     public partial interface IFarmPictureService
     {
-        Task<List<FarmPictureViewModel>> GetAllFarmPictures(FarmPictureViewModel filter);
+        Task<List<FarmPictureViewModel>> GetAllFarmPictures();
         Task<List<FarmPictureViewModel>> GetFarmPictureById(Guid id);
         Task<FarmPictureViewModel> CreateFarmPicture(CreateFarmPictureRequest request);
         Task<FarmPictureViewModel> UpdateFarmPicture(Guid id, UpdateFarmPictureRequest request);
@@ -34,9 +34,9 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FarmPictureViewModel>> GetAllFarmPictures(FarmPictureViewModel filter)
+        public async Task<List<FarmPictureViewModel>> GetAllFarmPictures()
         {
-            return await Get().ProjectTo<FarmPictureViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            return await Get().ProjectTo<FarmPictureViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<List<FarmPictureViewModel>> GetFarmPictureById(Guid id)

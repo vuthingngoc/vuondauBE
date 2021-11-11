@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Business\\VuonDau.Business.csproj": {}
+    "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Business\\VuonDau.Business.csproj": {}
   },
   "projects": {
-    "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Business\\VuonDau.Business.csproj": {
+    "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Business\\VuonDau.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Business\\VuonDau.Business.csproj",
+        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Business\\VuonDau.Business.csproj",
         "projectName": "VuonDau.Business",
-        "projectPath": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Business\\VuonDau.Business.csproj",
+        "projectPath": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Business\\VuonDau.Business.csproj",
         "packagesPath": "C:\\Users\\09323\\.nuget\\packages\\",
-        "outputPath": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Business\\obj\\",
+        "outputPath": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -32,8 +32,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Data\\VuonDau.Data.csproj": {
-                "projectPath": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Data\\VuonDau.Data.csproj"
+              "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Data\\VuonDau.Data.csproj": {
+                "projectPath": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Data\\VuonDau.Data.csproj"
               }
             }
           }
@@ -76,14 +76,14 @@
         }
       }
     },
-    "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Data\\VuonDau.Data.csproj": {
+    "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Data\\VuonDau.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Data\\VuonDau.Data.csproj",
+        "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Data\\VuonDau.Data.csproj",
         "projectName": "VuonDau.Data",
-        "projectPath": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Data\\VuonDau.Data.csproj",
+        "projectPath": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Data\\VuonDau.Data.csproj",
         "packagesPath": "C:\\Users\\09323\\.nuget\\packages\\",
-        "outputPath": "D:\\Education\\Ky7\\vuondauBE-FullFilter\\VuonDau.Data\\obj\\",
+        "outputPath": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

@@ -19,9 +19,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/farm-pictures")]
         [SwaggerOperation(Tags = new[] { "FarmPictures" })]
-        public async Task<IActionResult> GetFarmPictures([FromQuery] FarmPictureViewModel filter)
+        public async Task<IActionResult> GetFarmPictures()
         {
-            var farmPictures = await _farmPictureService.GetAllFarmPictures(filter);
+            var farmPictures = await _farmPictureService.GetAllFarmPictures();
             return Ok(farmPictures);
         }
 

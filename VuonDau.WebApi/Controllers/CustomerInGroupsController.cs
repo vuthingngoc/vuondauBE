@@ -22,9 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/customer-in-groups")]
         [SwaggerOperation(Tags = new[] { "CustomerInGroups" })]
-        public async Task<IActionResult> GetCustomerInGroups([FromQuery] CustomerInGroupViewModel filter)
+        public async Task<IActionResult> GetCustomerInGroups()
         {
-            var customerInGroups = await _customerInGroupService.GetAllCustomerInGroups(filter);
+            var customerInGroups = await _customerInGroupService.GetAllCustomerInGroups();
             return Ok(customerInGroups);
         }
 

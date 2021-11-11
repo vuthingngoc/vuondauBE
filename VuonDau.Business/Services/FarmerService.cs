@@ -12,8 +12,6 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
-using Reso.Core.Utilities;
-using System.Linq;
 
 namespace VuonDau.Business.Services
 {
@@ -45,12 +43,10 @@ namespace VuonDau.Business.Services
             if (request.Status == null)
             {
                 return await Get(f => f.Email.Contains(request.Email) && f.FullName.Contains(request.FullName))
-                    .OrderByDescending(f => f.Status).OrderBy(f => f.FullName).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
+                    .OrderBy(f => f.FullName).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
             }
-            else {
-                return await Get(f => f.Email.Contains(request.Email) && f.FullName.Contains(request.FullName) && f.Status == request.Status)
+            return await Get(f => f.Email.Contains(request.Email) && f.FullName.Contains(request.FullName) && f.Status == request.Status)
                     .OrderByDescending(f => f.Status).OrderBy(f => f.FullName).ProjectTo<FarmerViewModel>(_mapper).ToListAsync();
-            }
         }
 
         public async Task<FarmerViewModel> GetFarmerById(Guid id)

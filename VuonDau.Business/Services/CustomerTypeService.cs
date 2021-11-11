@@ -16,7 +16,7 @@ namespace VuonDau.Business.Services
 {
     public partial interface ICustomerTypeService
     {
-        Task<List<CustomerTypeViewModel>> GetAllCustomerTypes(CustomerTypeViewModel filter);
+        Task<List<CustomerTypeViewModel>> GetAllCustomerTypes(string name);
         Task<CustomerTypeViewModel> GetCustomerTypeById(Guid id);
         Task<CustomerTypeViewModel> CreateCustomerType(CreateCustomerTypeRequest request);
         Task<CustomerTypeViewModel> UpdateCustomerType(Guid id, UpdateCustomerTypeRequest request);
@@ -34,9 +34,10 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<CustomerTypeViewModel>> GetAllCustomerTypes(CustomerTypeViewModel filter)
+        public async Task<List<CustomerTypeViewModel>> GetAllCustomerTypes(string name)
         {
-            return await Get().ProjectTo<CustomerTypeViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+            name = name == null ? "" : name;
+            return await Get(c => c.Name.Contains(name)).ProjectTo<CustomerTypeViewModel>(_mapper).ToListAsync();
         }
 
         public async Task<CustomerTypeViewModel> GetCustomerTypeById(Guid id)

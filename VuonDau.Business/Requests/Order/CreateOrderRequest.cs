@@ -8,6 +8,7 @@ namespace VuonDau.Business.Requests.Order
     {
         public Guid? CustomerId { get; set; }
         public Guid? CampaignId { get; set; }
+        public Guid? PaymentId { get; set; }
         public string FullName { get; set; }
         public string Message { get; set; }
         public string Phone { get; set; }

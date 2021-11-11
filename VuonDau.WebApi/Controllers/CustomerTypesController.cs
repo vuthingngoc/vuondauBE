@@ -22,9 +22,9 @@ namespace VuonDau.WebApi.Controllers
         [HttpGet]
         [Route("~/api/v1/customer-types")]
         [SwaggerOperation(Tags = new[] { "CustomerTypes" })]
-        public async Task<IActionResult> GetCustomerTypes([FromQuery] CustomerTypeViewModel filter)
+        public async Task<IActionResult> GetCustomerTypes([FromQuery] string name)
         {
-            var customerTypes = await _customerTypeService.GetAllCustomerTypes(filter);
+            var customerTypes = await _customerTypeService.GetAllCustomerTypes(name);
             return Ok(customerTypes);
         }
 
