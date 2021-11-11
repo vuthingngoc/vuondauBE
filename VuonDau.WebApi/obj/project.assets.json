@@ -2797,7 +2797,10 @@
         },
         "runtime": {
           "bin/placeholder/VuonDau.Business.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "VuonDau.Data/1.0.0": {
         "type": "project",
@@ -2812,7 +2815,10 @@
         },
         "runtime": {
           "bin/placeholder/VuonDau.Data.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -9028,25 +9034,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\09323\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\vuong\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
       "projectName": "VuonDau.WebApi",
-      "projectPath": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
-      "packagesPath": "C:\\Users\\09323\\.nuget\\packages\\",
-      "outputPath": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.WebApi\\obj\\",
+      "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.WebApi\\VuonDau.WebApi.csproj",
+      "packagesPath": "C:\\Users\\vuong\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.WebApi\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\09323\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\vuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -9059,11 +9060,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Business\\VuonDau.Business.csproj": {
-              "projectPath": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Business\\VuonDau.Business.csproj"
+            "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\VuonDau.Business.csproj": {
+              "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Business\\VuonDau.Business.csproj"
             },
-            "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Data\\VuonDau.Data.csproj": {
-              "projectPath": "D:\\Education\\Ky7\\vuondauBE-paging\\VuonDau.Data\\VuonDau.Data.csproj"
+            "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj": {
+              "projectPath": "C:\\Users\\vuong\\Desktop\\SWR-VuonDauBE\\vuondauBE\\VuonDau.Data\\VuonDau.Data.csproj"
             }
           }
         }
@@ -9145,7 +9146,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }
