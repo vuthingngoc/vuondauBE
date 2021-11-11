@@ -51,39 +51,39 @@ namespace VuonDau.Business.Services
                     if (request.StartDate == null && request.EndDate == null)
                     {
                         OrderViewModel filter = new OrderViewModel();
-                        return await Get().OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+                        return await Get().OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
                     }
                     if (request.EndDate == null)
                     {
                         return await Get(o => o.DateOfCreate >= request.StartDate)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                     }
                     if (request.StartDate == null)
                     {
                         return await Get(o => o.DateOfCreate <= request.EndDate)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                     }
                     return await Get(o => request.StartDate <= o.DateOfCreate && o.DateOfCreate <= request.EndDate)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                 } else
                 {
                     if (request.StartDate == null && request.EndDate == null)
                     {
                         return await Get(o => o.CustomerId == request.CustomerId)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                     }
                     if (request.EndDate == null)
                     {
                         return await Get(o => o.DateOfCreate >= request.StartDate && o.CustomerId == request.CustomerId)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                     }
                     if (request.StartDate == null)
                     {
                         return await Get(o => o.DateOfCreate <= request.EndDate && o.CustomerId == request.CustomerId)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                     }
                     return await Get(o => request.StartDate <= o.DateOfCreate && o.DateOfCreate <= request.EndDate && o.CustomerId == request.CustomerId)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                 }
                 
             }
@@ -94,49 +94,49 @@ namespace VuonDau.Business.Services
                     if (request.StartDate == null && request.EndDate == null)
                     {
                         OrderViewModel filter = new OrderViewModel();
-                        return await Get(o => o.Status == request.Status).OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
+                        return await Get(o => o.Status == request.Status).OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).DynamicFilter(filter).ToListAsync();
                     }
                     if (request.EndDate == null)
                     {
                         return await Get(o => o.DateOfCreate >= request.StartDate && o.Status == request.Status)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                     }
                     if (request.StartDate == null)
                     {
                         return await Get(o => o.DateOfCreate <= request.EndDate && o.Status == request.Status)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                     }
                     return await Get(o => request.StartDate <= o.DateOfCreate && o.DateOfCreate <= request.EndDate && o.Status == request.Status)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                 } else
                 {
                     if (request.StartDate == null && request.EndDate == null)
                     {
                         return await Get(o => o.CustomerId == request.CustomerId && o.Status == request.Status)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                     }
                     if (request.EndDate == null)
                     {
                         return await Get(o => o.DateOfCreate >= request.StartDate && o.Status == request.Status && o.CustomerId == request.CustomerId)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                     }
                     if (request.StartDate == null)
                     {
                         return await Get(o => o.DateOfCreate <= request.EndDate && o.Status == request.Status && o.CustomerId == request.CustomerId)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                     }
                     return await Get(o => request.StartDate <= o.DateOfCreate && o.DateOfCreate <= request.EndDate && o.Status == request.Status && o.CustomerId == request.CustomerId)
-                    .OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+                    .OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
                 }
             }
         }
         public async Task<OrderViewModel> GetOrderById(Guid id)
         {
-            return await Get(p => p.Id == id && p.Status == (int)Status.Active).OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).FirstOrDefaultAsync();
+            return await Get(p => p.Id == id && p.Status == (int)Status.Active).OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).FirstOrDefaultAsync();
         }
         public async Task<List<OrderViewModel>> GetOrderByCustomerId(Guid CustomerId)
         {
-            return await Get(p => p.CustomerId == CustomerId).OrderByDescending(o => o.Status).OrderByDescending(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
+            return await Get(p => p.CustomerId == CustomerId).OrderByDescending(o => o.Status).OrderBy(o => o.DateOfCreate).ProjectTo<OrderViewModel>(_mapper).ToListAsync();
         }
         public async Task<OrderViewModel> CreateOrder(CreateOrderRequest request)
             {
@@ -161,7 +161,7 @@ namespace VuonDau.Business.Services
                         req.Weight = product.Quantity;
                         req.Price = product.Price;
                         var orderDetail = await _orderDetailService.CreateOrderDetail(req);
-                        totalPrice += product.Price * product.Quantity;
+                        totalPrice += product.Price;
                     }
                     orderViewModel.TotalPrice = totalPrice;
                 }

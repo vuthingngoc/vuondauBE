@@ -15,6 +15,14 @@
         },
         "runtime": {
           "VuonDau.Data.dll": {}
+        },
+        "resources": {
+          "en/VuonDau.Data.resources.dll": {
+            "locale": "en"
+          },
+          "vi/VuonDau.Data.resources.dll": {
+            "locale": "vi"
+          }
         }
       },
       "Humanizer.Core/2.8.26": {
