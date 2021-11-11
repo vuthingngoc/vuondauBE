@@ -12,12 +12,14 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using Reso.Core.Utilities;
 using System.Linq;
+using VuonDau.Data.Common.Response;
+using VuonDau.Data.Common.Constants;
 
 namespace VuonDau.Business.Services
 {
     public partial interface IFarmService
     {
-        Task<List<FarmViewModel>> GetAllFarms(SearchFarmRequest request);
+        Task<ModelResponse.ModelsResponse<FarmViewModel>> GetAllFarms(SearchFarmRequest request, int page, int size);
         Task<FarmViewModel> GetFarmById(Guid id);
         Task<List<FarmViewModel>> GetFarmByType(Guid id);
         Task<List<FarmViewModel>> GetFarmByFarmerId(Guid id);
@@ -39,7 +41,7 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<List<FarmViewModel>> GetAllFarms(SearchFarmRequest request)
+        public async Task<ModelResponse.ModelsResponse<FarmViewModel>> GetAllFarms(SearchFarmRequest request, int page, int size)
         {
             request.Name = request.Name == null ? "" : request.Name;
             if (request.Status == null)
@@ -50,28 +52,72 @@ namespace VuonDau.Business.Services
                     {
                         if (request.AreaId == null)
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()))
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()))
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                    .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                         else
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.AreaId == request.AreaId)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.AreaId == request.AreaId)
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                    .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                     }
                     else
                     {
                         if (request.AreaId == null)
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) 
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) 
                                     && f.FarmerId == request.FarmerId)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                    .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                         else
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower())
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower())
                                     && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                    .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
 
                         }
                     }
@@ -82,27 +128,71 @@ namespace VuonDau.Business.Services
                     {
                         if (request.AreaId == null)
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId)
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                    .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                         else
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
-                                    && f.AreaId == request.AreaId).OrderByDescending(f => f.Status).OrderBy(f => f.Name).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
+                                    && f.AreaId == request.AreaId).OrderByDescending(f => f.Status).OrderBy(f => f.Name)
+                                    .ProjectTo<FarmViewModel>(_mapper).PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                     }
                     else
                     {
                         if (request.AreaId == null)
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
-                                    && f.FarmerId == request.FarmerId).OrderByDescending(f => f.Status).OrderBy(f => f.Name).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
+                                    && f.FarmerId == request.FarmerId).OrderByDescending(f => f.Status).OrderBy(f => f.Name)
+                                    .ProjectTo<FarmViewModel>(_mapper).PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                         else
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
                                     && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                    .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                     }
                 }
@@ -114,62 +204,150 @@ namespace VuonDau.Business.Services
                     {
                         if (request.AreaId == null)
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.Status == request.Status)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.Status == request.Status)
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                    .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                         else
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower())
-                                    && f.AreaId == request.AreaId && f.Status == request.Status)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower())
+                                     && f.AreaId == request.AreaId && f.Status == request.Status)
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                    .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                     }
                     else
                     {
                         if (request.AreaId == null)
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower())
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower())
                                     && f.FarmerId == request.FarmerId && f.Status == request.Status)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                    .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                         else
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower())
+                            var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower())
                                     && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId && f.Status == request.Status)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                    .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                     }
                 }
                 else
                 {
-                    if (request.FarmerId == null)
-                    {
-                        if (request.AreaId == null)
+                        if (request.FarmerId == null)
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
-                                    && f.Status == request.Status)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                            if (request.AreaId == null)
+                            {
+                                var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
+                                        && f.Status == request.Status)
+                                        .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                        .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
+                        }
+                            else
+                            {
+                                var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
+                                        && f.AreaId == request.AreaId && f.Status == request.Status)
+                                        .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                        .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
+                        }
                         }
                         else
                         {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
-                                    && f.AreaId == request.AreaId && f.Status == request.Status)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                            if (request.AreaId == null)
+                            {
+                                var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
+                                        && f.FarmerId == request.FarmerId && f.Status == request.Status)
+                                        .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                        .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
-                    }
-                    else
-                    {
-                        if (request.AreaId == null)
-                        {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
-                                    && f.FarmerId == request.FarmerId && f.Status == request.Status)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
-                        }
-                        else
-                        {
-                            return await Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
-                                    && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId && f.Status == request.Status)
-                                    .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper).ToListAsync();
+                            else
+                            {
+                                var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
+                                        && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId && f.Status == request.Status)
+                                        .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
+                                        .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
+                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            {
+                                Data = await result.Item2.ToListAsync(),
+                                Metadata = new PagingMetadata
+                                {
+                                    Page = page,
+                                    Size = size,
+                                    Total = result.Item1
+                                }
+                            };
                         }
                     }
                 }

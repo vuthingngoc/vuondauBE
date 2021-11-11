@@ -16,9 +16,9 @@ namespace VuonDau.WebApi.Controllers
         //[Authorize]
         [Route("~/api/v1/farms")]
         [SwaggerOperation(Tags = new[] { "Farms" })]
-        public async Task<IActionResult> GetFarms([FromQuery] SearchFarmRequest request)
+        public async Task<IActionResult> GetFarms([FromQuery] SearchFarmRequest request, int page, int size)
         {
-            var farms = await _farmService.GetAllFarms(request);
+            var farms = await _farmService.GetAllFarms(request, page, size);
             return Ok(farms);
         }
 
