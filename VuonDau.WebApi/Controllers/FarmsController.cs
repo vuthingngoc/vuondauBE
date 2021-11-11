@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Swashbuckle.AspNetCore.Annotations;
 using VuonDau.Business.Requests.Farm;
 using VuonDau.Business.ViewModel;
+using Reso.Core.Extension;
 
 namespace VuonDau.WebApi.Controllers
 {
@@ -13,11 +16,37 @@ namespace VuonDau.WebApi.Controllers
     {
         /// Get List Farms
         [HttpGet]
-        //[Authorize]
         [Route("~/api/v1/farms")]
         [SwaggerOperation(Tags = new[] { "Farms" })]
         public async Task<IActionResult> GetFarms([FromQuery] SearchFarmRequest request, int page, int size)
         {
+            //List<FarmViewModel> rs;
+            //_memoryCache.TryGetValue(FARM_CACHE, out rs);
+            //if (rs != null)
+            //{
+            //    return Ok(rs);
+            //}
+            //try
+            //{
+            //    rs = await _distributedCache.GetAsync<List<FarmViewModel>>(FARM_CACHE);
+            //} catch (Exception)
+            //{
+            //    throw;
+            //}
+            //if (rs != null)
+            //{
+            //    return Ok(rs);
+            //}
+            //var farms = await _farmService.GetAllFarms(request, page, size);
+            //rs = farms.Data;
+            //_memoryCache.Set(FARM_CACHE, rs);
+            //try
+            //{
+            //    await _distributedCache.SetObjectAsync(FARM_CACHE, rs);
+            //} catch (Exception)
+            //{
+            //}
+            //return Ok(rs);
             var farms = await _farmService.GetAllFarms(request, page, size);
             return Ok(farms);
         }

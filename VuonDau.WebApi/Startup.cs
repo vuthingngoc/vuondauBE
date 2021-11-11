@@ -64,7 +64,7 @@ namespace VuonDau.WebApi
             services.AddDbContext<VuondauDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VuonDauDatabase"))
                 .EnableSensitiveDataLogging()
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-            services.ConfigMemoryCacheAndRedisCache(Configuration["Endpoint:RedisEndpoint"]);
+            services.ConfigMemoryCacheAndRedisCache(Configuration["Redis"]);
             services.AddHttpClient();
             services.ConfigureAutoMapper();
             services.ConfigureDI();

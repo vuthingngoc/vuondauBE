@@ -18,3 +18,4 @@ C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Release\netcorea
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.dll
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.pdb
 C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.genruntimeconfig.cache
+C:\Users\vuong\Desktop\SWR-VuonDauBE\vuondauBE\VuonDau.Data\obj\Release\netcoreapp3.1\VuonDau.Data.csprojAssemblyReference.cache

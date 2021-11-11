@@ -19,7 +19,7 @@ namespace VuonDau.Business.Services
 {
     public partial interface IFarmService
     {
-        Task<ModelResponse.ModelsResponse<FarmViewModel>> GetAllFarms(SearchFarmRequest request, int page, int size);
+        Task<ModelsResponse<FarmViewModel>> GetAllFarms(SearchFarmRequest request, int page, int size);
         Task<FarmViewModel> GetFarmById(Guid id);
         Task<List<FarmViewModel>> GetFarmByType(Guid id);
         Task<List<FarmViewModel>> GetFarmByFarmerId(Guid id);
@@ -41,7 +41,7 @@ namespace VuonDau.Business.Services
             _mapper = mapper.ConfigurationProvider;
         }
 
-        public async Task<ModelResponse.ModelsResponse<FarmViewModel>> GetAllFarms(SearchFarmRequest request, int page, int size)
+        public async Task<ModelsResponse<FarmViewModel>> GetAllFarms(SearchFarmRequest request, int page, int size)
         {
             request.Name = request.Name == null ? "" : request.Name;
             if (request.Status == null)
@@ -55,15 +55,9 @@ namespace VuonDau.Business.Services
                             var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()))
                                     .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                     .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                         else
@@ -71,15 +65,9 @@ namespace VuonDau.Business.Services
                             var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.AreaId == request.AreaId)
                                     .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                     .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                     }
@@ -91,15 +79,9 @@ namespace VuonDau.Business.Services
                                     && f.FarmerId == request.FarmerId)
                                     .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                     .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                         else
@@ -108,15 +90,9 @@ namespace VuonDau.Business.Services
                                     && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId)
                                     .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                     .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
 
                         }
@@ -131,15 +107,9 @@ namespace VuonDau.Business.Services
                             var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId)
                                     .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                     .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                         else
@@ -147,15 +117,9 @@ namespace VuonDau.Business.Services
                             var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
                                     && f.AreaId == request.AreaId).OrderByDescending(f => f.Status).OrderBy(f => f.Name)
                                     .ProjectTo<FarmViewModel>(_mapper).PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                     }
@@ -166,15 +130,9 @@ namespace VuonDau.Business.Services
                             var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.FarmTypeId == request.FarmTypeId
                                     && f.FarmerId == request.FarmerId).OrderByDescending(f => f.Status).OrderBy(f => f.Name)
                                     .ProjectTo<FarmViewModel>(_mapper).PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                         else
@@ -183,15 +141,9 @@ namespace VuonDau.Business.Services
                                     && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId)
                                     .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                     .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                     }
@@ -207,15 +159,9 @@ namespace VuonDau.Business.Services
                             var result = Get(f => f.Name.ToLower().Contains(request.Name.ToLower()) && f.Status == request.Status)
                                     .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                     .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                         else
@@ -224,15 +170,9 @@ namespace VuonDau.Business.Services
                                      && f.AreaId == request.AreaId && f.Status == request.Status)
                                     .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                     .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                     }
@@ -244,15 +184,9 @@ namespace VuonDau.Business.Services
                                     && f.FarmerId == request.FarmerId && f.Status == request.Status)
                                     .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                     .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                         else
@@ -261,15 +195,9 @@ namespace VuonDau.Business.Services
                                     && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId && f.Status == request.Status)
                                     .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                     .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                     }
@@ -284,15 +212,9 @@ namespace VuonDau.Business.Services
                                         && f.Status == request.Status)
                                         .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                         .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
-                                Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
+                                Data = await result.Item2.ToListAsync(), 
                             };
                         }
                             else
@@ -301,15 +223,9 @@ namespace VuonDau.Business.Services
                                         && f.AreaId == request.AreaId && f.Status == request.Status)
                                         .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                         .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                         }
@@ -321,15 +237,9 @@ namespace VuonDau.Business.Services
                                         && f.FarmerId == request.FarmerId && f.Status == request.Status)
                                         .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                         .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                             else
@@ -338,15 +248,9 @@ namespace VuonDau.Business.Services
                                         && f.FarmerId == request.FarmerId && f.AreaId == request.AreaId && f.Status == request.Status)
                                         .OrderBy(f => f.Name).OrderByDescending(f => f.Status).ProjectTo<FarmViewModel>(_mapper)
                                         .PagingIQueryable(page, size, PageConstants.LimitPaging, PageConstants.DefaultPage);
-                            return new ModelResponse.ModelsResponse<FarmViewModel>
+                            return new ModelsResponse<FarmViewModel>
                             {
                                 Data = await result.Item2.ToListAsync(),
-                                Metadata = new PagingMetadata
-                                {
-                                    Page = page,
-                                    Size = size,
-                                    Total = result.Item1
-                                }
                             };
                         }
                     }
